@@ -49,9 +49,17 @@
 - (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated;
 
 /**
- *  If YES the tabbar will become scrollable and when a tabbar item is selected will be centered.
+ *  @warning different behaviour from v0.1
+ *
+ *  If YES the tabbar will become scrollable and when a tabbar item is selected will be centered, except on the borders.
  *  Default: NO
  */
 @property(nonatomic,assign) BOOL centerTabBarOnSelect;
+
+/**
+ *  The same behaviour then centerTabBarOnSelect except that it will grow the scrollbar to able to always center items.
+ *  Default: NO
+ */
+@property(nonatomic,assign) BOOL alwaysCenterTabBarOnSelect;
 
 @end

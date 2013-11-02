@@ -66,6 +66,7 @@
     //[self.tabBar setScrollEnabledWithChildSize:90];
     self.tabBar.childEdges = UIEdgeInsetsMake(4, 4, 4, 4);
     self.tabBar.centerTabBarOnSelect = YES;
+    self.tabBar.alwaysCenterTabBarOnSelect = NO;
     self.tabBar.imageSeparator = (self.tabBar.alignment == JBarViewAlignmentHorizontal ?
                                   [UIImage imageNamed:@"imageSeparatorHorizontal"] :
                                   [UIImage imageNamed:@"imageSeparatorVertical"]);

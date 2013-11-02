@@ -131,7 +131,7 @@
 }
 
 - (void)positionButton:(UIButton *)button animated:(BOOL)animated {
-    if (_centerTabBarOnSelect) {
+    if ( self.centerTabBarOnSelect || self.alwaysCenterTabBarOnSelect ) {
         [_scrollContainer scrollRectToCenter:button.frame animated:animated];
     } else {
         [_scrollContainer scrollRectToVisible:button.frame animated:animated];
@@ -145,15 +145,15 @@
 
     NSArray *viewsArray = _scrollContainer.subviews;
     CGRect bounds = self.bounds;
-    if (self.needsUpdateScroll && viewsArray.count > 0) {
+    if ( self.needsUpdateScroll && viewsArray.count > 0 ) {
 
         NSArray * buttonsArray = self.tabBarMatrix.buttonsArray;
         CGRect minRect = ((UIView *)buttonsArray[0]).frame;
         CGRect maxRect = ((UIView *)buttonsArray[buttonsArray.count-1]).frame;
         
-        if (_centerTabBarOnSelect) {
+        if ( self.alwaysCenterTabBarOnSelect ) {
             
-            if (self.alignment == JBarViewAlignmentHorizontal) {
+            if ( self.alignment == JBarViewAlignmentHorizontal ) {
                 CGFloat minDelta = bounds.size.width/2.0f - minRect.size.width/2.0f;
                 CGFloat maxDelta = bounds.size.width/2.0f - maxRect.size.width/2.0f;
                 for (UIView *subView in viewsArray) {
@@ -165,7 +165,7 @@
                 size.width += minDelta + maxDelta;
                 _scrollContainer.contentSize = size;
 
-            }else if (self.alignment == JBarViewAlignmentVertical) {
+            }else if ( self.alignment == JBarViewAlignmentVertical ) {
                 CGFloat minDelta = bounds.size.height/2.0f - minRect.size.height/2.0f;
                 CGFloat maxDelta = bounds.size.height/2.0f - maxRect.size.height/2.0f;
                 for (UIView *subView in viewsArray) {
@@ -181,7 +181,7 @@
         }
     }
     
-    if (self.selectedTabBar) {
+    if ( self.selectedTabBar ) {
         [self positionButton:self.selectedTabBar animated:self.needsAnimateSelection];
     }
     
