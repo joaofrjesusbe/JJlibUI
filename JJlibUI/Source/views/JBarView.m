@@ -16,6 +16,7 @@
 @property(nonatomic,assign) UIView *subViewsContainer;
 @property(nonatomic,assign) CGFloat scrollBoxFixSize;
 @property(nonatomic,assign) int scrollViewsCounter;
+@property(nonatomic,assign) float partialViewPercentage;
 
 @end
 
@@ -152,9 +153,13 @@
     [self setNeedsLayout];
 }
 
-- (void)setScrollEnabledWithNumberOfChildsVisible:(uint)numberOfChildsVisible {
+- (void)setScrollEnabledWithNumberOfChildsVisible:(float)numberOfChildsVisible {
+    
+    NSAssert( numberOfChildsVisible > 0, @"numberOfChildsVisible must be great than 0" );
+    
     self.scrollEnabled = YES;
-    self.scrollViewsCounter = numberOfChildsVisible;
+    self.scrollViewsCounter = (int)numberOfChildsVisible;
+    self.partialViewPercentage = fmodf(numberOfChildsVisible, 1.0);
     self.scrollBoxFixSize = 0;
     [self setNeedsLayout];
 }
@@ -198,6 +203,10 @@
             }
         }
     }
+    
+    if (_scrollViewsCounter > _childViews.count) {
+        _scrollViewsCounter = _childViews.count;
+    }
 }
 
 - (CGRect)frameForSubBarViews {
@@ -234,22 +243,29 @@
     } else {
         
         CGFloat boxCount = _childViews.count;
+        int separatorCount = boxCount - 1;
         CGSize separatorSize = _imageSeparator.size;
         CGFloat totalSpace = 0;
         
         if ( _scrollEnabled && self.scrollViewsCounter != 0 ) {
             boxCount = self.scrollViewsCounter;
+            separatorCount = boxCount - 1;
+            
+            if (self.partialViewPercentage > 0) {
+                separatorCount = boxCount;
+                boxCount += self.partialViewPercentage;
+            }
         }
         
         switch (_alignment) {
             case JBarViewAlignmentHorizontal:
-                totalSpace = ( _imageSeparator ? bounds.size.width - separatorSize.width * (boxCount - 1) : bounds.size.width );
+                totalSpace = ( _imageSeparator ? bounds.size.width - separatorSize.width * separatorCount : bounds.size.width );
                 frame.size.width = totalSpace / boxCount;
                 frame.size.height = bounds.size.height;
                 break;
                 
             case JBarViewAlignmentVertical:
-                totalSpace = ( _imageSeparator ? bounds.size.height - separatorSize.height * (boxCount - 1) : bounds.size.height );
+                totalSpace = ( _imageSeparator ? bounds.size.height - separatorSize.height * separatorCount : bounds.size.height );
                 frame.size.width = bounds.size.width;
                 frame.size.height = totalSpace / boxCount;
                 break;

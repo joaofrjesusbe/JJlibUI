@@ -92,10 +92,11 @@ typedef NS_ENUM(short, JBarViewAlignment) {
 
 /**
  *  Enable scroll with a number visible of childs. Each child will be resized to reach the effect desired.
+ *  If the number has a fraction part then will add that part of the child.
  *
  *  @param numberOfBarSubViewsVisible number visible of childs
  */
-- (void)setScrollEnabledWithNumberOfChildsVisible:(uint)numberOfChildsVisible;
+- (void)setScrollEnabledWithNumberOfChildsVisible:(float)numberOfChildsVisible;
 
 /**
  *  Enable scroll where each child view has a specific size (on horizontal is  width, on vertical is height)
