@@ -7,7 +7,7 @@
 //
 
 #import "TabBarExampleVC.h"
-#import "JTabBarView.h"
+#import "JUILib.h"
 
 #define LoadXibView(xibName) [[NSBundle mainBundle] loadNibNamed:xibName owner:self options:nil][0]
 #define LoadXibViewAtPos(xibName,position) [[NSBundle mainBundle] loadNibNamed:xibName owner:self options:nil][position]
@@ -62,7 +62,7 @@
     //self.tabBar.autoResizeChilds = NO;
     self.tabBar.alignment = JBarViewAlignmentHorizontal;
     //self.tabBar.scrollEnabled = YES;
-    [self.tabBar setScrollEnabledWithNumberOfChildsVisible:5];
+    [self.tabBar setScrollEnabledWithNumberOfChildsVisible:4.5];
     //[self.tabBar setScrollEnabledWithChildSize:90];
     self.tabBar.childEdges = UIEdgeInsetsMake(4, 4, 4, 4);
     self.tabBar.centerTabBarOnSelect = YES;
@@ -72,7 +72,7 @@
                                   [UIImage imageNamed:@"imageSeparatorVertical"]);
     self.tabBar.backgroundImage = [UIImage imageNamed:@"backgroundBar"];
     self.tabBar.childViews = tabViewsArray;
-    self.tabBar.selectedIndex = 3;
+    self.tabBar.selectedIndex = 0;
 }
 
 - (void)didReceiveMemoryWarning
