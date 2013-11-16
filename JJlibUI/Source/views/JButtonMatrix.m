@@ -33,6 +33,7 @@
     
     if (buttonsArray == nil) {
         _buttonsArray = @[];
+        _selectedButton = nil;
     } else {
         _buttonsArray = [buttonsArray copy];
         NSInteger i = 0;

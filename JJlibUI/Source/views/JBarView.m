@@ -42,9 +42,13 @@
     return self;
 }
 
-- (void)awakeFromNib {
+- (id)initWithCoder:(NSCoder *)aDecoder {
     
-    [self setupJBarView];
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setupJBarView];
+    }
+    return self;
 }
 
 - (void)setupJBarView {
@@ -175,7 +179,7 @@
 #pragma mark - private methods
 
 - (void)prepareImageSeparators {
-    if ( _imageSeparator && self.separatorImageViews == nil ) {
+    if ( _childViews.count > 1 && _imageSeparator && self.separatorImageViews == nil ) {
         
         _separatorImageViews = [[NSMutableArray alloc] initWithCapacity: _childViews.count - 1];
         for ( NSInteger i = 0; i < _childViews.count - 1; i++ ) {
@@ -192,6 +196,7 @@
     if ( _childViews.count > 0 ) {
         
         UIView *fatherView = _childViews[0];
+        fatherView = fatherView.superview;
         if ( fatherView != self.subViewsContainer ) {
             
             for ( UIView *subView in _childViews ) {

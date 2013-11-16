@@ -34,10 +34,13 @@
     return self;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
+- (id)initWithCoder:(NSCoder *)aDecoder {
     
-    [self setupJTabBarView];
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setupJTabBarView];
+    }
+    return self;
 }
 
 - (void)setupJTabBarView {
@@ -66,6 +69,10 @@
     }
     
     self.tabBarMatrix.buttonsArray = childsButtons;
+    
+    if (self.scrollEnabled) {
+        self.needsUpdateScroll = YES;
+    }
     
     [super setChildViews:childViews];
 }
@@ -97,7 +104,6 @@
     }
 }
 
-
 - (void)setCenterTabBarOnSelect:(BOOL)centerTabBarOnSelect {
     
     if (_centerTabBarOnSelect != centerTabBarOnSelect) {
@@ -115,12 +121,12 @@
 #pragma mark - public actions
 
 - (void)setSelectedTabBar:(UIButton *)selectedTabBar animated:(BOOL)animated {
-    self.needsAnimateSelection = YES;
+    self.needsAnimateSelection = animated;
     self.selectedTabBar = selectedTabBar;
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated {
-    self.needsAnimateSelection = YES;
+    self.needsAnimateSelection = animated;
     self.selectedIndex = selectedIndex;
 }
 
@@ -138,7 +144,7 @@
     }
 }
 
-#pragma mark - subviews
+#pragma mark - UIView methods
 
 - (void)layoutSubviews {
     [super layoutSubviews];

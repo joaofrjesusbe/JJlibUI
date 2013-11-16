@@ -27,7 +27,7 @@
  *  Setting this to nil will deselect the button.
  *  Default: nil
  */
-@property(nonatomic,assign) UIButton *selectedButton;
+@property(nonatomic,weak) UIButton *selectedButton;
 
 /**
  *  The UIButton#selectedIndex that is currently selected.
