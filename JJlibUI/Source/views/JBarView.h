@@ -42,7 +42,7 @@ typedef NS_ENUM(short, JBarViewAlignment) {
  *  Delegate of the bar to adjust better the position and size of the child views.
  *  Default: nil
  */
-@property(nonatomic,assign) id<JBarViewDelegate> delegate;
+@property(nonatomic,weak) id<JBarViewDelegate> delegate;
 
 /**
  *  Array of UIView's that are going to rearrange it's position and size.

@@ -21,7 +21,7 @@
  *  Setting this to nil will deselect the button.
  *  Default: nil
  */
-@property(nonatomic,assign) UIButton *selectedTabBar;
+@property(nonatomic,weak) UIButton *selectedTabBar;
 
 /**
  *  The UIButton representing as a tabbar item that is selected
