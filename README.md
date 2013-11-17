@@ -16,6 +16,7 @@ Support for iOS 5.0 and superior.
 		- Full flexible tabbar controller.
 		- More examples
 
+![Screenshots](Screenshot.png "Screenshot")
 
 Suggestions and Contributions email: joaofrjesusbe at gmail.com
 
