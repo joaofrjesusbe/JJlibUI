@@ -21,6 +21,7 @@
 		0759DA77181BDBBE006BA244 /* TabBarExampleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0759DA75181BDBBE006BA244 /* TabBarExampleVC.m */; };
 		0759DA78181BDBBE006BA244 /* TabBarExampleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0759DA76181BDBBE006BA244 /* TabBarExampleVC.xib */; };
 		0774DA101837AA1C0061A879 /* ButtonTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0774DA0F1837AA1C0061A879 /* ButtonTemplate.xib */; };
+		0777010D183AC43A00203BE9 /* JTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0777010C183AC43A00203BE9 /* JTabBarController.m */; };
 		07E4B3501813E1FB00B861CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E4B34F1813E1FB00B861CD /* Foundation.framework */; };
 		07E4B3521813E1FB00B861CD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E4B3511813E1FB00B861CD /* CoreGraphics.framework */; };
 		07E4B3541813E1FB00B861CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E4B3531813E1FB00B861CD /* UIKit.framework */; };
@@ -67,6 +68,8 @@
 		0759DA75181BDBBE006BA244 /* TabBarExampleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarExampleVC.m; sourceTree = "<group>"; };
 		0759DA76181BDBBE006BA244 /* TabBarExampleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarExampleVC.xib; sourceTree = "<group>"; };
 		0774DA0F1837AA1C0061A879 /* ButtonTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTemplate.xib; sourceTree = "<group>"; };
+		0777010B183AC43A00203BE9 /* JTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTabBarController.h; sourceTree = "<group>"; };
+		0777010C183AC43A00203BE9 /* JTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTabBarController.m; sourceTree = "<group>"; };
 		07E4B34C1813E1FB00B861CD /* JJlibUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JJlibUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07E4B34F1813E1FB00B861CD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		07E4B3511813E1FB00B861CD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -112,6 +115,7 @@
 		072238B41823D7E100824A9D /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				0777010A183AC41000203BE9 /* containers */,
 				072238B51823D7E100824A9D /* categories */,
 				072238C01823D7E100824A9D /* views */,
 				072238BF1823D7E100824A9D /* JUILib.h */,
@@ -141,6 +145,15 @@
 				072238C61823D7E100824A9D /* JTabBarView.m */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		0777010A183AC41000203BE9 /* containers */ = {
+			isa = PBXGroup;
+			children = (
+				0777010B183AC43A00203BE9 /* JTabBarController.h */,
+				0777010C183AC43A00203BE9 /* JTabBarController.m */,
+			);
+			path = containers;
 			sourceTree = "<group>";
 		};
 		07B777421813F33D004B76A1 /* Examples */ = {
@@ -336,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0777010D183AC43A00203BE9 /* JTabBarController.m in Sources */,
 				072238C71823D7E100824A9D /* UIButton+JButton.m in Sources */,
 				072238CC1823D7E100824A9D /* JButtonMatrix.m in Sources */,
 				0759DA77181BDBBE006BA244 /* TabBarExampleVC.m in Sources */,
