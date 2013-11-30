@@ -93,7 +93,6 @@
     self.horizontalTabBar.childViews = tabViewsArray;
     self.horizontalTabBar.selectedIndex = 0;
     
-
 }
 
 - (void)didReceiveMemoryWarning

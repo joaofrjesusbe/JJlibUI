@@ -21,11 +21,11 @@ typedef NS_ENUM(short, JTabBarDock) {
     JTabBarDockRight
 };
 
+
 #define JTabBarDockIsHorizontal(x) ( (x) == JTabBarDockBottom || (x) == JTabBarDockTop )
 #define JTabBarDockIsVertical(x) ( (x) == JTabBarDockLeft || (x) == JTabBarDockRight )
 
 
-@protocol JTabBarControllerSource;
 @protocol JTabBarControllerDelegate;
 @interface JTabBarController : UIViewController
 
@@ -63,26 +63,32 @@ typedef NS_ENUM(short, JTabBarDock) {
 /**
  *  View that defines the area where the selected child viewController will be position.
  */
-@property(nonatomic,readwrite) IBOutlet UIView *viewContainer;
+@property(nonatomic,strong) IBOutlet UIView *viewContainer;
 
 /**
  *  Child's UIViewController's. Will create a tabbar for each UIViewController.
  */
 @property(nonatomic,copy) NSArray *childViewControllers;
 
-@property(nonatomic,readonly) JButtonMatrix *associatedButtonMatrix;
+- (void)setChildViewControllers:(NSArray *)childViewControllers animatedOptions:(UIViewAnimationOptions)animatedOptions completion:(void (^)(void))completion;
+
+@property(nonatomic,assign) UIViewController *selectedChildViewController;
+
+@property(nonatomic) uint selectedIndex;
+
+@property(nonatomic,strong) JButtonMatrix *associatedButtonMatrix;
 
 @property(nonatomic,assign) id<JTabBarControllerDelegate> delegate;
 
 #pragma mark - if tabBar associated 
 
-@property(nonatomic,readwrite) IBOutlet JTabBarView *associatedTabBar;
+@property(nonatomic,strong) IBOutlet JTabBarView *associatedTabBar;
 
-@property(nonatomic,readonly) JTabBarDock tabBarDock;
+@property(nonatomic,assign) JTabBarDock tabBarDock;
 
 @property(nonatomic,assign) BOOL hiddenTabBar;
 
-- (void)setHiddenTabBar:(BOOL)hiddenTabBar animated:(BOOL)animated;
+- (void)setHiddenTabBar:(BOOL)hiddenTabBar animatedOptions:(UIViewAnimationOptions)animatedOptions completion:(void (^)(void))completion;
 
 @end
 
@@ -90,10 +96,19 @@ typedef NS_ENUM(short, JTabBarDock) {
 @protocol JTabBarControllerDelegate <NSObject>
 @optional
 
-- (UIButton *)tabBarController:(JTabBarController *)tabBarController tabBarButtonForIndex:(uint)index;
+- (UIButton *)tabBarController:(JTabBarController *)tabBarController tabBarButtonForChildViewController:(UIViewController *)childViewController forIndex:(uint)index;
 
-- (BOOL)tabBarController:(JTabBarController *)tabBarController willSelectSubViewController:(UIViewController *)subViewController forIndex:(uint)index;
+- (BOOL)tabBarController:(JTabBarController *)tabBarController willSelectChildViewController:(UIViewController *)childViewController forIndex:(uint)index;
 
-- (void)tabBarController:(JTabBarController *)tabBarController didSelectSubViewController:(UIViewController *)subViewController forIndex:(uint)index;
+- (void)tabBarController:(JTabBarController *)tabBarController didSelectChildViewController:(UIViewController *)childViewController forIndex:(uint)index;
+
+@end
+
+
+@interface  UIViewController (JTabBarController)
+
+@property (nonatomic, strong) IBOutlet UIButton *jTabBarButton;
+
+@property (nonatomic, weak) JTabBarController *jTabBarController;
 
 @end
