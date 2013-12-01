@@ -10,7 +10,7 @@
 #import "TabBarExampleVC.h"
 #import "JUILib.h"
 
-@interface TabBarControllerExampleVC ()
+@interface TabBarControllerExampleVC () <JTabBarControllerDelegate>
 
 @property (nonatomic,strong) JTabBarController *tabBarController;
 
@@ -31,8 +31,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    _tabBarController = [[JTabBarController alloc] initWithTabBarSize:44 andDockPosition:JTabBarDockLeft];
+    JTabBarView *tabBarView = [[JTabBarView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    tabBarView.backgroundImage = [UIImage imageNamed:@"darkBackgroundBar"];
+
+
+    _tabBarController = [[JTabBarController alloc] initWithTabBar:tabBarView andDockPosition:JTabBarDockLeft];
+    _tabBarController.delegate = self;
+    //_tabBarController = [[JTabBarController alloc] initWithTabBarSize:44 andDockPosition:JTabBarDockLeft];
     _tabBarController.childViewControllers = @[
                                                [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil],
                                                [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil],
@@ -47,6 +52,17 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - JTabBarControllerDelegate
+
+- (UIButton *)tabBarController:(JTabBarController *)tabBarController tabBarButtonForChildViewController:(UIViewController *)childViewController forIndex:(uint)index {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+    [button setTitle:[NSString stringWithFormat:@"%d", index] forState:UIControlStateNormal];
+    button.tintColor = [UIColor grayColor];
+    return button;
 }
 
 @end

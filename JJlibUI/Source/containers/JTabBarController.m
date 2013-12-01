@@ -52,8 +52,17 @@
         _associatedButtonMatrix = nil;
         _tabBarDock = dockPosition;
         if (_tabBarDock != JTabBarDockNone) {
-            self.tabBarSize = ( JTabBarDockIsHorizontal(_tabBarDock) ? CGRectGetWidth(tabbar.frame) : CGRectGetHeight(tabbar.frame) );
+            
+            if ( JTabBarDockIsHorizontal(_tabBarDock) ) {
+                _associatedTabBar.alignment = JBarViewAlignmentHorizontal;
+                self.tabBarSize = CGRectGetWidth(tabbar.frame);
+            } else {
+                _associatedTabBar.alignment = JBarViewAlignmentVertical;
+                self.tabBarSize = CGRectGetHeight(tabbar.frame);
+            }
+            
         }else {
+            _associatedTabBar.alignment = JBarViewAlignmentNone;
             self.tabBarSize = -1;
         }
     }
@@ -128,7 +137,13 @@
 
 #pragma mark - view helpers
 
-- (void)createTabBar {
+- (void)createAssociatedTabBar {
+    JTabBarView *tabbar = [[JTabBarView alloc] initWithFrame:CGRectZero];
+    _associatedTabBar = tabbar;
+    [self adjustAssociatedTabBar];
+}
+
+- (void)adjustAssociatedTabBar {
     CGRect viewBounds = self.view.bounds;
     CGRect tabBarFrame = CGRectZero;
     JBarViewAlignment alignment = JBarViewAlignmentHorizontal;
@@ -163,11 +178,8 @@
             break;
     }
     
-    JTabBarView *tabbar = [[JTabBarView alloc] initWithFrame:tabBarFrame];
-    tabbar.alignment = alignment;
-    _associatedTabBar = tabbar;
-    [self.view addSubview:tabbar];
-
+    _associatedTabBar.frame = tabBarFrame;
+    _associatedTabBar.alignment = alignment;
 }
 
 - (void)createViewContainer {
@@ -211,6 +223,11 @@
     for (UIViewController *childViewControllers in _childViewControllers) {
         UIButton *button = childViewControllers.jTabBarButton;
         
+        if ( [self.delegate respondsToSelector:@selector(tabBarController:tabBarButtonForChildViewController:forIndex:)] ) {
+            button = [self.delegate tabBarController:self tabBarButtonForChildViewController:childViewControllers forIndex:i];
+            needToAssociateNewButtons = YES;
+        }
+    
         if (button == nil && _associatedButtonMatrix) {
             NSArray *buttonsAvaiable = _associatedButtonMatrix.buttonsArray;
             button = (i < buttonsAvaiable.count ? buttonsAvaiable[i] : nil);
@@ -252,7 +269,11 @@
 	// Do any additional setup after loading the view.
     
     if ( _associatedTabBar == nil && _associatedButtonMatrix == nil ) {
-        [self createTabBar];
+        [self createAssociatedTabBar];
+        [self.view addSubview:_associatedTabBar];
+    } else if ( _associatedTabBar ) {
+        [self adjustAssociatedTabBar];
+        [self.view addSubview:_associatedTabBar];
     }
     
     if ( _viewContainer == nil ) {
@@ -285,10 +306,26 @@
 #pragma mark - private functions
 
 - (void)changeWithButton:(UIButton *)button {
-    [self changeToViewController:_childViewControllers[button.selectionIndex]];
+    
+    uint index = button.selectionIndex;
+    UIViewController *viewController = _childViewControllers[index];
+    BOOL shouldSelect = YES;
+    if ( [self.delegate respondsToSelector:@selector(tabBarController:willSelectChildViewController:forIndex:)] ) {
+        shouldSelect = [self.delegate tabBarController:self willSelectChildViewController:viewController forIndex:index];
+    }
+    
+    if ( shouldSelect ) {
+    
+        [self changeToViewController:viewController];
+        
+        if ( [self.delegate respondsToSelector:@selector(tabBarController:didSelectChildViewController:forIndex:)] ) {
+            [self.delegate tabBarController:self didSelectChildViewController:viewController forIndex:index];
+        }
+    }
 }
 
 - (void)changeToViewController:(UIViewController *)viewController {
+    
     // remove old viewController
     if ( _selectedChildViewController ) {
         [_selectedChildViewController willMoveToParentViewController:nil];
@@ -302,6 +339,7 @@
     [self.viewContainer addSubview:viewController.view];
     [viewController didMoveToParentViewController:self];
     _selectedChildViewController = viewController;
+    
 }
 
 @end
