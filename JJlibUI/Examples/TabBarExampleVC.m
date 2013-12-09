@@ -55,7 +55,7 @@
                 
                 // random change a frame
                 CGRect frame = tabButton.frame;
-                frame.size.width += arc4random_uniform(100);
+                frame.size.height += arc4random_uniform(100);
                 tabButton.frame = frame;
                 
             }
@@ -78,27 +78,42 @@
     }
     
     self.verticalTabBar.alignment = JBarViewAlignmentVertical;
-    [self.verticalTabBar setScrollEnabledWithChildSize:90];
+    self.verticalTabBar.scrollEnabled = YES;
+    self.verticalTabBar.autoResizeChilds = NO;
     self.verticalTabBar.centerTabBarOnSelect = YES;
     self.verticalTabBar.alwaysCenterTabBarOnSelect = YES;
-    self.verticalTabBar.imageSeparator = [UIImage imageNamed:@"imageSeparatorVertical"];
-    self.verticalTabBar.backgroundImage = [UIImage imageNamed:@"backgroundBar"];
+    self.verticalTabBar.imageSeparator = [UIImage imageNamed:@"blueVerticalSeparator"];
+    self.verticalTabBar.backgroundImage = [UIImage imageNamed:@"blueHorizontalBar"];
     
     self.horizontalTabBar.alignment = JBarViewAlignmentHorizontal;
     [self.horizontalTabBar setScrollEnabledWithNumberOfChildsVisible:4.5];
     self.horizontalTabBar.childEdges = UIEdgeInsetsMake(4, 4, 4, 4);
     self.horizontalTabBar.centerTabBarOnSelect = YES;
-    self.horizontalTabBar.imageSeparator = [UIImage imageNamed:@"imageSeparatorHorizontal"];
-    self.horizontalTabBar.backgroundImage = [UIImage imageNamed:@"backgroundBar"];
+    self.horizontalTabBar.imageSeparator = [UIImage imageNamed:@"blueHorizontalSeparator"];
+    self.horizontalTabBar.backgroundImage = [UIImage imageNamed:@"blueHorizontalBar"];
     self.horizontalTabBar.childViews = tabViewsArray;
     self.horizontalTabBar.selectedIndex = 0;
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end

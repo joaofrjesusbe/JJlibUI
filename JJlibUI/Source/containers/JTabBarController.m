@@ -140,38 +140,43 @@
 - (void)createAssociatedTabBar {
     JTabBarView *tabbar = [[JTabBarView alloc] initWithFrame:CGRectZero];
     _associatedTabBar = tabbar;
+    [self.view addSubview:tabbar];
+    [self.view bringSubviewToFront:_associatedTabBar];
     [self adjustAssociatedTabBar];
+}
+
+- (void)createViewContainer {
+    UIView *container = [[UIView alloc] initWithFrame:CGRectZero];
+    _viewContainer = container;
+    [self.view addSubview:container];
+    [self.view sendSubviewToBack:container];
+    [self adjustAssociatedContainer];
 }
 
 - (void)adjustAssociatedTabBar {
     CGRect viewBounds = self.view.bounds;
     CGRect tabBarFrame = CGRectZero;
     JBarViewAlignment alignment = JBarViewAlignmentHorizontal;
-    UIViewAutoresizing resizeMask = UIViewAutoresizingNone;
     
     switch (self.tabBarDock) {
         case JTabBarDockTop:
             tabBarFrame = CGRectMake(0, 0, viewBounds.size.width, self.tabBarSize);
             alignment = JBarViewAlignmentHorizontal;
-            resizeMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
             break;
             
         case JTabBarDockBottom:
             tabBarFrame = CGRectMake(0, viewBounds.size.height - self.tabBarSize, viewBounds.size.width, self.tabBarSize);
             alignment = JBarViewAlignmentHorizontal;
-            resizeMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
             break;
             
         case JTabBarDockLeft:
             tabBarFrame = CGRectMake(0, 0, self.tabBarSize, viewBounds.size.height);
             alignment = JBarViewAlignmentVertical;
-            resizeMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
             break;
             
         case JTabBarDockRight:
             tabBarFrame = CGRectMake(0, viewBounds.size.width - self.tabBarSize, self.tabBarSize, viewBounds.size.height);
             alignment = JBarViewAlignmentVertical;
-            resizeMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
             break;
             
         default:
@@ -182,7 +187,7 @@
     _associatedTabBar.alignment = alignment;
 }
 
-- (void)createViewContainer {
+- (void)adjustAssociatedContainer {
     CGRect viewBounds = self.view.bounds;
     CGSize tabBarSize = _associatedTabBar.frame.size;
     CGRect containerFrame = CGRectZero;
@@ -208,11 +213,7 @@
             break;
     }
     
-    UIView *container = [[UIView alloc] initWithFrame:containerFrame];
-    container.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    _viewContainer = container;
-    [self.view addSubview:container];
-    [self.view sendSubviewToBack:container];
+    self.viewContainer.frame = containerFrame;
 }
 
 - (void)createButtonsForViewControllers {
@@ -220,11 +221,18 @@
     NSMutableArray *tabBarButtons = [NSMutableArray arrayWithCapacity:_childViewControllers.count];
     NSInteger i = 0;
     BOOL needToAssociateNewButtons = NO;
-    for (UIViewController *childViewControllers in _childViewControllers) {
-        UIButton *button = childViewControllers.jTabBarButton;
+    for (UIViewController *childViewController in _childViewControllers) {
+        
+        UIButton *button = nil;
         
         if ( [self.delegate respondsToSelector:@selector(tabBarController:tabBarButtonForChildViewController:forIndex:)] ) {
-            button = [self.delegate tabBarController:self tabBarButtonForChildViewController:childViewControllers forIndex:i];
+            button = [self.delegate tabBarController:self tabBarButtonForChildViewController:childViewController forIndex:i];
+            needToAssociateNewButtons = YES;
+        }
+        
+        UIButton *customButton = childViewController.jTabBarButton;
+        if (customButton) {
+            button = customButton;
             needToAssociateNewButtons = YES;
         }
     
@@ -244,8 +252,16 @@
             needToAssociateNewButtons = YES;
         }
         
+        if ( childViewController.tabBarItem ) {
+            [button setTitle:childViewController.tabBarItem.title forState:UIControlStateNormal];
+            [button setImage:childViewController.tabBarItem.image forState:UIControlStateNormal];
+            if ([childViewController.tabBarItem respondsToSelector:@selector(selectedImage)]) {
+                [button setImage:childViewController.tabBarItem.selectedImage forState:UIControlStateNormal];
+            }
+        }
+        
         [button addTarget:self action:@selector(changeWithButton:) forControlEvents:UIControlEventTouchUpInside];
-        childViewControllers.jTabBarButton = button;
+        childViewController.jTabBarButton = button;
         [tabBarButtons addObject:button];
         i++;
     }
@@ -286,6 +302,12 @@
         [self changeToViewController:_childViewControllers[0]];
     }
 }
+
+- (void)viewWillLayoutSubviews {
+    [self adjustAssociatedTabBar];
+    [self adjustAssociatedContainer];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

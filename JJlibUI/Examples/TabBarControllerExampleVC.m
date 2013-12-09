@@ -8,6 +8,8 @@
 
 #import "TabBarControllerExampleVC.h"
 #import "TabBarExampleVC.h"
+#import "BarViewExampleVC.h"
+#import "MoreViewVC.h"
 #import "JUILib.h"
 
 @interface TabBarControllerExampleVC () <JTabBarControllerDelegate>
@@ -32,35 +34,56 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     JTabBarView *tabBarView = [[JTabBarView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    tabBarView.backgroundImage = [UIImage imageNamed:@"darkBackgroundBar"];
+    tabBarView.backgroundImage = [UIImage imageNamed:@"blackHorizontalBar"];
 
-
-    _tabBarController = [[JTabBarController alloc] initWithTabBar:tabBarView andDockPosition:JTabBarDockLeft];
+    TabBarExampleVC *example1 = [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil];
+    example1.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"ButtonTemplate" owner:self options:nil][0];
+    example1.tabBarItem.title = @"TabBar";
+    
+    BarViewExampleVC *example2 = [[BarViewExampleVC alloc] initWithNibName:nil bundle:nil];
+    example2.tabBarItem.title = @"BarView";
+    
+    MoreViewVC *example3 = [[MoreViewVC alloc] initWithNibName:nil bundle:nil];
+    example3.tabBarItem.title = @"More";
+    
+    _tabBarController = [[JTabBarController alloc] initWithTabBar:tabBarView andDockPosition:JTabBarDockBottom];
     _tabBarController.delegate = self;
-    //_tabBarController = [[JTabBarController alloc] initWithTabBarSize:44 andDockPosition:JTabBarDockLeft];
     _tabBarController.childViewControllers = @[
-                                               [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil],
-                                               [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil],
-                                               [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil]
+                                               example1,
+                                               example2,
+                                               example3
                                                ];
     [self addChildViewController:_tabBarController];
     [self.view addSubview:_tabBarController.view];
     [_tabBarController didMoveToParentViewController:self];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - JTabBarControllerDelegate
 
 - (UIButton *)tabBarController:(JTabBarController *)tabBarController tabBarButtonForChildViewController:(UIViewController *)childViewController forIndex:(uint)index {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-    [button setTitle:[NSString stringWithFormat:@"%d", index] forState:UIControlStateNormal];
     button.tintColor = [UIColor grayColor];
     return button;
 }
