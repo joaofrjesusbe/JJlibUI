@@ -72,7 +72,7 @@ typedef NS_ENUM(short, JTabBarDock) {
 
 - (void)setChildViewControllers:(NSArray *)childViewControllers animatedOptions:(UIViewAnimationOptions)animatedOptions completion:(void (^)(void))completion;
 
-@property(nonatomic,assign) UIViewController *selectedChildViewController;
+@property(nonatomic,strong) UIViewController *selectedChildViewController;
 
 @property(nonatomic) uint selectedIndex;
 

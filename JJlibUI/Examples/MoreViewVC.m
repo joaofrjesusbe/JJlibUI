@@ -7,6 +7,10 @@
 //
 
 #import "MoreViewVC.h"
+#import "JUILib.h"
+#import "TabBarExampleVC.h"
+#import "BarViewExampleVC.h"
+
 
 @interface MoreViewVC ()
 
@@ -49,5 +53,30 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
+- (IBAction)changeTabByCode:(id)sender {
+    self.jTabBarController.selectedIndex = 0;
+}
+
+- (IBAction)changeVCsByCode:(id)sender {
+    
+    TabBarExampleVC *example1 = [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil];
+    example1.tabBarItem.title = @"TabBar";
+    
+    BarViewExampleVC *example2 = [[BarViewExampleVC alloc] initWithNibName:nil bundle:nil];
+    example2.tabBarItem.title = @"BarView";
+    
+    MoreViewVC *example3 = [[MoreViewVC alloc] initWithNibName:nil bundle:nil];
+    example3.tabBarItem.title = @"More";
+    
+    self.jTabBarController.childViewControllers = @[
+                                               example1,
+                                               example3,
+                                               example2
+                                               ];
+    
+#warning - need to fix this
+    self.jTabBarController.selectedIndex = 1;
+    
+}
 
 @end

@@ -37,13 +37,15 @@
     tabBarView.backgroundImage = [UIImage imageNamed:@"blackHorizontalBar"];
 
     TabBarExampleVC *example1 = [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil];
-    example1.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"ButtonTemplate" owner:self options:nil][0];
+    example1.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
     example1.tabBarItem.title = @"TabBar";
     
     BarViewExampleVC *example2 = [[BarViewExampleVC alloc] initWithNibName:nil bundle:nil];
+    example2.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
     example2.tabBarItem.title = @"BarView";
     
     MoreViewVC *example3 = [[MoreViewVC alloc] initWithNibName:nil bundle:nil];
+    example3.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
     example3.tabBarItem.title = @"More";
     
     _tabBarController = [[JTabBarController alloc] initWithTabBar:tabBarView andDockPosition:JTabBarDockBottom];
@@ -53,6 +55,7 @@
                                                example2,
                                                example3
                                                ];
+    _tabBarController.selectedIndex = 2;
     [self addChildViewController:_tabBarController];
     [self.view addSubview:_tabBarController.view];
     [_tabBarController didMoveToParentViewController:self];
@@ -81,11 +84,9 @@
 #pragma mark - JTabBarControllerDelegate
 
 - (UIButton *)tabBarController:(JTabBarController *)tabBarController tabBarButtonForChildViewController:(UIViewController *)childViewController forIndex:(uint)index {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-    button.tintColor = [UIColor grayColor];
-    return button;
+    
+    // this will only execute if the childViewController do not provide a jTabBarButton
+    return [[NSBundle mainBundle] loadNibNamed:@"AltMainButtonTemplate" owner:self options:nil][0];;
 }
 
 @end

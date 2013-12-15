@@ -116,4 +116,8 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 @end

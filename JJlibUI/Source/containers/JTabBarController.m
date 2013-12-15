@@ -83,14 +83,24 @@
 #pragma mark - public properties
 
 - (void)setChildViewControllers:(NSArray *)childViewControllers {
+
+    for (UIViewController *child in _childViewControllers) {
+        child.jTabBarController = nil;
+    }
+    
     if ( [self isViewLoaded] ) {
-        
+        self.selectedChildViewController = nil;
     }
     
     _childViewControllers = [childViewControllers mutableCopy];
     
+    for (UIViewController *child in _childViewControllers) {
+        child.jTabBarController = self;
+    }
+    
     if ( [self isViewLoaded] ) {
-        
+        [self createButtonsForViewControllers];
+        self.selectedIndex = 0;
     }
 }
 
@@ -104,7 +114,13 @@
     _selectedChildViewController = selectedChildViewController;
     
     if ( [self isViewLoaded] ) {
-        _associatedButtonMatrix.selectedIndex = index;
+        
+        if ( _associatedButtonMatrix ) {
+            _associatedButtonMatrix.selectedIndex = index;
+        } else if ( _associatedTabBar ) {
+            _associatedTabBar.selectedIndex = index;
+        }
+        [self changeToViewController:selectedChildViewController];
     }
 }
 
@@ -118,7 +134,7 @@
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
-    if (selectedIndex > 0 && selectedIndex < _childViewControllers.count) {
+    if (selectedIndex < _childViewControllers.count) {
         self.selectedChildViewController = _childViewControllers[selectedIndex];
     }
 }
@@ -299,7 +315,19 @@
     [self createButtonsForViewControllers];
     
     if (_childViewControllers.count > 0) {
-        [self changeToViewController:_childViewControllers[0]];
+        
+        NSUInteger index = 0;
+        if (_selectedChildViewController) {
+            index = [_childViewControllers indexOfObject:_selectedChildViewController];
+        }
+        
+        if (_associatedButtonMatrix) {
+            _associatedButtonMatrix.selectedIndex = index;
+        }else if (_associatedTabBar) {
+            _associatedTabBar.selectedIndex = index;
+        }
+        UIViewController *controller = _childViewControllers[index];
+        [self changeToViewController:controller];
     }
 }
 
@@ -311,8 +339,17 @@
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    // Remove non-active child's views
+    for (UIViewController *childController in _childViewControllers) {
+        if ( childController != _selectedChildViewController ) {
+            if ( [childController isViewLoaded] && [self.view window] == nil ) {
+                childController.view = nil;
+            }
+        }
+    }
+    
+    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - public functions
