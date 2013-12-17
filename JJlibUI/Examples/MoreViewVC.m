@@ -65,16 +65,15 @@
     BarViewExampleVC *example2 = [[BarViewExampleVC alloc] initWithNibName:nil bundle:nil];
     example2.tabBarItem.title = @"BarView";
     
-    MoreViewVC *example3 = [[MoreViewVC alloc] initWithNibName:nil bundle:nil];
-    example3.tabBarItem.title = @"More";
+    // remove our custom button so a default delegate is created
+    self.jTabBarButton = nil;
     
     self.jTabBarController.childViewControllers = @[
                                                example1,
-                                               example3,
+                                               self,
                                                example2
                                                ];
     
-#warning - need to fix this
     self.jTabBarController.selectedIndex = 1;
     
 }

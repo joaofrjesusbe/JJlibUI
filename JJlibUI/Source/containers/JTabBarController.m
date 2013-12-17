@@ -3,7 +3,7 @@
 //  JJlibUI
 //
 //  Created by Joao Jesus on 18/11/13.
-//  Copyright (c) 2013 Joao Jesus. All rights reserved.
+//  Copyright (c) 2013 JJApps. All rights reserved.
 //
 
 #import "JTabBarController.h"
@@ -111,8 +111,6 @@
         return;
     }
     
-    _selectedChildViewController = selectedChildViewController;
-    
     if ( [self isViewLoaded] ) {
         
         if ( _associatedButtonMatrix ) {
@@ -121,6 +119,9 @@
             _associatedTabBar.selectedIndex = index;
         }
         [self changeToViewController:selectedChildViewController];
+        
+    } else {        
+        _selectedChildViewController = selectedChildViewController;
     }
 }
 

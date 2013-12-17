@@ -3,7 +3,6 @@ Suggestions and Contributions email: joaofrjesusbe at gmail.com
 
 Release Notes (v0.2.1):
 	- Introducing JTabBarController
-	- CocoPods integration (soon)
 
 Release Notes (v0.1.3):
 	- Fix JTabBarView when setting new child views on runtime.
