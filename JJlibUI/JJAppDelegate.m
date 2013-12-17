@@ -7,14 +7,15 @@
 //
 
 #import "JJAppDelegate.h"
-#import "TabBarExampleVC.h"
+#import "TabBarControllerExampleVC.h"
 
 @implementation JJAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil];
+    self.window.rootViewController = [[TabBarControllerExampleVC alloc] initWithNibName:nil bundle:nil];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

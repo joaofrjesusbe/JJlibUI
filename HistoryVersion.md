@@ -1,6 +1,9 @@
 JJlibUI - simplify UI
 Suggestions and Contributions email: joaofrjesusbe at gmail.com
 
+Release Notes (v0.2.1):
+	- Introducing JTabBarController
+
 Release Notes (v0.1.3):
 	- Fix JTabBarView when setting new child views on runtime.
 	- Fix JButtonMatrix when selecting a new button.

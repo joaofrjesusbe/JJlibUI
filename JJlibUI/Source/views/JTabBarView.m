@@ -13,7 +13,7 @@
 
 @interface JTabBarView ()
 
-@property(nonatomic,strong) JButtonMatrix *tabBarMatrix;
+@property(nonatomic,readwrite) JButtonMatrix *associatedButtonMatrix;
 @property(nonatomic,assign) BOOL needsUpdateScroll;
 @property(nonatomic,assign) BOOL needsAnimateSelection;
 
@@ -44,7 +44,7 @@
 }
 
 - (void)setupJTabBarView {
-    _tabBarMatrix = [[JButtonMatrix alloc] init];
+    _associatedButtonMatrix = [[JButtonMatrix alloc] init];
     self.needsAnimateSelection = NO;
     self.needsUpdateScroll = NO;
 }
@@ -58,7 +58,7 @@
         childViews = @[];
     }
     
-    for (UIButton *button in self.tabBarMatrix.buttonsArray) {
+    for (UIButton *button in self.associatedButtonMatrix.buttonsArray) {
         [button removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
     }
     
@@ -68,7 +68,7 @@
         [childsButtons addObject:button];
     }
     
-    self.tabBarMatrix.buttonsArray = childsButtons;
+    self.associatedButtonMatrix.buttonsArray = childsButtons;
     
     if (self.scrollEnabled) {
         self.needsUpdateScroll = YES;
@@ -82,24 +82,24 @@
 
 @dynamic selectedTabBar;
 - (UIButton *)selectedTabBar {
-    return self.tabBarMatrix.selectedButton;
+    return self.associatedButtonMatrix.selectedButton;
 }
 
 - (void)setSelectedTabBar:(UIButton *)selectedTabBar {
     if (selectedTabBar != self.selectedTabBar) {
-        self.tabBarMatrix.selectedButton = selectedTabBar;
+        self.associatedButtonMatrix.selectedButton = selectedTabBar;
         [self setNeedsLayout];
     }
 }
 
 @dynamic selectedIndex;
 - (int)selectedIndex {
-    return self.tabBarMatrix.selectedIndex;
+    return self.associatedButtonMatrix.selectedIndex;
 }
 
 - (void)setSelectedIndex:(int)selectedIndex {
     if (selectedIndex != self.selectedIndex) {
-        self.tabBarMatrix.selectedIndex = selectedIndex;
+        self.associatedButtonMatrix.selectedIndex = selectedIndex;
         [self setNeedsLayout];
     }
 }
@@ -153,7 +153,7 @@
     CGRect bounds = self.bounds;
     if ( self.needsUpdateScroll && viewsArray.count > 0 ) {
 
-        NSArray * buttonsArray = self.tabBarMatrix.buttonsArray;
+        NSArray * buttonsArray = self.associatedButtonMatrix.buttonsArray;
         CGRect minRect = ((UIView *)buttonsArray[0]).frame;
         CGRect maxRect = ((UIView *)buttonsArray[buttonsArray.count-1]).frame;
         
