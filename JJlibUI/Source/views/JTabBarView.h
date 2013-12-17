@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "JBarView.h"
 #import "UIButton+JButton.h"
+#import "JButtonMatrix.h"
 
 /**
  *  A tabbar build over the JBarView.
@@ -61,5 +62,7 @@
  *  Default: NO
  */
 @property(nonatomic,assign) BOOL alwaysCenterTabBarOnSelect;
+
+@property(nonatomic,readonly) JButtonMatrix *associatedButtonMatrix;
 
 @end

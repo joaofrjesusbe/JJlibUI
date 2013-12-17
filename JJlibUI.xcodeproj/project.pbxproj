@@ -12,15 +12,25 @@
 		072238CB1823D7E100824A9D /* JBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 072238C21823D7E100824A9D /* JBarView.m */; };
 		072238CC1823D7E100824A9D /* JButtonMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 072238C41823D7E100824A9D /* JButtonMatrix.m */; };
 		072238CD1823D7E100824A9D /* JTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 072238C61823D7E100824A9D /* JTabBarView.m */; };
-		072238D01824179B00824A9D /* imageSeparatorVertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 072238CE1824179B00824A9D /* imageSeparatorVertical.png */; };
-		072238D11824179B00824A9D /* imageSeparatorVertical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 072238CF1824179B00824A9D /* imageSeparatorVertical@2x.png */; };
-		072238D4182417A300824A9D /* imageSeparatorHorizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 072238D2182417A300824A9D /* imageSeparatorHorizontal.png */; };
-		072238D5182417A300824A9D /* imageSeparatorHorizontal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 072238D3182417A300824A9D /* imageSeparatorHorizontal@2x.png */; };
-		0742815D181D3BAB00C99CBC /* backgroundBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0742815A181D3BAB00C99CBC /* backgroundBar.png */; };
-		0742815E181D3BAB00C99CBC /* backgroundBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0742815B181D3BAB00C99CBC /* backgroundBar@2x.png */; };
 		0759DA77181BDBBE006BA244 /* TabBarExampleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0759DA75181BDBBE006BA244 /* TabBarExampleVC.m */; };
 		0759DA78181BDBBE006BA244 /* TabBarExampleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0759DA76181BDBBE006BA244 /* TabBarExampleVC.xib */; };
-		0774DA101837AA1C0061A879 /* ButtonTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0774DA0F1837AA1C0061A879 /* ButtonTemplate.xib */; };
+		077676DF184A0E8D00D08B1C /* TabBarControllerExampleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 077676DE184A0E8D00D08B1C /* TabBarControllerExampleVC.m */; };
+		0777010D183AC43A00203BE9 /* JTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0777010C183AC43A00203BE9 /* JTabBarController.m */; };
+		07B43DEA185DEB2700F8926C /* ButtonTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DE9185DEB2700F8926C /* ButtonTemplate.xib */; };
+		07B43DF4185DEB3700F8926C /* blackHorizontalBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DEC185DEB3700F8926C /* blackHorizontalBar.png */; };
+		07B43DF5185DEB3700F8926C /* blackHorizontalBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DED185DEB3700F8926C /* blackHorizontalBar@2x.png */; };
+		07B43DF6185DEB3700F8926C /* blueHorizontalBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DEE185DEB3700F8926C /* blueHorizontalBar.png */; };
+		07B43DF7185DEB3700F8926C /* blueHorizontalBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DEF185DEB3700F8926C /* blueHorizontalBar@2x.png */; };
+		07B43DF8185DEB3700F8926C /* blueHorizontalSeparator.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DF0185DEB3700F8926C /* blueHorizontalSeparator.png */; };
+		07B43DF9185DEB3700F8926C /* blueHorizontalSeparator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DF1185DEB3700F8926C /* blueHorizontalSeparator@2x.png */; };
+		07B43DFA185DEB3700F8926C /* blueVerticalSeparator.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DF2185DEB3700F8926C /* blueVerticalSeparator.png */; };
+		07B43DFB185DEB3700F8926C /* blueVerticalSeparator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DF3185DEB3700F8926C /* blueVerticalSeparator@2x.png */; };
+		07B43DFD185DEB5E00F8926C /* MainButtonTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DFC185DEB5E00F8926C /* MainButtonTemplate.xib */; };
+		07B43DFF185DEC6300F8926C /* AltMainButtonTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DFE185DEC6300F8926C /* AltMainButtonTemplate.xib */; };
+		07C760F0185673D30020FDF4 /* BarViewExampleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C760EE185673D30020FDF4 /* BarViewExampleVC.m */; };
+		07C760F1185673D30020FDF4 /* BarViewExampleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C760EF185673D30020FDF4 /* BarViewExampleVC.xib */; };
+		07C760F51856747C0020FDF4 /* MoreViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C760F31856747C0020FDF4 /* MoreViewVC.m */; };
+		07C760F61856747C0020FDF4 /* MoreViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C760F41856747C0020FDF4 /* MoreViewVC.xib */; };
 		07E4B3501813E1FB00B861CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E4B34F1813E1FB00B861CD /* Foundation.framework */; };
 		07E4B3521813E1FB00B861CD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E4B3511813E1FB00B861CD /* CoreGraphics.framework */; };
 		07E4B3541813E1FB00B861CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E4B3531813E1FB00B861CD /* UIKit.framework */; };
@@ -57,16 +67,30 @@
 		072238C41823D7E100824A9D /* JButtonMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JButtonMatrix.m; sourceTree = "<group>"; };
 		072238C51823D7E100824A9D /* JTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTabBarView.h; sourceTree = "<group>"; };
 		072238C61823D7E100824A9D /* JTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTabBarView.m; sourceTree = "<group>"; };
-		072238CE1824179B00824A9D /* imageSeparatorVertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageSeparatorVertical.png; sourceTree = "<group>"; };
-		072238CF1824179B00824A9D /* imageSeparatorVertical@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imageSeparatorVertical@2x.png"; sourceTree = "<group>"; };
-		072238D2182417A300824A9D /* imageSeparatorHorizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageSeparatorHorizontal.png; sourceTree = "<group>"; };
-		072238D3182417A300824A9D /* imageSeparatorHorizontal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imageSeparatorHorizontal@2x.png"; sourceTree = "<group>"; };
-		0742815A181D3BAB00C99CBC /* backgroundBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundBar.png; sourceTree = "<group>"; };
-		0742815B181D3BAB00C99CBC /* backgroundBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundBar@2x.png"; sourceTree = "<group>"; };
 		0759DA74181BDBBE006BA244 /* TabBarExampleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarExampleVC.h; sourceTree = "<group>"; };
 		0759DA75181BDBBE006BA244 /* TabBarExampleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarExampleVC.m; sourceTree = "<group>"; };
 		0759DA76181BDBBE006BA244 /* TabBarExampleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarExampleVC.xib; sourceTree = "<group>"; };
-		0774DA0F1837AA1C0061A879 /* ButtonTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTemplate.xib; sourceTree = "<group>"; };
+		077676DD184A0E8D00D08B1C /* TabBarControllerExampleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarControllerExampleVC.h; sourceTree = "<group>"; };
+		077676DE184A0E8D00D08B1C /* TabBarControllerExampleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarControllerExampleVC.m; sourceTree = "<group>"; };
+		0777010B183AC43A00203BE9 /* JTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTabBarController.h; sourceTree = "<group>"; };
+		0777010C183AC43A00203BE9 /* JTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTabBarController.m; sourceTree = "<group>"; };
+		07B43DE9185DEB2700F8926C /* ButtonTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTemplate.xib; sourceTree = "<group>"; };
+		07B43DEC185DEB3700F8926C /* blackHorizontalBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackHorizontalBar.png; sourceTree = "<group>"; };
+		07B43DED185DEB3700F8926C /* blackHorizontalBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackHorizontalBar@2x.png"; sourceTree = "<group>"; };
+		07B43DEE185DEB3700F8926C /* blueHorizontalBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueHorizontalBar.png; sourceTree = "<group>"; };
+		07B43DEF185DEB3700F8926C /* blueHorizontalBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueHorizontalBar@2x.png"; sourceTree = "<group>"; };
+		07B43DF0185DEB3700F8926C /* blueHorizontalSeparator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueHorizontalSeparator.png; sourceTree = "<group>"; };
+		07B43DF1185DEB3700F8926C /* blueHorizontalSeparator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueHorizontalSeparator@2x.png"; sourceTree = "<group>"; };
+		07B43DF2185DEB3700F8926C /* blueVerticalSeparator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueVerticalSeparator.png; sourceTree = "<group>"; };
+		07B43DF3185DEB3700F8926C /* blueVerticalSeparator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueVerticalSeparator@2x.png"; sourceTree = "<group>"; };
+		07B43DFC185DEB5E00F8926C /* MainButtonTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainButtonTemplate.xib; sourceTree = "<group>"; };
+		07B43DFE185DEC6300F8926C /* AltMainButtonTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AltMainButtonTemplate.xib; sourceTree = "<group>"; };
+		07C760ED185673D30020FDF4 /* BarViewExampleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarViewExampleVC.h; sourceTree = "<group>"; };
+		07C760EE185673D30020FDF4 /* BarViewExampleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarViewExampleVC.m; sourceTree = "<group>"; };
+		07C760EF185673D30020FDF4 /* BarViewExampleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarViewExampleVC.xib; sourceTree = "<group>"; };
+		07C760F21856747C0020FDF4 /* MoreViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewVC.h; sourceTree = "<group>"; };
+		07C760F31856747C0020FDF4 /* MoreViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewVC.m; sourceTree = "<group>"; };
+		07C760F41856747C0020FDF4 /* MoreViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewVC.xib; sourceTree = "<group>"; };
 		07E4B34C1813E1FB00B861CD /* JJlibUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JJlibUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07E4B34F1813E1FB00B861CD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		07E4B3511813E1FB00B861CD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -112,6 +136,7 @@
 		072238B41823D7E100824A9D /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				0777010A183AC41000203BE9 /* containers */,
 				072238B51823D7E100824A9D /* categories */,
 				072238C01823D7E100824A9D /* views */,
 				072238BF1823D7E100824A9D /* JUILib.h */,
@@ -143,19 +168,56 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		0777010A183AC41000203BE9 /* containers */ = {
+			isa = PBXGroup;
+			children = (
+				0777010B183AC43A00203BE9 /* JTabBarController.h */,
+				0777010C183AC43A00203BE9 /* JTabBarController.m */,
+			);
+			path = containers;
+			sourceTree = "<group>";
+		};
+		07B43DE8185DEB2700F8926C /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				07B43DE9185DEB2700F8926C /* ButtonTemplate.xib */,
+				07B43DFC185DEB5E00F8926C /* MainButtonTemplate.xib */,
+				07B43DFE185DEC6300F8926C /* AltMainButtonTemplate.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		07B43DEB185DEB3700F8926C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				07B43DEC185DEB3700F8926C /* blackHorizontalBar.png */,
+				07B43DED185DEB3700F8926C /* blackHorizontalBar@2x.png */,
+				07B43DEE185DEB3700F8926C /* blueHorizontalBar.png */,
+				07B43DEF185DEB3700F8926C /* blueHorizontalBar@2x.png */,
+				07B43DF0185DEB3700F8926C /* blueHorizontalSeparator.png */,
+				07B43DF1185DEB3700F8926C /* blueHorizontalSeparator@2x.png */,
+				07B43DF2185DEB3700F8926C /* blueVerticalSeparator.png */,
+				07B43DF3185DEB3700F8926C /* blueVerticalSeparator@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		07B777421813F33D004B76A1 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
-				072238D2182417A300824A9D /* imageSeparatorHorizontal.png */,
-				072238D3182417A300824A9D /* imageSeparatorHorizontal@2x.png */,
-				072238CE1824179B00824A9D /* imageSeparatorVertical.png */,
-				072238CF1824179B00824A9D /* imageSeparatorVertical@2x.png */,
-				0742815A181D3BAB00C99CBC /* backgroundBar.png */,
-				0742815B181D3BAB00C99CBC /* backgroundBar@2x.png */,
+				07B43DEB185DEB3700F8926C /* Images */,
+				07B43DE8185DEB2700F8926C /* Xibs */,
+				077676DD184A0E8D00D08B1C /* TabBarControllerExampleVC.h */,
+				077676DE184A0E8D00D08B1C /* TabBarControllerExampleVC.m */,
 				0759DA74181BDBBE006BA244 /* TabBarExampleVC.h */,
 				0759DA75181BDBBE006BA244 /* TabBarExampleVC.m */,
 				0759DA76181BDBBE006BA244 /* TabBarExampleVC.xib */,
-				0774DA0F1837AA1C0061A879 /* ButtonTemplate.xib */,
+				07C760ED185673D30020FDF4 /* BarViewExampleVC.h */,
+				07C760EE185673D30020FDF4 /* BarViewExampleVC.m */,
+				07C760EF185673D30020FDF4 /* BarViewExampleVC.xib */,
+				07C760F21856747C0020FDF4 /* MoreViewVC.h */,
+				07C760F31856747C0020FDF4 /* MoreViewVC.m */,
+				07C760F41856747C0020FDF4 /* MoreViewVC.xib */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -308,16 +370,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				072238D11824179B00824A9D /* imageSeparatorVertical@2x.png in Resources */,
+				07B43DFD185DEB5E00F8926C /* MainButtonTemplate.xib in Resources */,
+				07B43DF8185DEB3700F8926C /* blueHorizontalSeparator.png in Resources */,
+				07B43DFA185DEB3700F8926C /* blueVerticalSeparator.png in Resources */,
+				07C760F61856747C0020FDF4 /* MoreViewVC.xib in Resources */,
+				07B43DF4185DEB3700F8926C /* blackHorizontalBar.png in Resources */,
+				07B43DFB185DEB3700F8926C /* blueVerticalSeparator@2x.png in Resources */,
+				07B43DF5185DEB3700F8926C /* blackHorizontalBar@2x.png in Resources */,
+				07B43DEA185DEB2700F8926C /* ButtonTemplate.xib in Resources */,
+				07B43DFF185DEC6300F8926C /* AltMainButtonTemplate.xib in Resources */,
+				07C760F1185673D30020FDF4 /* BarViewExampleVC.xib in Resources */,
+				07B43DF9185DEB3700F8926C /* blueHorizontalSeparator@2x.png in Resources */,
+				07B43DF6185DEB3700F8926C /* blueHorizontalBar.png in Resources */,
 				0759DA78181BDBBE006BA244 /* TabBarExampleVC.xib in Resources */,
-				0742815E181D3BAB00C99CBC /* backgroundBar@2x.png in Resources */,
 				07E4B35A1813E1FB00B861CD /* InfoPlist.strings in Resources */,
-				072238D01824179B00824A9D /* imageSeparatorVertical.png in Resources */,
-				072238D5182417A300824A9D /* imageSeparatorHorizontal@2x.png in Resources */,
-				072238D4182417A300824A9D /* imageSeparatorHorizontal.png in Resources */,
-				0774DA101837AA1C0061A879 /* ButtonTemplate.xib in Resources */,
+				07B43DF7185DEB3700F8926C /* blueHorizontalBar@2x.png in Resources */,
 				07E4B3621813E1FB00B861CD /* Images.xcassets in Resources */,
-				0742815D181D3BAB00C99CBC /* backgroundBar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0777010D183AC43A00203BE9 /* JTabBarController.m in Sources */,
 				072238C71823D7E100824A9D /* UIButton+JButton.m in Sources */,
 				072238CC1823D7E100824A9D /* JButtonMatrix.m in Sources */,
 				0759DA77181BDBBE006BA244 /* TabBarExampleVC.m in Sources */,
@@ -343,7 +412,10 @@
 				072238C81823D7E100824A9D /* UIScrollView+JCenterScroll.m in Sources */,
 				07E4B35C1813E1FB00B861CD /* main.m in Sources */,
 				072238CB1823D7E100824A9D /* JBarView.m in Sources */,
+				07C760F0185673D30020FDF4 /* BarViewExampleVC.m in Sources */,
 				072238CD1823D7E100824A9D /* JTabBarView.m in Sources */,
+				07C760F51856747C0020FDF4 /* MoreViewVC.m in Sources */,
+				077676DF184A0E8D00D08B1C /* TabBarControllerExampleVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

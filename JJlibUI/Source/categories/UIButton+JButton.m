@@ -3,7 +3,7 @@
 //  JJlibUI
 //
 //  Created by Joao Jesus on 25/10/13.
-//  Copyright (c) JJApps. All rights reserved.
+//  Copyright (c) 2013 JJApps. All rights reserved.
 //
 
 #import "UIButton+JButton.h"
