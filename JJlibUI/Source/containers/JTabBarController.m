@@ -126,7 +126,7 @@
 }
 
 @dynamic selectedIndex;
-- (uint)selectedIndex {
+- (NSInteger)selectedIndex {
     UIViewController *viewController = self.selectedChildViewController;
     if (viewController == nil) {
         return NSNotFound;
@@ -134,7 +134,7 @@
     return [_childViewControllers indexOfObject:self.selectedChildViewController];
 }
 
-- (void)setSelectedIndex:(NSUInteger)selectedIndex {
+- (void)setSelectedIndex:(NSInteger)selectedIndex {
     if (selectedIndex < _childViewControllers.count) {
         self.selectedChildViewController = _childViewControllers[selectedIndex];
     }
@@ -149,7 +149,15 @@
 }
 
 - (void)setHiddenTabBar:(BOOL)hiddenTabBar {
-    [NSException raise:NSGenericException format:@"Not implemented"];
+    
+    _hiddenTabBar = hiddenTabBar;
+    if (self.associatedTabBar) {
+        self.associatedTabBar.hidden = _hiddenTabBar;
+    }
+    
+    if ( [self isViewLoaded] ) {
+        _viewContainer.frame = [self frameForContainer];
+    }
 }
 
 #pragma mark - view helpers
@@ -159,7 +167,9 @@
     _associatedTabBar = tabbar;
     [self.view addSubview:tabbar];
     [self.view bringSubviewToFront:_associatedTabBar];
-    [self adjustAssociatedTabBar];
+    
+    _associatedTabBar.frame = [self frameForTabBar];
+    _associatedTabBar.alignment = [self alignmentForTabBar];
 }
 
 - (void)createViewContainer {
@@ -167,47 +177,56 @@
     _viewContainer = container;
     [self.view addSubview:container];
     [self.view sendSubviewToBack:container];
-    [self adjustAssociatedContainer];
+    
+    _viewContainer.frame = [self frameForContainer];
 }
 
-- (void)adjustAssociatedTabBar {
+- (CGRect)frameForTabBar {
     CGRect viewBounds = self.view.bounds;
-    CGRect tabBarFrame = CGRectZero;
-    JBarViewAlignment alignment = JBarViewAlignmentHorizontal;
+    CGRect tabBarFrame = self.associatedTabBar.frame;
     
     switch (self.tabBarDock) {
         case JTabBarDockTop:
             tabBarFrame = CGRectMake(0, 0, viewBounds.size.width, self.tabBarSize);
-            alignment = JBarViewAlignmentHorizontal;
             break;
             
         case JTabBarDockBottom:
             tabBarFrame = CGRectMake(0, viewBounds.size.height - self.tabBarSize, viewBounds.size.width, self.tabBarSize);
-            alignment = JBarViewAlignmentHorizontal;
             break;
             
         case JTabBarDockLeft:
             tabBarFrame = CGRectMake(0, 0, self.tabBarSize, viewBounds.size.height);
-            alignment = JBarViewAlignmentVertical;
             break;
             
         case JTabBarDockRight:
             tabBarFrame = CGRectMake(0, viewBounds.size.width - self.tabBarSize, self.tabBarSize, viewBounds.size.height);
-            alignment = JBarViewAlignmentVertical;
             break;
             
         default:
             break;
     }
     
-    _associatedTabBar.frame = tabBarFrame;
-    _associatedTabBar.alignment = alignment;
+    return tabBarFrame;
 }
 
-- (void)adjustAssociatedContainer {
+- (JBarViewAlignment)alignmentForTabBar {
+    if ( JTabBarDockIsHorizontal(self.tabBarDock) ) {
+        return JBarViewAlignmentHorizontal;
+    } else if ( JTabBarDockIsVertical(self.tabBarDock) ) {
+        return JBarViewAlignmentVertical;
+    } else {
+        return JBarViewAlignmentNone;
+    }
+}
+
+- (CGRect)frameForContainer {
     CGRect viewBounds = self.view.bounds;
     CGSize tabBarSize = _associatedTabBar.frame.size;
-    CGRect containerFrame = CGRectZero;
+    if ( self.associatedTabBar.hidden ) {
+        tabBarSize = CGSizeZero;
+    }
+    
+    CGRect containerFrame = viewBounds;
     
     switch (self.tabBarDock) {
         case JTabBarDockTop:
@@ -230,7 +249,7 @@
             break;
     }
     
-    self.viewContainer.frame = containerFrame;
+    return containerFrame;
 }
 
 - (void)createButtonsForViewControllers {
@@ -265,7 +284,7 @@
         
         if (button == nil) {
             button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            [button setTitle:[NSString stringWithFormat:@"%d", i] forState:UIControlStateNormal];
+            [button setTitle:[NSString stringWithFormat:@"%ld", i] forState:UIControlStateNormal];
             needToAssociateNewButtons = YES;
         }
         
@@ -305,7 +324,8 @@
         [self createAssociatedTabBar];
         [self.view addSubview:_associatedTabBar];
     } else if ( _associatedTabBar ) {
-        [self adjustAssociatedTabBar];
+        _associatedTabBar.frame = [self frameForTabBar];
+        _associatedTabBar.alignment = [self alignmentForTabBar];
         [self.view addSubview:_associatedTabBar];
     }
     
@@ -333,8 +353,9 @@
 }
 
 - (void)viewWillLayoutSubviews {
-    [self adjustAssociatedTabBar];
-    [self adjustAssociatedContainer];
+    _associatedTabBar.frame = [self frameForTabBar];
+    _associatedTabBar.alignment = [self alignmentForTabBar];
+    _viewContainer.frame = [self frameForContainer];
 }
 
 
@@ -353,21 +374,34 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - public functions
+#pragma mark - animation functions
 
-- (void)setChildViewControllers:(NSArray *)childViewControllers animatedOptions:(UIViewAnimationOptions)animatedOptions completion:(void (^)(void))completion {
+- (void)setSelectedIndex:(NSInteger)selectedIndex animation:(JTabBarAnimation)animation completion:(void (^)(void))completion {
     [NSException raise:NSGenericException format:@"Not implemented"];
 }
 
-- (void)setHiddenTabBar:(BOOL)hiddenTabBar animatedOptions:(UIViewAnimationOptions)animatedOptions completion:(void (^)(void))completion {
+- (void)setChildViewControllers:(NSArray *)childViewControllers animation:(JTabBarAnimation)animation completion:(void (^)(void))completion {
     [NSException raise:NSGenericException format:@"Not implemented"];
+}
+
+- (void)setHiddenTabBar:(BOOL)hiddenTabBar animation:(JTabBarAnimation)animation completion:(void (^)(void))completion {
+    [NSException raise:NSGenericException format:@"Not implemented"];
+    
+    _hiddenTabBar = hiddenTabBar;
+    if (self.associatedTabBar) {
+        self.associatedTabBar.hidden = _hiddenTabBar;
+    }
+    
+    if ( [self isViewLoaded] ) {
+        
+    }
 }
 
 #pragma mark - private functions
 
 - (void)changeWithButton:(UIButton *)button {
     
-    uint index = button.selectionIndex;
+    NSInteger index = button.selectionIndex;
     UIViewController *viewController = _childViewControllers[index];
     BOOL shouldSelect = YES;
     if ( [self.delegate respondsToSelector:@selector(tabBarController:willSelectChildViewController:forIndex:)] ) {

@@ -342,6 +342,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Joao Jesus";
 				TargetAttributes = {
+					07E4B34B1813E1FB00B861CD = {
+						DevelopmentTeam = 3RXE783ECT;
+					};
 					07E4B3661813E1FB00B861CD = {
 						TestTargetID = 07E4B34B1813E1FB00B861CD;
 					};
@@ -536,10 +539,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JJlibUI/JJlibUI-Prefix.pch";
 				INFOPLIST_FILE = "JJlibUI/JJlibUI-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -549,10 +555,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JJlibUI/JJlibUI-Prefix.pch";
 				INFOPLIST_FILE = "JJlibUI/JJlibUI-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
