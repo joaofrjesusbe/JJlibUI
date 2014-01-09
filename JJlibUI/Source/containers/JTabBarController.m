@@ -118,7 +118,10 @@
         } else if ( _associatedTabBar ) {
             _associatedTabBar.selectedIndex = index;
         }
-        [self changeToViewController:selectedChildViewController];
+        
+        if (selectedChildViewController != _selectedChildViewController) {
+            [self changeToViewController:selectedChildViewController isInitializing:NO];
+        }        
         
     } else {        
         _selectedChildViewController = selectedChildViewController;
@@ -348,7 +351,7 @@
             _associatedTabBar.selectedIndex = index;
         }
         UIViewController *controller = _childViewControllers[index];
-        [self changeToViewController:controller];
+        [self changeToViewController:controller isInitializing:YES];
     }
 }
 
@@ -410,7 +413,9 @@
     
     if ( shouldSelect ) {
     
-        [self changeToViewController:viewController];
+        if (viewController != _selectedChildViewController) {
+            [self changeToViewController:viewController isInitializing:NO];
+        }
         
         if ( [self.delegate respondsToSelector:@selector(tabBarController:didSelectChildViewController:forIndex:)] ) {
             [self.delegate tabBarController:self didSelectChildViewController:viewController forIndex:index];
@@ -418,22 +423,73 @@
     }
 }
 
-- (void)changeToViewController:(UIViewController *)viewController {
+- (void)changeToViewController:(UIViewController *)viewController isInitializing:(BOOL)isInitializing {
     
-    // remove old viewController
-    if ( _selectedChildViewController ) {
-        [_selectedChildViewController willMoveToParentViewController:nil];
-        [_selectedChildViewController.view removeFromSuperview];
-        [_selectedChildViewController removeFromParentViewController];
-        _selectedChildViewController = nil;
+    BOOL allowTransition = !isInitializing && _selectedChildViewController != nil && viewController != nil;
+    
+    if ( allowTransition && self.defaultSelectedControllerAnimation != JTabBarAnimationNone ) {
+        
+        [self addChildViewController:viewController];
+        viewController.view.frame = self.viewContainer.bounds;
+        
+        UIViewAnimationOptions options = UIViewAnimationOptionTransitionNone;
+        if ( self.defaultSelectedControllerAnimation == JTabBarAnimationCrossDissolve ) {
+            options = UIViewAnimationOptionTransitionCrossDissolve;
+        }
+        
+        [self transitionFromViewController:_selectedChildViewController
+                          toViewController:viewController
+                                  duration:0.4
+                                   options:options
+                                animations:^{
+                                    if (self.defaultSelectedControllerAnimation == JTabBarAnimationSlide) {
+                                        CGRect finalFrame = _selectedChildViewController.view.frame;
+                                        switch (self.tabBarDock) {
+                                            case JTabBarDockTop:
+                                                finalFrame.origin.y -= finalFrame.size.height;
+                                                break;
+
+                                            case JTabBarDockBottom:
+                                                finalFrame.origin.y += finalFrame.size.height;
+                                                break;
+
+                                            case JTabBarDockLeft:
+                                                finalFrame.origin.x -= finalFrame.size.width;
+                                                break;
+
+                                            case JTabBarDockRight:
+                                                finalFrame.origin.x += finalFrame.size.width;
+                                                break;
+
+                                            default:
+                                                break;
+                                        }
+                                        _selectedChildViewController.view.frame = finalFrame;
+                                    }
+                                }
+                                completion:^(BOOL finished){
+                                    [_selectedChildViewController willMoveToParentViewController:nil];
+                                    [_selectedChildViewController removeFromParentViewController];
+                                    [viewController didMoveToParentViewController:self];
+                                    _selectedChildViewController = viewController;
+                                }];
+        
+    } else {
+        
+        // remove old viewController
+        if ( _selectedChildViewController ) {
+            [_selectedChildViewController willMoveToParentViewController:nil];
+            [_selectedChildViewController.view removeFromSuperview];
+            [_selectedChildViewController removeFromParentViewController];
+            _selectedChildViewController = nil;
+        }
+        
+        viewController.view.frame = self.viewContainer.bounds;
+        [self addChildViewController:viewController];
+        [self.viewContainer addSubview:viewController.view];
+        [viewController didMoveToParentViewController:self];
+        _selectedChildViewController = viewController;
     }
-    
-    viewController.view.frame = self.viewContainer.bounds;
-    [self addChildViewController:viewController];
-    [self.viewContainer addSubview:viewController.view];
-    [viewController didMoveToParentViewController:self];
-    _selectedChildViewController = viewController;
-    
 }
 
 @end

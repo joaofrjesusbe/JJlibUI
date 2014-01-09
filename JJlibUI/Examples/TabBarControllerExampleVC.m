@@ -50,6 +50,7 @@
     
     _tabBarController = [[JTabBarController alloc] initWithTabBar:tabBarView andDockPosition:JTabBarDockBottom];
     _tabBarController.delegate = self;
+    _tabBarController.defaultSelectedControllerAnimation = JTabBarAnimationCrossDissolve;
     _tabBarController.childViewControllers = @[
                                                example1,
                                                example2,

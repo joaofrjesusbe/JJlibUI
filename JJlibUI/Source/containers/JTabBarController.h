@@ -26,8 +26,8 @@ typedef NS_ENUM(short, JTabBarDock) {
  */
 typedef NS_ENUM(short, JTabBarAnimation) {
     JTabBarAnimationNone,
-    JTabBarAnimationFade,
-    JTabBarAnimationSlide
+    JTabBarAnimationCrossDissolve,
+    JTabBarAnimationSlide,
 };
 
 #define JTabBarDockIsHorizontal(x) ( (x) == JTabBarDockBottom || (x) == JTabBarDockTop )
@@ -100,7 +100,7 @@ typedef NS_ENUM(short, JTabBarAnimation) {
 
 @property(nonatomic,assign) JTabBarAnimation defaultSelectedControllerAnimation;
 
--(void)setSelectedIndex:(NSInteger)selectedIndex animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
+- (void)setSelectedIndex:(NSInteger)selectedIndex animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
 
 - (void)setChildViewControllers:(NSArray *)childViewControllers animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
 
