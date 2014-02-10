@@ -93,11 +93,11 @@
 }
 
 @dynamic selectedIndex;
-- (int)selectedIndex {
+- (NSInteger)selectedIndex {
     return self.associatedButtonMatrix.selectedIndex;
 }
 
-- (void)setSelectedIndex:(int)selectedIndex {
+- (void)setSelectedIndex:(NSInteger)selectedIndex {
     if (selectedIndex != self.selectedIndex) {
         self.associatedButtonMatrix.selectedIndex = selectedIndex;
         [self setNeedsLayout];

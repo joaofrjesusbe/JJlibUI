@@ -6,19 +6,20 @@
 //  Copyright (c) 2013 Joao Jesus. All rights reserved.
 //
 
-#import "BarViewExampleVC.h"
+#import "AnimationExampleVC.h"
 
-@interface BarViewExampleVC ()
+@interface AnimationExampleVC ()
 
 @end
 
-@implementation BarViewExampleVC
+@implementation AnimationExampleVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"Animations";
     }
     return self;
 }

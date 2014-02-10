@@ -9,10 +9,14 @@
 #import "MoreViewVC.h"
 #import "JUILib.h"
 #import "TabBarExampleVC.h"
-#import "BarViewExampleVC.h"
+#import "AnimationExampleVC.h"
 
 
 @interface MoreViewVC ()
+
+@property(nonatomic,strong) NSArray *backupVCs;
+@property(nonatomic,strong) UIButton *backupButton;
+@property(nonatomic,assign) BOOL usingOriginalVCs;
 
 @end
 
@@ -23,6 +27,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"Advance";
     }
     return self;
 }
@@ -31,6 +36,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.usingOriginalVCs = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,28 +60,46 @@
 }
 
 - (IBAction)changeTabByCode:(id)sender {
-    self.jTabBarController.selectedIndex = 0;
+    //self.jTabBarController.selectedIndex = 0; 
+    [self.jTabBarController setSelectedIndex:0 animation:JTabBarAnimationCrossDissolve completion:nil];
 }
 
 - (IBAction)changeVCsByCode:(id)sender {
     
-    TabBarExampleVC *example1 = [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil];
-    example1.tabBarItem.title = @"TabBar";
-    
-    BarViewExampleVC *example2 = [[BarViewExampleVC alloc] initWithNibName:nil bundle:nil];
-    example2.tabBarItem.title = @"BarView";
-    
-    // remove our custom button so a default delegate is created
-    self.jTabBarButton = nil;
-    
-    self.jTabBarController.childViewControllers = @[
-                                               example1,
-                                               self,
-                                               example2
-                                               ];
-    
-    self.jTabBarController.selectedIndex = 1;
-    
+    if (self.usingOriginalVCs) {
+        
+        TabBarExampleVC *example1 = [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil];
+        
+        AnimationExampleVC *example2 = [[AnimationExampleVC alloc] initWithNibName:nil bundle:nil];
+        
+        // remove our custom button so a default delegate is created
+        self.backupButton = self.jTabBarButton;
+        self.jTabBarButton = nil;
+        
+        self.backupVCs = self.jTabBarController.childViewControllers;
+        self.jTabBarController.childViewControllers = @[
+                                                        example1,
+                                                        self,
+                                                        example2
+                                                        ];
+        
+        self.jTabBarController.selectedIndex = 1;
+        self.usingOriginalVCs = NO;
+        
+    } else {
+
+        self.jTabBarButton = self.backupButton;
+        self.jTabBarController.childViewControllers = self.backupVCs;
+
+        self.jTabBarController.selectedIndex = 2;
+        self.usingOriginalVCs = YES;
+    }
+}
+
+
+- (IBAction)toggleHiddenTabBar:(id)sender {
+    //self.jTabBarController.hiddenTabBar = !self.jTabBarController.hiddenTabBar;
+    [self.jTabBarController setHiddenTabBar:!self.jTabBarController.hiddenTabBar animation:JTabBarAnimationCrossDissolve completion:nil];
 }
 
 @end
