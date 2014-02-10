@@ -71,7 +71,7 @@
     }
     
     if (selectedIndex < 0 || selectedIndex >= _buttonsArray.count) {
-        [NSException raise:@"Invalid selected index" format:@"Selection index %ld is invalid", selectedIndex];
+        [NSException raise:@"Invalid selected index" format:@"Selection index %d is invalid", selectedIndex];
         return;
     }
     self.selectedButton = _buttonsArray[selectedIndex];

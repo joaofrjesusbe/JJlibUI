@@ -8,7 +8,7 @@
 
 #import "TabBarControllerExampleVC.h"
 #import "TabBarExampleVC.h"
-#import "BarViewExampleVC.h"
+#import "AnimationExampleVC.h"
 #import "MoreViewVC.h"
 #import "JUILib.h"
 
@@ -38,15 +38,12 @@
 
     TabBarExampleVC *example1 = [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil];
     example1.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
-    example1.tabBarItem.title = @"TabBar";
     
-    BarViewExampleVC *example2 = [[BarViewExampleVC alloc] initWithNibName:nil bundle:nil];
+    AnimationExampleVC *example2 = [[AnimationExampleVC alloc] initWithNibName:nil bundle:nil];
     example2.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
-    example2.tabBarItem.title = @"BarView";
     
     MoreViewVC *example3 = [[MoreViewVC alloc] initWithNibName:nil bundle:nil];
     example3.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
-    example3.tabBarItem.title = @"More";
     
     _tabBarController = [[JTabBarController alloc] initWithTabBar:tabBarView andDockPosition:JTabBarDockBottom];
     _tabBarController.delegate = self;

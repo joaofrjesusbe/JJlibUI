@@ -9,7 +9,7 @@
 #import "MoreViewVC.h"
 #import "JUILib.h"
 #import "TabBarExampleVC.h"
-#import "BarViewExampleVC.h"
+#import "AnimationExampleVC.h"
 
 
 @interface MoreViewVC ()
@@ -27,6 +27,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"Advance";
     }
     return self;
 }
@@ -59,7 +60,8 @@
 }
 
 - (IBAction)changeTabByCode:(id)sender {
-    self.jTabBarController.selectedIndex = 0;
+    //self.jTabBarController.selectedIndex = 0; 
+    [self.jTabBarController setSelectedIndex:0 animation:JTabBarAnimationCrossDissolve completion:nil];
 }
 
 - (IBAction)changeVCsByCode:(id)sender {
@@ -67,10 +69,8 @@
     if (self.usingOriginalVCs) {
         
         TabBarExampleVC *example1 = [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil];
-        example1.tabBarItem.title = @"TabBar";
         
-        BarViewExampleVC *example2 = [[BarViewExampleVC alloc] initWithNibName:nil bundle:nil];
-        example2.tabBarItem.title = @"BarView";
+        AnimationExampleVC *example2 = [[AnimationExampleVC alloc] initWithNibName:nil bundle:nil];
         
         // remove our custom button so a default delegate is created
         self.backupButton = self.jTabBarButton;
@@ -96,14 +96,10 @@
     }
 }
 
-- (IBAction)toggleTabBarSelection:(id)sender {
-    
-    self.jTabBarController.selectedIndex = NSNotFound;
-}
-
 
 - (IBAction)toggleHiddenTabBar:(id)sender {
-    self.jTabBarController.hiddenTabBar = !self.jTabBarController.hiddenTabBar;
+    //self.jTabBarController.hiddenTabBar = !self.jTabBarController.hiddenTabBar;
+    [self.jTabBarController setHiddenTabBar:!self.jTabBarController.hiddenTabBar animation:JTabBarAnimationCrossDissolve completion:nil];
 }
 
 @end
