@@ -15,7 +15,7 @@
 @property(nonatomic,strong) UIScrollView *scrollContainer;
 @property(nonatomic,assign) UIView *subViewsContainer;
 @property(nonatomic,assign) CGFloat scrollBoxFixSize;
-@property(nonatomic,assign) int scrollViewsCounter;
+@property(nonatomic,assign) NSInteger scrollViewsCounter;
 @property(nonatomic,assign) float partialViewPercentage;
 
 @end

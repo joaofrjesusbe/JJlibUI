@@ -9,7 +9,7 @@
 /**
  *  @brief JJlibUI - simplify UI
  *
- *  @version 0.2.1
+ *  @version 0.3
  *  @author João Jesus
  *
  *  First set of the JJlibUI.

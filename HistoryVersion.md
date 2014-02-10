@@ -1,6 +1,10 @@
 JJlibUI - simplify UI
 Suggestions and Contributions email: joaofrjesusbe at gmail.com
 
+Release Notes (v0.3):
+	- Add hide/show tabbar from JTabBarController
+	- Add animations to hide tabbar and change child view controllers. 
+
 Release Notes (v0.2.1):
 	- Introducing JTabBarController
 

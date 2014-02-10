@@ -27,6 +27,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"TabBar";
     }
     return self;
 }
@@ -34,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
     JButtonSelectionBlock verticalBlockWhenSelect = ^(UIButton *button, JButtonEventType type ) {
         if (type == JButtonEventSelect) {

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BarViewExampleVC : UIViewController
+@interface AnimationExampleVC : UIViewController
 
 @end
