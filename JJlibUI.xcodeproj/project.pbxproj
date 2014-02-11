@@ -44,6 +44,7 @@
 		07E4B3731813E1FB00B861CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07E4B3711813E1FB00B861CD /* InfoPlist.strings */; };
 		07E4B3751813E1FB00B861CD /* JJlibUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E4B3741813E1FB00B861CD /* JJlibUITests.m */; };
 		61366AA318AA5E7100BF5AAA /* ExampleSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 61366AA218AA5E7100BF5AAA /* ExampleSettings.m */; };
+		61838FA318AA8218003B4665 /* MoreStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61838FA218AA8218003B4665 /* MoreStoryboard.storyboard */; };
 		61CB127318A90DB200B37440 /* under-construction.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 61CB127218A90DB200B37440 /* under-construction.jpg */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,7 @@
 		07E4B3741813E1FB00B861CD /* JJlibUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JJlibUITests.m; sourceTree = "<group>"; };
 		61366AA118AA5E7100BF5AAA /* ExampleSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleSettings.h; sourceTree = "<group>"; };
 		61366AA218AA5E7100BF5AAA /* ExampleSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleSettings.m; sourceTree = "<group>"; };
+		61838FA218AA8218003B4665 /* MoreStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MoreStoryboard.storyboard; sourceTree = "<group>"; };
 		61CB127218A90DB200B37440 /* under-construction.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "under-construction.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -226,6 +228,7 @@
 				07C760F41856747C0020FDF4 /* ExampleActionsVC.xib */,
 				61366AA118AA5E7100BF5AAA /* ExampleSettings.h */,
 				61366AA218AA5E7100BF5AAA /* ExampleSettings.m */,
+				61838FA218AA8218003B4665 /* MoreStoryboard.storyboard */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				0759DA78181BDBBE006BA244 /* ExampleTabBarVC.xib in Resources */,
 				07E4B35A1813E1FB00B861CD /* InfoPlist.strings in Resources */,
 				07B43DF7185DEB3700F8926C /* blueHorizontalBar@2x.png in Resources */,
+				61838FA318AA8218003B4665 /* MoreStoryboard.storyboard in Resources */,
 				07E4B3621813E1FB00B861CD /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

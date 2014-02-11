@@ -46,9 +46,13 @@
     ExampleActionsVC *actions = [[ExampleActionsVC alloc] initWithNibName:nil bundle:nil];
     actions.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
     
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MoreStoryboard" bundle:nil];
+    UIViewController *more = [sb instantiateInitialViewController];
+    more.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
+    
     _tabBarController = [[JTabBarController alloc] initWithTabBar:tabBarView andDockPosition:JTabBarDockBottom];
     _tabBarController.delegate = self;
-    _tabBarController.childViewControllers = @[ tabBar, actions, config];
+    _tabBarController.childViewControllers = @[ tabBar, actions, config, more];
     _tabBarController.selectedIndex = 1;
     [self addChildViewController:_tabBarController];
     [self.view addSubview:_tabBarController.view];
