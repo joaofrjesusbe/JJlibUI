@@ -407,7 +407,8 @@
 }
 
 - (void)setChildViewControllers:(NSArray *)childViewControllers animation:(JTabBarAnimation)animation completion:(void (^)(void))completion {
-    [NSException raise:NSGenericException format:@"Not implemented"];
+    self.childViewControllers = childViewControllers;
+    [self setSelectedIndex:0 animation:animation completion:completion];
 }
 
 - (void)setHiddenTabBar:(BOOL)hiddenTabBar animation:(JTabBarAnimation)animation completion:(void (^)(void))completion {

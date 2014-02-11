@@ -6,19 +6,20 @@
 //  Copyright (c) 2013 Joao Jesus. All rights reserved.
 //
 
-#import "TabBarControllerExampleVC.h"
-#import "TabBarExampleVC.h"
-#import "AnimationExampleVC.h"
-#import "MoreViewVC.h"
+#import "ExampleMainTabBarVC.h"
+#import "ExampleTabBarVC.h"
+#import "ExampleConfigVC.h"
+#import "ExampleActionsVC.h"
 #import "JUILib.h"
+#import "ExampleSettings.h"
 
-@interface TabBarControllerExampleVC () <JTabBarControllerDelegate>
+@interface ExampleMainTabBarVC () <JTabBarControllerDelegate>
 
 @property (nonatomic,strong) JTabBarController *tabBarController;
 
 @end
 
-@implementation TabBarControllerExampleVC
+@implementation ExampleMainTabBarVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,27 +37,25 @@
     JTabBarView *tabBarView = [[JTabBarView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     tabBarView.backgroundImage = [UIImage imageNamed:@"blackHorizontalBar"];
 
-    TabBarExampleVC *example1 = [[TabBarExampleVC alloc] initWithNibName:nil bundle:nil];
-    example1.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
+    ExampleTabBarVC *tabBar = [[ExampleTabBarVC alloc] initWithNibName:nil bundle:nil];
+    tabBar.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
     
-    AnimationExampleVC *example2 = [[AnimationExampleVC alloc] initWithNibName:nil bundle:nil];
-    example2.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
+    ExampleConfigVC *config = [[ExampleConfigVC alloc] initWithNibName:nil bundle:nil];
+    config.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
     
-    MoreViewVC *example3 = [[MoreViewVC alloc] initWithNibName:nil bundle:nil];
-    example3.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
+    ExampleActionsVC *actions = [[ExampleActionsVC alloc] initWithNibName:nil bundle:nil];
+    actions.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
     
     _tabBarController = [[JTabBarController alloc] initWithTabBar:tabBarView andDockPosition:JTabBarDockBottom];
     _tabBarController.delegate = self;
-    _tabBarController.defaultSelectedControllerAnimation = JTabBarAnimationCrossDissolve;
-    _tabBarController.childViewControllers = @[
-                                               example1,
-                                               example2,
-                                               example3
-                                               ];
-    _tabBarController.selectedIndex = 2;
+    _tabBarController.childViewControllers = @[ tabBar, actions, config];
+    _tabBarController.selectedIndex = 1;
     [self addChildViewController:_tabBarController];
     [self.view addSubview:_tabBarController.view];
     [_tabBarController didMoveToParentViewController:self];
+    
+    ExampleSettings *settings = [ExampleSettings sharedSettings];
+    [settings initializeDefaultsWithTabBarController:_tabBarController];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

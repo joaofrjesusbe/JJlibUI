@@ -96,11 +96,13 @@ typedef NS_ENUM(short, JTabBarAnimation) {
 @property(nonatomic,assign) BOOL hiddenTabBar;
 
 
-#pragma mark - TabBar Animation
+#pragma mark - Animations
 
 @property(nonatomic,assign) JTabBarAnimation defaultSelectedControllerAnimation;
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
+
+- (void)setSelectedChildViewController:(UIViewController *)selectedChildViewController animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
 
 - (void)setChildViewControllers:(NSArray *)childViewControllers animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
 

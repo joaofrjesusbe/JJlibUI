@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 JJApps. All rights reserved.
 //
 
-#import "TabBarExampleVC.h"
+#import "ExampleTabBarVC.h"
 #import "JUILib.h"
 
 
-@interface TabBarExampleVC ()
+@interface ExampleTabBarVC ()
 
 @property (weak, nonatomic) IBOutlet JTabBarView *horizontalTabBar;
 @property (weak, nonatomic) IBOutlet JTabBarView *verticalTabBar;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation TabBarExampleVC
+@implementation ExampleTabBarVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -98,6 +98,11 @@
     
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+/*
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -117,9 +122,8 @@
     [super viewDidDisappear:animated];
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
+*/
 
-- (BOOL)prefersStatusBarHidden {
-    return YES;
-}
+
 
 @end

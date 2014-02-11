@@ -51,6 +51,13 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    [self setupJBarView];
+    _childViews = self.subviews;
+}
+
 - (void)setupJBarView {
     _alignment = JBarViewAlignmentHorizontal;
     self.subViewsContainer = self;
@@ -225,7 +232,9 @@
     }
     
     // CGRectZero no change in size
-    if ( !self.autoResizeChilds || (self.isScrollEnabled && self.scrollViewsCounter == 0 && self.scrollBoxFixSize == 0) ) {
+#warning autoResizeChilds does not resize but change it's position
+    if ( (self.isScrollEnabled && self.scrollViewsCounter == 0 && self.scrollBoxFixSize == 0) ) {
+    //if ( !self.autoResizeChilds || (self.isScrollEnabled && self.scrollViewsCounter == 0 && self.scrollBoxFixSize == 0) ) {
         return CGRectZero;
     }
     
