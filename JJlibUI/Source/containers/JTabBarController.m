@@ -11,7 +11,7 @@
 
 @interface JTabBarController ()
 
-@property(nonatomic,assign) CGFloat tabBarSize;
+@property(nonatomic,assign) CGSize tabBarSize;
 
 @end
 
@@ -25,16 +25,16 @@
     if (self) {
         // Custom initialization
         _associatedButtonMatrix = nil;
-        self.tabBarSize = 44;
+        self.tabBarSize = CGSizeMake(88, 44);
     }
     return self;
 }
 
-- (id)initWithTabBarHeight:(CGFloat)height {
-    return [self initWithTabBarSize:height andDockPosition:JTabBarDockBottom];
+- (id)initWithTabBarSize:(CGSize)size {
+    return [self initWithTabBarSize:size andDockPosition:JTabBarDockBottom];
 }
 
-- (id)initWithTabBarSize:(CGFloat)size andDockPosition:(JTabBarDock)dockPosition {
+- (id)initWithTabBarSize:(CGSize)size andDockPosition:(JTabBarDock)dockPosition {
     self = [super init];
     if (self) {
         _associatedTabBar = nil;
@@ -55,15 +55,15 @@
             
             if ( JTabBarDockIsHorizontal(_tabBarDock) ) {
                 _associatedTabBar.alignment = JBarViewAlignmentHorizontal;
-                self.tabBarSize = CGRectGetWidth(tabbar.frame);
+                self.tabBarSize = tabbar.frame.size;
             } else {
                 _associatedTabBar.alignment = JBarViewAlignmentVertical;
-                self.tabBarSize = CGRectGetHeight(tabbar.frame);
+                self.tabBarSize = tabbar.frame.size;
             }
             
         }else {
             _associatedTabBar.alignment = JBarViewAlignmentNone;
-            self.tabBarSize = -1;
+            self.tabBarSize = CGSizeZero;
         }
     }
     return self;
@@ -75,7 +75,7 @@
         _associatedButtonMatrix = buttonMatrix;
         _associatedTabBar = nil;
         _tabBarDock = JTabBarDockNone;
-        self.tabBarSize = -1;
+        self.tabBarSize = CGSizeZero;
     }
     return self;
 }
@@ -163,6 +163,14 @@
     }
 }
 
+- (void)setTabBarDock:(JTabBarDock)tabBarDock {
+    _tabBarDock = tabBarDock;
+    
+    if ( [self isViewLoaded] ) {
+        [self viewWillLayoutSubviews];
+    }
+}
+
 #pragma mark - view helpers
 
 - (void)createAssociatedTabBar {
@@ -187,26 +195,26 @@
 - (CGRect)frameForTabBarWithTabbarHidden:(BOOL)tabbarHidden {
     CGRect viewBounds = [self frameForContainerWithTabbarHidden:tabbarHidden];
     CGRect tabBarFrame = self.associatedTabBar.frame;
-    CGFloat offsetHidden = 0;
+    CGPoint offsetHidden = CGPointZero;
     if ( tabbarHidden ) {
-        offsetHidden = -self.tabBarSize;
+        offsetHidden = CGPointMake( -self.tabBarSize.width, -self.tabBarSize.height);
     }
     
     switch (self.tabBarDock) {
         case JTabBarDockTop:
-            tabBarFrame = CGRectMake(0, offsetHidden, viewBounds.size.width, self.tabBarSize);
+            tabBarFrame = CGRectMake(0, offsetHidden.y, viewBounds.size.width, self.tabBarSize.height);
             break;
             
         case JTabBarDockBottom:
-            tabBarFrame = CGRectMake(0, viewBounds.size.height, viewBounds.size.width, self.tabBarSize);
+            tabBarFrame = CGRectMake(0, viewBounds.size.height, viewBounds.size.width, self.tabBarSize.height);
             break;
             
         case JTabBarDockLeft:
-            tabBarFrame = CGRectMake(offsetHidden, 0, self.tabBarSize, viewBounds.size.height);
+            tabBarFrame = CGRectMake(offsetHidden.x, 0, self.tabBarSize.width, viewBounds.size.height);
             break;
             
         case JTabBarDockRight:
-            tabBarFrame = CGRectMake(viewBounds.size.width, 0, self.tabBarSize, viewBounds.size.height);
+            tabBarFrame = CGRectMake(viewBounds.size.width, 0, self.tabBarSize.width, viewBounds.size.height);
             break;
             
         case JTabBarDockNone:
@@ -228,28 +236,28 @@
 
 - (CGRect)frameForContainerWithTabbarHidden:(BOOL)tabbarHidden {
     CGRect viewBounds = self.view.bounds;
-    CGFloat tabBarSize = self.tabBarSize;
+    CGSize tabBarSize = self.tabBarSize;
     if ( tabbarHidden ) {
-        tabBarSize = 0.0f;
+        tabBarSize = CGSizeZero;
     }
     
     CGRect containerFrame = viewBounds;
     
     switch (self.tabBarDock) {
         case JTabBarDockTop:
-            containerFrame = CGRectMake(0, tabBarSize, viewBounds.size.width, viewBounds.size.height - tabBarSize);
+            containerFrame = CGRectMake(0, tabBarSize.height, viewBounds.size.width, viewBounds.size.height - tabBarSize.height);
             break;
             
         case JTabBarDockBottom:
-            containerFrame = CGRectMake(0, 0, viewBounds.size.width, viewBounds.size.height - tabBarSize);
+            containerFrame = CGRectMake(0, 0, viewBounds.size.width, viewBounds.size.height - tabBarSize.height);
             break;
             
         case JTabBarDockLeft:
-            containerFrame = CGRectMake(tabBarSize, 0, viewBounds.size.width - tabBarSize, viewBounds.size.height);
+            containerFrame = CGRectMake(tabBarSize.width, 0, viewBounds.size.width - tabBarSize.width, viewBounds.size.height);
             break;
             
         case JTabBarDockRight:
-            containerFrame = CGRectMake(0, 0, viewBounds.size.width - tabBarSize, viewBounds.size.height);
+            containerFrame = CGRectMake(0, 0, viewBounds.size.width - tabBarSize.width, viewBounds.size.height);
             break;
             
         case JTabBarDockNone:

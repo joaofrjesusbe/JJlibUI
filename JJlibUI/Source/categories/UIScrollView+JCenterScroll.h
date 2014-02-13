@@ -21,4 +21,6 @@
  */
 - (void)scrollRectToCenter:(CGRect)rect animated:(BOOL)animated;
 
+- (void)setContentSizeWithMarginSize:(CGSize)margin;
+
 @end

@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    JTabBarView *tabBarView = [[JTabBarView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    JTabBarView *tabBarView = [[JTabBarView alloc] initWithFrame:CGRectMake(0, 0, 88, 44)];
     tabBarView.backgroundImage = [UIImage imageNamed:@"blackHorizontalBar"];
 
     ExampleTabBarVC *tabBar = [[ExampleTabBarVC alloc] initWithNibName:nil bundle:nil];
@@ -45,6 +45,8 @@
     
     ExampleActionsVC *actions = [[ExampleActionsVC alloc] initWithNibName:nil bundle:nil];
     actions.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
+    
+    [UIButton buttonWithType:UIButtonTypeInfoDark];
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MoreStoryboard" bundle:nil];
     UIViewController *more = [sb instantiateInitialViewController];

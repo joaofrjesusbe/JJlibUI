@@ -42,7 +42,7 @@ typedef NS_ENUM(short, JTabBarAnimation) {
  *
  *  @param height size of the bottom dock tabbar
  */
-- (id)initWithTabBarHeight:(CGFloat)height;
+- (id)initWithTabBarSize:(CGSize)size;
 
 /**
  *  Prefered initializer with code. Creates a fixed tabbar based on the dock property.
@@ -50,7 +50,7 @@ typedef NS_ENUM(short, JTabBarAnimation) {
  *  @param size         Size of the dock tabbar. If bottom or top is height, if left or right is width.
  *  @param dockPosition dockPosition
  */
-- (id)initWithTabBarSize:(CGFloat)size andDockPosition:(JTabBarDock)dockPosition;
+- (id)initWithTabBarSize:(CGSize)size andDockPosition:(JTabBarDock)dockPosition;
 
 /**
  *  Initializer with a custom tabview. The controller will use the tabview given instead of generate a new one.
