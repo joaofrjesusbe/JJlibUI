@@ -60,19 +60,19 @@ typedef NS_ENUM(short, JBarViewAlignment) {
  *  To dynamic create a image as background. Will streach the image to bounds size.
  *  Default: nil
  */
-@property(nonatomic,strong) UIImage *backgroundImage UI_APPEARANCE_SELECTOR;
+@property(nonatomic,strong) UIImage *backgroundImage;
 
 /**
  *  Add's a image between each child view.
  *  Default: nil
  */
-@property(nonatomic,strong) UIImage *imageSeparator UI_APPEARANCE_SELECTOR;
+@property(nonatomic,strong) UIImage *imageSeparator;
 
 /**
  *  Add's edge inset to each child view.
  *  Default: {0, 0, 0, 0}
  */
-@property(nonatomic,assign) UIEdgeInsets childEdges UI_APPEARANCE_SELECTOR;
+@property(nonatomic,assign) UIEdgeInsets childEdges;
 
 /**
  *  If YES will resize it's subviews accordling to it's policy. If NO, just the position is going to be changed, overriding the scroll policy.

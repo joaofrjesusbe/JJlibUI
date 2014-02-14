@@ -47,7 +47,6 @@
 
 - (IBAction)changeTabByCode:(id)sender {
     
-    //self.jTabBarController.selectedIndex = 0;  // nonAnimation
     [self.jTabBarController setSelectedIndex:0 animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
 }
 
@@ -68,21 +67,12 @@
         
         NSArray * childViewControllers = @[ tabBar, self, config];
         
-        // nonAnimation
-        /*
-        self.jTabBarController.childViewControllers = childViewControllers;
-        self.jTabBarController.selectedIndex = 1;
-         */
-        
         [self.jTabBarController setChildViewControllers:childViewControllers animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
         
     } else {
 
         self.jTabBarButton = self.backupButton;
         self.usingOriginalVCs = YES;
-        
-        //self.jTabBarController.childViewControllers = self.backupVCs;
-        //self.jTabBarController.selectedIndex = 2;
         
         [self.jTabBarController setChildViewControllers:self.backupVCs animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
 
@@ -92,30 +82,7 @@
 
 - (IBAction)toggleHiddenTabBar:(id)sender {
     
-    //self.jTabBarController.hiddenTabBar = !self.jTabBarController.hiddenTabBar; // nonAnimation
     [self.jTabBarController setHiddenTabBar:!self.jTabBarController.hiddenTabBar animation:[ExampleSettings sharedSettings].hiddenTabBar completion:nil];
 }
-
-/*
- - (void)viewWillAppear:(BOOL)animated {
- [super viewWillAppear:animated];
- NSLog(@"%s", __PRETTY_FUNCTION__);
- }
- 
- - (void)viewDidAppear:(BOOL)animated {
- [super viewDidAppear:animated];
- NSLog(@"%s", __PRETTY_FUNCTION__);
- }
- 
- - (void)viewWillDisappear:(BOOL)animated {
- [super viewWillDisappear:animated];
- NSLog(@"%s", __PRETTY_FUNCTION__);
- }
- 
- - (void)viewDidDisappear:(BOOL)animated {
- [super viewDidDisappear:animated];
- NSLog(@"%s", __PRETTY_FUNCTION__);
- }
- */
 
 @end

@@ -8,105 +8,76 @@
         <scene sceneID="lrF-oJ-m6y">
             <objects>
                 <navigationController title="More" definesPresentationContext="YES" id="9Cs-N1-TKh" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rty-7d-lCS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="rty-7d-lCS">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="8Jc-KF-y2C" kind="relationship" relationship="rootViewController" id="LIq-7o-fPP"/>
+                        <segue destination="d3a-el-Sbr" kind="relationship" relationship="rootViewController" id="SAZ-G0-FtM"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IHi-Co-EdN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="110" y="43"/>
         </scene>
-        <!--Tab Bar Controller - From Storyboard-->
-        <scene sceneID="OKS-cI-xND">
+        <!--View Controller - From Storyboard-->
+        <scene sceneID="AcS-jH-34k">
             <objects>
-                <viewController id="8Jc-KF-y2C" customClass="JTabBarController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="DXx-8h-bD6">
+                <viewController id="d3a-el-Sbr" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6If-ye-NW3">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tabBar contentMode="scaleToFill" id="pWW-TJ-6ty">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <items>
-                                    <tabBarItem systemItem="topRated" id="kBb-UC-WMU"/>
-                                    <tabBarItem systemItem="recents" id="t56-AG-gZ9"/>
-                                </items>
-                            </tabBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="From Storyboard" id="lRQ-Sx-Zy7"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wnq-NP-Q1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="553" y="44"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="BOX-OX-UaS">
-            <objects>
-                <viewController id="CPo-qn-wkg" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hwn-Ts-bJI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ubw-Yy-Gl1">
-                                <rect key="frame" x="0.0" y="285" width="320" height="283"/>
+                            <containerView contentMode="scaleToFill" id="rqg-ic-1UB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                            <containerView contentMode="scaleToFill" id="MpD-N9-7eP">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="284"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="gyn-DO-AwD" kind="embed" id="QGh-iW-7eB"/>
+                                    <segue destination="BKu-Le-SK4" kind="embed" id="2Cz-fy-9L8"/>
                                 </connections>
                             </containerView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" id="qWh-ER-Xxp">
+                                <rect key="frame" x="20" y="20" width="280" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="1º Tab"/>
+                                    <segment title="2º Tab"/>
+                                    <segment title="3º Tab"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="From Storyboard" id="jVg-AI-WR3"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tqB-g3-gRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iol-uN-RsU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1099" y="-687"/>
+            <point key="canvasLocation" x="546" y="40"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="iuD-6V-ae1">
+        <scene sceneID="ynf-bq-lTV">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gyn-DO-AwD" sceneMemberID="viewController">
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="kLZ-fW-gTQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="284"/>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BKu-Le-SK4" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="luV-is-l1a">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="under-construction.jpg" id="dEZ-Tz-GC4">
+                                <rect key="frame" x="10" y="184" width="300" height="300"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I3f-U3-AUV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEJ-PM-Tkv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1626" y="-944"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="OpU-jw-vtY">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="0wf-dD-cxU" sceneMemberID="viewController">
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="82m-q0-1Bd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Oge-0X-dOC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1636" y="-560"/>
+            <point key="canvasLocation" x="1031" y="40"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="under-construction.jpg" width="500" height="346"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

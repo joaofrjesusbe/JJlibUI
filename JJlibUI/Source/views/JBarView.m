@@ -191,6 +191,7 @@
         _separatorImageViews = [[NSMutableArray alloc] initWithCapacity: _childViews.count - 1];
         for ( NSInteger i = 0; i < _childViews.count - 1; i++ ) {
             UIImageView *imageSeparatorView = [[UIImageView alloc] initWithImage:_imageSeparator];
+            imageSeparatorView.contentMode = UIViewContentModeScaleToFill;
             UIView *container = (self.isScrollEnabled ? _scrollContainer : self);
             [container addSubview:imageSeparatorView];
             [_separatorImageViews addObject:imageSeparatorView];
@@ -232,9 +233,7 @@
     }
     
     // CGRectZero no change in size
-#warning autoResizeChilds does not resize but change it's position
     if ( (self.isScrollEnabled && self.scrollViewsCounter == 0 && self.scrollBoxFixSize == 0) ) {
-    //if ( !self.autoResizeChilds || (self.isScrollEnabled && self.scrollViewsCounter == 0 && self.scrollBoxFixSize == 0) ) {
         return CGRectZero;
     }
     

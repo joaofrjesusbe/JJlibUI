@@ -107,35 +107,15 @@
     self.segAnimHiddenTabbar.selectedSegmentIndex = [self indexForAnimation:[ExampleSettings sharedSettings].hiddenTabBar];
     
     self.segOrientation.selectedSegmentIndex = [self indexForDocking:self.jTabBarController.tabBarDock];
+    
+    [self.scrollView setContentSizeWithMarginSize:CGSizeMake(0, 0)];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    [self.scrollView setContentSizeWithMarginSize:CGSizeMake(10, 10)];
+    [self.scrollView setContentSizeWithMarginSize:CGSizeMake(0, 0)];
 }
-
-/*
- - (void)viewWillAppear:(BOOL)animated {
- [super viewWillAppear:animated];
- NSLog(@"%s", __PRETTY_FUNCTION__);
- }
- 
- - (void)viewDidAppear:(BOOL)animated {
- [super viewDidAppear:animated];
- NSLog(@"%s", __PRETTY_FUNCTION__);
- }
- 
- - (void)viewWillDisappear:(BOOL)animated {
- [super viewWillDisappear:animated];
- NSLog(@"%s", __PRETTY_FUNCTION__);
- }
- 
- - (void)viewDidDisappear:(BOOL)animated {
- [super viewDidDisappear:animated];
- NSLog(@"%s", __PRETTY_FUNCTION__);
- }
- */
 
 #pragma mark - IBActions
 

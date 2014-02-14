@@ -46,8 +46,6 @@
     ExampleActionsVC *actions = [[ExampleActionsVC alloc] initWithNibName:nil bundle:nil];
     actions.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
     
-    [UIButton buttonWithType:UIButtonTypeInfoDark];
-    
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MoreStoryboard" bundle:nil];
     UIViewController *more = [sb instantiateInitialViewController];
     more.jTabBarButton = [[NSBundle mainBundle] loadNibNamed:@"MainButtonTemplate" owner:self options:nil][0];
@@ -62,26 +60,6 @@
     
     ExampleSettings *settings = [ExampleSettings sharedSettings];
     [settings initializeDefaultsWithTabBarController:_tabBarController];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - JTabBarControllerDelegate

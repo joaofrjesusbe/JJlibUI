@@ -60,13 +60,6 @@ typedef NS_ENUM(short, JTabBarAnimation) {
  */
 - (id)initWithTabBar:(JTabBarView *)tabBar andDockPosition:(JTabBarDock)dockPosition;
 
-/**
- *  Initializer with a checkbox matrix that is outside the tabcontroller.
- *  Allows to create a custom tabbar.
- *
- *  @param checkBoxMatrix matix to be associated
- */
-- (id)initWithButtonMatrix:(JButtonMatrix *)buttonMatrix;
 
 /**
  *  View that defines the area where the selected child viewController will be position.
@@ -82,12 +75,10 @@ typedef NS_ENUM(short, JTabBarAnimation) {
 
 @property(nonatomic,assign) NSInteger selectedIndex;
 
-@property(nonatomic,strong) JButtonMatrix *associatedButtonMatrix;
-
 @property(nonatomic,assign) id<JTabBarControllerDelegate> delegate;
 
 
-#pragma mark - if TabBar associated
+#pragma mark - TabBar
 
 @property(nonatomic,strong) IBOutlet JTabBarView *associatedTabBar;
 
