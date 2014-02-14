@@ -9,8 +9,8 @@ Current build: v0.4
  - Personalize your TabBar.
  - Easy transitions.
  - Choose the TabBar orientation.
- - Use your favorite UIControl to use with your JTabBarController.
 
+See example for advance how to do advance features.
 
 ####How to create
 
