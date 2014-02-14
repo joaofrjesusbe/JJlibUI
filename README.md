@@ -5,6 +5,12 @@ Support for iOS 5.0 and superior.
 
 Current build: v0.4
 
+####Functionality :
+ - Personalize your TabBar.
+ - Easy transitions.
+ - Choose the TabBar orientation.
+ - Use your favorite UIControl to use with your JTabBarController.
+
 
 ### How to create
 
@@ -23,18 +29,15 @@ Current build: v0.4
     [self.view addSubview:_tabBarController.view];
     [_tabBarController didMoveToParentViewController:self];
 
-### TabBar More features
+### Screenshots
 ![Screenshots](Screenshots/Screenshot1.png "Screenshot1")
+
 ![Screenshots](Screenshots/Screenshot2.png "Screenshot2")
+
 ![Screenshots](Screenshots/Screenshot3.png "Screenshot3")
+
 ![Screenshots](Screenshots/Screenshot4.png "Screenshot3")
 
-
-###Functionality :
- - Perseonalize your TabBar.
- - Easy customize transitions.
- - Choose the TabBar orientation.
- - Use your favorite UIControl to use with your JTabBarController.	
 
 ###More:
 
