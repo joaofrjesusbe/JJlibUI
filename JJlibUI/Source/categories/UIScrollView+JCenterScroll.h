@@ -21,4 +21,11 @@
  */
 - (void)scrollRectToCenter:(CGRect)rect animated:(BOOL)animated;
 
+/**
+ *  Set contentSize based on the margin and the farthermost subview.
+ *
+ *  @param margin margin from contentSize
+ */
+- (void)setContentSizeWithMarginSize:(CGSize)margin;
+
 @end

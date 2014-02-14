@@ -28,4 +28,19 @@
 
 }
 
+- (void)setContentSizeWithMarginSize:(CGSize)margin {
+    
+    CGSize contentSize = self.bounds.size;
+    
+    NSArray *childs = self.subviews;
+    for (UIView *child in childs) {
+        
+        CGRect frame = child.frame;
+        contentSize.width = MAX(contentSize.width, CGRectGetMaxX(frame));
+        contentSize.height = MAX(contentSize.height, CGRectGetMaxY(frame));
+    }
+    
+    self.contentSize = contentSize;
+}
+
 @end

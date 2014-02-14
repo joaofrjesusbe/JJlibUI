@@ -42,7 +42,7 @@ typedef NS_ENUM(short, JTabBarAnimation) {
  *
  *  @param height size of the bottom dock tabbar
  */
-- (id)initWithTabBarHeight:(CGFloat)height;
+- (id)initWithTabBarSize:(CGSize)size;
 
 /**
  *  Prefered initializer with code. Creates a fixed tabbar based on the dock property.
@@ -50,7 +50,7 @@ typedef NS_ENUM(short, JTabBarAnimation) {
  *  @param size         Size of the dock tabbar. If bottom or top is height, if left or right is width.
  *  @param dockPosition dockPosition
  */
-- (id)initWithTabBarSize:(CGFloat)size andDockPosition:(JTabBarDock)dockPosition;
+- (id)initWithTabBarSize:(CGSize)size andDockPosition:(JTabBarDock)dockPosition;
 
 /**
  *  Initializer with a custom tabview. The controller will use the tabview given instead of generate a new one.
@@ -60,13 +60,6 @@ typedef NS_ENUM(short, JTabBarAnimation) {
  */
 - (id)initWithTabBar:(JTabBarView *)tabBar andDockPosition:(JTabBarDock)dockPosition;
 
-/**
- *  Initializer with a checkbox matrix that is outside the tabcontroller.
- *  Allows to create a custom tabbar.
- *
- *  @param checkBoxMatrix matix to be associated
- */
-- (id)initWithButtonMatrix:(JButtonMatrix *)buttonMatrix;
 
 /**
  *  View that defines the area where the selected child viewController will be position.
@@ -82,12 +75,10 @@ typedef NS_ENUM(short, JTabBarAnimation) {
 
 @property(nonatomic,assign) NSInteger selectedIndex;
 
-@property(nonatomic,strong) JButtonMatrix *associatedButtonMatrix;
-
 @property(nonatomic,assign) id<JTabBarControllerDelegate> delegate;
 
 
-#pragma mark - if TabBar associated
+#pragma mark - TabBar
 
 @property(nonatomic,strong) IBOutlet JTabBarView *associatedTabBar;
 
@@ -96,11 +87,13 @@ typedef NS_ENUM(short, JTabBarAnimation) {
 @property(nonatomic,assign) BOOL hiddenTabBar;
 
 
-#pragma mark - TabBar Animation
+#pragma mark - Animations
 
 @property(nonatomic,assign) JTabBarAnimation defaultSelectedControllerAnimation;
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
+
+- (void)setSelectedChildViewController:(UIViewController *)selectedChildViewController animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
 
 - (void)setChildViewControllers:(NSArray *)childViewControllers animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
 

@@ -9,10 +9,9 @@
 /**
  *  @brief JJlibUI - simplify UI
  *
- *  @version 0.3
+ *  @version 0.4
  *  @author João Jesus
  *
- *  First set of the JJlibUI.
  *  To help build new UI easy and customizable.
  *  Support for iOS 5.0 and superior.
  *

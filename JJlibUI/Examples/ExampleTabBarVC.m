@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 JJApps. All rights reserved.
 //
 
-#import "TabBarExampleVC.h"
+#import "ExampleTabBarVC.h"
 #import "JUILib.h"
 
 
-@interface TabBarExampleVC ()
+@interface ExampleTabBarVC ()
 
 @property (weak, nonatomic) IBOutlet JTabBarView *horizontalTabBar;
 @property (weak, nonatomic) IBOutlet JTabBarView *verticalTabBar;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation TabBarExampleVC
+@implementation ExampleTabBarVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,11 +55,16 @@
                 tabButton.blockSelectionAction = verticalBlockWhenSelect;
                 [verticalViewsArray addObject:tabButton];
                 
-                // random change a frame
-                CGRect frame = tabButton.frame;
-                frame.size.height += arc4random_uniform(100);
-                tabButton.frame = frame;
                 
+                CGRect frame = tabButton.frame;
+                
+                // random change a frame
+                //frame.size.height += arc4random_uniform(100);
+                
+                // fixed size
+                frame.size.height = 80;
+                
+                tabButton.frame = frame;
             }
             self.verticalTabBar.childViews = verticalViewsArray;
             self.verticalTabBar.selectedIndex = 0;
@@ -96,26 +101,6 @@
     self.horizontalTabBar.childViews = tabViewsArray;
     self.horizontalTabBar.selectedIndex = 0;
     
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (BOOL)prefersStatusBarHidden {

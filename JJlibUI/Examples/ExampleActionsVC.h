@@ -1,5 +1,5 @@
 //
-//  BarViewExampleVC.h
+//  MoreViewVC.h
 //  JJlibUI
 //
 //  Created by Joao Jesus on 09/12/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AnimationExampleVC : UIViewController
+@interface ExampleActionsVC : UIViewController
 
 @end

@@ -11,7 +11,7 @@
 
 @interface JTabBarController ()
 
-@property(nonatomic,assign) CGFloat tabBarSize;
+@property(nonatomic,assign) CGSize tabBarSize;
 
 @end
 
@@ -24,21 +24,19 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _associatedButtonMatrix = nil;
-        self.tabBarSize = 44;
+        self.tabBarSize = CGSizeMake(88, 44);
     }
     return self;
 }
 
-- (id)initWithTabBarHeight:(CGFloat)height {
-    return [self initWithTabBarSize:height andDockPosition:JTabBarDockBottom];
+- (id)initWithTabBarSize:(CGSize)size {
+    return [self initWithTabBarSize:size andDockPosition:JTabBarDockBottom];
 }
 
-- (id)initWithTabBarSize:(CGFloat)size andDockPosition:(JTabBarDock)dockPosition {
+- (id)initWithTabBarSize:(CGSize)size andDockPosition:(JTabBarDock)dockPosition {
     self = [super init];
     if (self) {
         _associatedTabBar = nil;
-        _associatedButtonMatrix = nil;
         _tabBarDock = dockPosition;
         self.tabBarSize = size;
     }
@@ -49,33 +47,14 @@
     self = [super init];
     if (self) {
         _associatedTabBar = tabbar;
-        _associatedButtonMatrix = nil;
         _tabBarDock = dockPosition;
-        if (_tabBarDock != JTabBarDockNone) {
-            
-            if ( JTabBarDockIsHorizontal(_tabBarDock) ) {
-                _associatedTabBar.alignment = JBarViewAlignmentHorizontal;
-                self.tabBarSize = CGRectGetWidth(tabbar.frame);
-            } else {
-                _associatedTabBar.alignment = JBarViewAlignmentVertical;
-                self.tabBarSize = CGRectGetHeight(tabbar.frame);
-            }
-            
+        if (_tabBarDock != JTabBarDockNone) {            
+            _associatedTabBar.alignment = ( JTabBarDockIsHorizontal(_tabBarDock) ? JBarViewAlignmentHorizontal : JBarViewAlignmentVertical);
+            self.tabBarSize = tabbar.frame.size;
         }else {
             _associatedTabBar.alignment = JBarViewAlignmentNone;
-            self.tabBarSize = -1;
+            self.tabBarSize = CGSizeZero;
         }
-    }
-    return self;
-}
-
-- (id)initWithButtonMatrix:(JButtonMatrix *)buttonMatrix {
-    self = [super init];
-    if (self) {
-        _associatedButtonMatrix = buttonMatrix;
-        _associatedTabBar = nil;
-        _tabBarDock = JTabBarDockNone;
-        self.tabBarSize = -1;
     }
     return self;
 }
@@ -83,49 +62,11 @@
 #pragma mark - public properties
 
 - (void)setChildViewControllers:(NSArray *)childViewControllers {
-
-    for (UIViewController *child in _childViewControllers) {
-        child.jTabBarController = nil;
-    }
-    
-    if ( [self isViewLoaded] ) {
-        self.selectedChildViewController = nil;
-    }
-    
-    _childViewControllers = [childViewControllers mutableCopy];
-    
-    for (UIViewController *child in _childViewControllers) {
-        child.jTabBarController = self;
-    }
-    
-    if ( [self isViewLoaded] ) {
-        [self createButtonsForViewControllers];
-        self.selectedIndex = 0;
-    }
+    [self setChildViewControllers:childViewControllers animation:JTabBarAnimationNone completion:nil];
 }
 
 - (void)setSelectedChildViewController:(UIViewController *)selectedChildViewController {
-    
-    NSInteger index = [_childViewControllers indexOfObject:selectedChildViewController];
-    if (index == NSNotFound) {
-        return;
-    }
-    
-    if ( [self isViewLoaded] ) {
-        
-        if ( _associatedButtonMatrix ) {
-            _associatedButtonMatrix.selectedIndex = index;
-        } else if ( _associatedTabBar ) {
-            _associatedTabBar.selectedIndex = index;
-        }
-        
-        if (selectedChildViewController != _selectedChildViewController) {
-            [self changeToViewController:selectedChildViewController withAnimation:JTabBarAnimationNone completion:nil];
-        }        
-        
-    } else {        
-        _selectedChildViewController = selectedChildViewController;
-    }
+    [self setSelectedChildViewController:selectedChildViewController animation:JTabBarAnimationNone completion:nil];
 }
 
 @dynamic selectedIndex;
@@ -138,28 +79,27 @@
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
-    if (selectedIndex >= 0 && selectedIndex < _childViewControllers.count) {
-        self.selectedChildViewController = _childViewControllers[selectedIndex];
-    }
-}
-
-- (void)setAssociatedButtonMatrix:(JButtonMatrix *)associatedButtonMatrix {
-    [NSException raise:NSGenericException format:@"Not implemented"];
+    [self setSelectedIndex:selectedIndex animation:JTabBarAnimationNone completion:nil];
 }
 
 - (void)setAssociatedTabBar:(JTabBarView *)associatedTabBar {
-    [NSException raise:NSGenericException format:@"Not implemented"];
+    _associatedTabBar = associatedTabBar;
+    [self.view addSubview:_associatedTabBar];
+    [self.view bringSubviewToFront:_associatedTabBar];
+    
+    _associatedTabBar.frame = [self frameForTabBarWithTabbarHidden:_associatedTabBar.hidden];
+    _associatedTabBar.alignment = [self alignmentForTabBar];
 }
 
 - (void)setHiddenTabBar:(BOOL)hiddenTabBar {
-    
-    _hiddenTabBar = hiddenTabBar;
-    if (self.associatedTabBar) {
-        self.associatedTabBar.hidden = _hiddenTabBar;
-    }
+    [self setHiddenTabBar:hiddenTabBar animation:JTabBarAnimationNone completion:nil];
+}
+
+- (void)setTabBarDock:(JTabBarDock)tabBarDock {
+    _tabBarDock = tabBarDock;
     
     if ( [self isViewLoaded] ) {
-        _viewContainer.frame = [self frameForContainerWithTabbarHidden:_hiddenTabBar];
+        [self viewWillLayoutSubviews];
     }
 }
 
@@ -167,16 +107,12 @@
 
 - (void)createAssociatedTabBar {
     JTabBarView *tabbar = [[JTabBarView alloc] initWithFrame:CGRectZero];
-    _associatedTabBar = tabbar;
-    [self.view addSubview:tabbar];
-    [self.view bringSubviewToFront:_associatedTabBar];
-    
-    _associatedTabBar.frame = [self frameForTabBarWithTabbarHidden:_associatedTabBar.hidden];
-    _associatedTabBar.alignment = [self alignmentForTabBar];
+    self.associatedTabBar = tabbar;
 }
 
 - (void)createViewContainer {
     UIView *container = [[UIView alloc] initWithFrame:CGRectZero];
+    container.clipsToBounds = YES;
     _viewContainer = container;
     [self.view addSubview:container];
     [self.view sendSubviewToBack:container];
@@ -187,26 +123,26 @@
 - (CGRect)frameForTabBarWithTabbarHidden:(BOOL)tabbarHidden {
     CGRect viewBounds = [self frameForContainerWithTabbarHidden:tabbarHidden];
     CGRect tabBarFrame = self.associatedTabBar.frame;
-    CGFloat offsetHidden = 0;
+    CGPoint offsetHidden = CGPointZero;
     if ( tabbarHidden ) {
-        offsetHidden = -self.tabBarSize;
+        offsetHidden = CGPointMake( -self.tabBarSize.width, -self.tabBarSize.height);
     }
     
     switch (self.tabBarDock) {
         case JTabBarDockTop:
-            tabBarFrame = CGRectMake(0, offsetHidden, viewBounds.size.width, self.tabBarSize);
+            tabBarFrame = CGRectMake(0, offsetHidden.y, viewBounds.size.width, self.tabBarSize.height);
             break;
             
         case JTabBarDockBottom:
-            tabBarFrame = CGRectMake(0, viewBounds.size.height, viewBounds.size.width, self.tabBarSize);
+            tabBarFrame = CGRectMake(0, viewBounds.size.height, viewBounds.size.width, self.tabBarSize.height);
             break;
             
         case JTabBarDockLeft:
-            tabBarFrame = CGRectMake(offsetHidden, 0, self.tabBarSize, viewBounds.size.height);
+            tabBarFrame = CGRectMake(offsetHidden.x, 0, self.tabBarSize.width, viewBounds.size.height);
             break;
             
         case JTabBarDockRight:
-            tabBarFrame = CGRectMake(viewBounds.size.width, 0, self.tabBarSize, viewBounds.size.height);
+            tabBarFrame = CGRectMake(viewBounds.size.width, 0, self.tabBarSize.width, viewBounds.size.height);
             break;
             
         case JTabBarDockNone:
@@ -228,28 +164,28 @@
 
 - (CGRect)frameForContainerWithTabbarHidden:(BOOL)tabbarHidden {
     CGRect viewBounds = self.view.bounds;
-    CGFloat tabBarSize = self.tabBarSize;
+    CGSize tabBarSize = self.tabBarSize;
     if ( tabbarHidden ) {
-        tabBarSize = 0.0f;
+        tabBarSize = CGSizeZero;
     }
     
     CGRect containerFrame = viewBounds;
     
     switch (self.tabBarDock) {
         case JTabBarDockTop:
-            containerFrame = CGRectMake(0, tabBarSize, viewBounds.size.width, viewBounds.size.height - tabBarSize);
+            containerFrame = CGRectMake(0, tabBarSize.height, viewBounds.size.width, viewBounds.size.height - tabBarSize.height);
             break;
             
         case JTabBarDockBottom:
-            containerFrame = CGRectMake(0, 0, viewBounds.size.width, viewBounds.size.height - tabBarSize);
+            containerFrame = CGRectMake(0, 0, viewBounds.size.width, viewBounds.size.height - tabBarSize.height);
             break;
             
         case JTabBarDockLeft:
-            containerFrame = CGRectMake(tabBarSize, 0, viewBounds.size.width - tabBarSize, viewBounds.size.height);
+            containerFrame = CGRectMake(tabBarSize.width, 0, viewBounds.size.width - tabBarSize.width, viewBounds.size.height);
             break;
             
         case JTabBarDockRight:
-            containerFrame = CGRectMake(0, 0, viewBounds.size.width - tabBarSize, viewBounds.size.height);
+            containerFrame = CGRectMake(0, 0, viewBounds.size.width - tabBarSize.width, viewBounds.size.height);
             break;
             
         case JTabBarDockNone:
@@ -274,22 +210,17 @@
         }
         
         UIButton *customButton = childViewController.jTabBarButton;
-        if (customButton) {
+        if ( customButton ) {
             button = customButton;
             needToAssociateNewButtons = YES;
         }
-    
-        if (button == nil && _associatedButtonMatrix) {
-            NSArray *buttonsAvaiable = _associatedButtonMatrix.buttonsArray;
-            button = (i < buttonsAvaiable.count ? buttonsAvaiable[i] : nil);
-        }
         
-        if (button == nil && _associatedTabBar) {
+        if ( button == nil ) {
             NSArray *buttonsAvaiable = _associatedTabBar.associatedButtonMatrix.buttonsArray;
             button = (i < buttonsAvaiable.count ? buttonsAvaiable[i] : nil);
         }
         
-        if (button == nil) {
+        if ( button == nil ) {
             button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             [button setTitle:[NSString stringWithFormat:@"%d", i] forState:UIControlStateNormal];
             needToAssociateNewButtons = YES;
@@ -310,9 +241,6 @@
     }
     
     if (needToAssociateNewButtons) {
-        if (_associatedButtonMatrix) {
-            _associatedButtonMatrix.buttonsArray = tabBarButtons;
-        }
         
         if (_associatedTabBar) {
             _associatedTabBar.childViews = tabBarButtons;
@@ -327,10 +255,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    if ( _associatedTabBar == nil && _associatedButtonMatrix == nil ) {
+    if ( _associatedTabBar == nil ) {
         [self createAssociatedTabBar];
         [self.view addSubview:_associatedTabBar];
-    } else if ( _associatedTabBar ) {
+    } else {
         _associatedTabBar.frame = [self frameForTabBarWithTabbarHidden:_associatedTabBar.hidden];
         _associatedTabBar.alignment = [self alignmentForTabBar];
         [self.view addSubview:_associatedTabBar];
@@ -349,11 +277,8 @@
             index = [_childViewControllers indexOfObject:_selectedChildViewController];
         }
         
-        if (_associatedButtonMatrix) {
-            _associatedButtonMatrix.selectedIndex = index;
-        }else if (_associatedTabBar) {
-            _associatedTabBar.selectedIndex = index;
-        }
+        _associatedTabBar.selectedIndex = index;
+
         UIViewController *controller = _childViewControllers[index];
         [self changeToViewController:controller withAnimation:JTabBarAnimationNone completion:nil];
     }
@@ -390,11 +315,7 @@
         
         if ( [self isViewLoaded] ) {
             
-            if ( _associatedButtonMatrix ) {
-                _associatedButtonMatrix.selectedIndex = selectedIndex;
-            } else if ( _associatedTabBar ) {
-                _associatedTabBar.selectedIndex = selectedIndex;
-            }
+            _associatedTabBar.selectedIndex = selectedIndex;
             
             if (viewController != _selectedChildViewController) {
                 [self changeToViewController:viewController withAnimation:animation completion:completion];
@@ -407,7 +328,25 @@
 }
 
 - (void)setChildViewControllers:(NSArray *)childViewControllers animation:(JTabBarAnimation)animation completion:(void (^)(void))completion {
-    [NSException raise:NSGenericException format:@"Not implemented"];
+    
+    for (UIViewController *child in _childViewControllers) {
+        child.jTabBarController = nil;
+    }
+    
+    if ( [self isViewLoaded] ) {
+        self.selectedChildViewController = nil;
+    }
+    
+    _childViewControllers = [childViewControllers mutableCopy];
+    
+    for (UIViewController *child in _childViewControllers) {
+        child.jTabBarController = self;
+    }
+    
+    if ( [self isViewLoaded] ) {
+        [self createButtonsForViewControllers];
+        [self setSelectedIndex:0 animation:animation completion:completion];
+    }
 }
 
 - (void)setHiddenTabBar:(BOOL)hiddenTabBar animation:(JTabBarAnimation)animation completion:(void (^)(void))completion {
@@ -415,7 +354,7 @@
     _hiddenTabBar = hiddenTabBar;
     CGRect frame = CGRectZero;
     
-    if ( [self isViewLoaded] && self.associatedTabBar ) {
+    if ( [self isViewLoaded] && self.associatedTabBar && animation != JTabBarAnimationNone ) {
         
         frame = [self frameForContainerWithTabbarHidden:YES];
         self.selectedChildViewController.view.frame = frame;
@@ -424,26 +363,30 @@
         if ( animation == JTabBarAnimationCrossDissolve ) {
             frame = [self frameForTabBarWithTabbarHidden:NO];
             self.associatedTabBar.frame = frame;
-            self.associatedTabBar.alpha = (hiddenTabBar ? 1.0 : 0.0);
+            self.associatedTabBar.alpha = (hiddenTabBar ? 1.0f : 0.0f);
 
         }else if ( animation == JTabBarAnimationSlide ) {
             frame = [self frameForTabBarWithTabbarHidden:!_hiddenTabBar];
             self.associatedTabBar.frame = frame;
+            self.associatedTabBar.alpha = 1.0f;
         }
         
         self.associatedTabBar.hidden = NO;
         
-        [UIView animateWithDuration:0.4f delay:0.0f options:options animations:^{
+        [UIView animateWithDuration:0.3f delay:0.0f options:options animations:^{
             
             if ( animation == JTabBarAnimationSlide ) {
                 CGRect frame = [self frameForTabBarWithTabbarHidden:_hiddenTabBar];
                 self.associatedTabBar.frame = frame;
             } else if ( animation == JTabBarAnimationCrossDissolve ) {
-                self.associatedTabBar.alpha = (hiddenTabBar ? 0.0 : 1.0);
+                self.associatedTabBar.alpha = (hiddenTabBar ? 0.0f : 1.0f);
             }
             
+            _viewContainer.frame = [self frameForContainerWithTabbarHidden:(_associatedTabBar ? _associatedTabBar.hidden : NO)];
+            self.selectedChildViewController.view.frame = _viewContainer.bounds;
+            
         } completion:^(BOOL finished) {
-            self.associatedTabBar.alpha = 1.0;
+            self.associatedTabBar.alpha = 1.0f;
             self.associatedTabBar.hidden = _hiddenTabBar;
             [self viewWillLayoutSubviews];
 
@@ -451,6 +394,31 @@
                 completion();
             }
         }];
+    } else {
+
+        self.associatedTabBar.alpha = 1.0f;
+        self.associatedTabBar.hidden = _hiddenTabBar;
+        [self viewWillLayoutSubviews];
+    }
+}
+
+- (void)setSelectedChildViewController:(UIViewController *)selectedChildViewController animation:(JTabBarAnimation)animation completion:(void (^)(void))completion {
+    
+    NSInteger index = [_childViewControllers indexOfObject:selectedChildViewController];
+    if (index == NSNotFound) {
+        return;
+    }
+    
+    if ( [self isViewLoaded] ) {
+        
+        self.associatedTabBar.selectedIndex = index;
+        
+        if (selectedChildViewController != _selectedChildViewController) {
+            [self changeToViewController:selectedChildViewController withAnimation:animation completion:nil];
+        }
+        
+    } else {
+        _selectedChildViewController = selectedChildViewController;
     }
 }
 
@@ -479,53 +447,60 @@
 
 - (void)changeToViewController:(UIViewController *)viewController withAnimation:(JTabBarAnimation)animation completion:(void (^)(void))completion {
     
-    BOOL allowTransition = animation != JTabBarAnimationNone && _selectedChildViewController != nil && viewController != nil;
+    BOOL allowTransition = (animation != JTabBarAnimationNone && _selectedChildViewController != nil && viewController != nil);
     
     if ( allowTransition ) {
         
-        [self addChildViewController:viewController];
         viewController.view.frame = self.viewContainer.bounds;
+        [self addChildViewController:viewController];
+        [_selectedChildViewController willMoveToParentViewController:nil];
         
-        UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState;
+        UIViewAnimationOptions options = UIViewAnimationOptionTransitionNone;
+        
         if ( animation == JTabBarAnimationCrossDissolve ) {
             options |= UIViewAnimationOptionTransitionCrossDissolve;
+            
+        } else if ( animation == JTabBarAnimationSlide ) {
+            
+            CGRect initialFrame = self.viewContainer.bounds;
+            switch (self.tabBarDock) {
+                case JTabBarDockTop:
+                    initialFrame.origin.y -= initialFrame.size.height;
+                    break;
+                    
+                case JTabBarDockBottom:
+                    initialFrame.origin.y += initialFrame.size.height;
+                    break;
+                    
+                case JTabBarDockLeft:
+                    initialFrame.origin.x -= initialFrame.size.width;
+                    break;
+                    
+                case JTabBarDockRight:
+                    initialFrame.origin.x += initialFrame.size.width;
+                    break;
+                    
+                default:
+                    break;
+            }
+            viewController.view.frame = initialFrame;
         }
         
         [self transitionFromViewController:_selectedChildViewController
                           toViewController:viewController
-                                  duration:0.4
+                                  duration:0.3
                                    options:options
                                 animations:^{
                                     if ( animation == JTabBarAnimationSlide ) {
                                         CGRect finalFrame = self.viewContainer.bounds;
-                                        switch (self.tabBarDock) {
-                                            case JTabBarDockTop:
-                                                finalFrame.origin.y -= finalFrame.size.height;
-                                                break;
-
-                                            case JTabBarDockBottom:
-                                                finalFrame.origin.y += finalFrame.size.height;
-                                                break;
-
-                                            case JTabBarDockLeft:
-                                                finalFrame.origin.x -= finalFrame.size.width;
-                                                break;
-
-                                            case JTabBarDockRight:
-                                                finalFrame.origin.x += finalFrame.size.width;
-                                                break;
-
-                                            default:
-                                                break;
-                                        }
-                                        _selectedChildViewController.view.frame = finalFrame;
+                                        viewController.view.frame = finalFrame;
                                     }
                                 }
                                 completion:^(BOOL finished){
-                                    [_selectedChildViewController willMoveToParentViewController:nil];
                                     [_selectedChildViewController removeFromParentViewController];
                                     [viewController didMoveToParentViewController:self];
                                     _selectedChildViewController = viewController;
+                                    [self viewWillLayoutSubviews];
                                     
                                     if ( completion ) {
                                         completion();
@@ -547,6 +522,7 @@
         [self.viewContainer addSubview:viewController.view];
         [viewController didMoveToParentViewController:self];
         _selectedChildViewController = viewController;
+        [self viewWillLayoutSubviews];
         
         if ( completion ) {
             completion();
