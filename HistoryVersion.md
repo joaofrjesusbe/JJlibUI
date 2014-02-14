@@ -4,6 +4,7 @@ Suggestions and Contributions email: joaofrjesusbe at gmail.com
 Release Notes (v0.4):
 	- Change examples
 	- Fix animations
+	- Small fixes
 
 Release Notes (v0.3):
 	- Add hide/show tabbar from JTabBarController
