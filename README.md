@@ -12,7 +12,7 @@ Current build: v0.4
  - Use your favorite UIControl to use with your JTabBarController.
 
 
-### How to create
+####How to create
 
 	// Create a controller 1
 	UIViewController *viewController1 = [[UIViewController alloc] initWithNibName:nil bundle:nil];
@@ -29,7 +29,7 @@ Current build: v0.4
     [self.view addSubview:_tabBarController.view];
     [_tabBarController didMoveToParentViewController:self];
 
-### Screenshots
+####Screenshots
 ![Screenshots](Screenshots/Screenshot1.png "Screenshot1")
 
 ![Screenshots](Screenshots/Screenshot2.png "Screenshot2")
@@ -39,7 +39,7 @@ Current build: v0.4
 ![Screenshots](Screenshots/Screenshot4.png "Screenshot3")
 
 
-###More:
+####More:
 
 Suggestions and Contributions email: joaofrjesusbe at gmail.com
 
