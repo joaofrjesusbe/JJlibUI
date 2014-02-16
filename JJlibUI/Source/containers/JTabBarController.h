@@ -34,6 +34,9 @@ typedef NS_ENUM(short, JTabBarAnimation) {
 #define JTabBarDockIsVertical(x) ( (x) == JTabBarDockLeft || (x) == JTabBarDockRight )
 
 
+const static NSString *JTabBarControllerSegue = @"JTabBarControllerSegue";
+
+
 @protocol JTabBarControllerDelegate;
 @interface JTabBarController : UIViewController
 
@@ -69,7 +72,7 @@ typedef NS_ENUM(short, JTabBarAnimation) {
 /**
  *  Child's UIViewController's. Will create a tabbar for each UIViewController.
  */
-@property(nonatomic,copy) NSArray *childViewControllers;
+@property(nonatomic,copy) IBOutletCollection(UIViewController) NSArray *childViewControllers;
 
 @property(nonatomic,strong) UIViewController *selectedChildViewController;
 
@@ -80,7 +83,7 @@ typedef NS_ENUM(short, JTabBarAnimation) {
 
 #pragma mark - TabBar
 
-@property(nonatomic,strong) IBOutlet JTabBarView *associatedTabBar;
+@property(nonatomic,strong) IBOutlet JTabBarView *tabBar;
 
 @property(nonatomic,assign) JTabBarDock tabBarDock;
 

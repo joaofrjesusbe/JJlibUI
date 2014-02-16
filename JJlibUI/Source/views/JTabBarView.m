@@ -13,9 +13,10 @@
 
 @interface JTabBarView ()
 
-@property(nonatomic,readwrite) JButtonMatrix *associatedButtonMatrix;
+@property(nonatomic,readwrite) JButtonMatrix *matrix;
 @property(nonatomic,assign) BOOL needsUpdateScroll;
 @property(nonatomic,assign) BOOL needsAnimateSelection;
+@property(nonatomic,assign) CGRect previousBounds;
 
 @end
 
@@ -44,11 +45,16 @@
 }
 
 - (void)setupJTabBarView {
-    _associatedButtonMatrix = [[JButtonMatrix alloc] init];
+    _matrix = [[JButtonMatrix alloc] init];
     self.needsAnimateSelection = NO;
     self.needsUpdateScroll = NO;
+    self.previousBounds = self.bounds;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.childViews = self.childViews;
+}
 
 #pragma mark - override super properties
 
@@ -58,7 +64,7 @@
         childViews = @[];
     }
     
-    for (UIButton *button in self.associatedButtonMatrix.buttonsArray) {
+    for (UIButton *button in self.matrix.buttonsArray) {
         [button removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
     }
     
@@ -68,7 +74,7 @@
         [childsButtons addObject:button];
     }
     
-    self.associatedButtonMatrix.buttonsArray = childsButtons;
+    self.matrix.buttonsArray = childsButtons;
     
     if (self.scrollEnabled) {
         self.needsUpdateScroll = YES;
@@ -82,24 +88,24 @@
 
 @dynamic selectedTabBar;
 - (UIButton *)selectedTabBar {
-    return self.associatedButtonMatrix.selectedButton;
+    return self.matrix.selectedButton;
 }
 
 - (void)setSelectedTabBar:(UIButton *)selectedTabBar {
     if (selectedTabBar != self.selectedTabBar) {
-        self.associatedButtonMatrix.selectedButton = selectedTabBar;
+        self.matrix.selectedButton = selectedTabBar;
         [self setNeedsLayout];
     }
 }
 
 @dynamic selectedIndex;
 - (NSInteger)selectedIndex {
-    return self.associatedButtonMatrix.selectedIndex;
+    return self.matrix.selectedIndex;
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
     if (selectedIndex != self.selectedIndex) {
-        self.associatedButtonMatrix.selectedIndex = selectedIndex;
+        self.matrix.selectedIndex = selectedIndex;
         [self setNeedsLayout];
     }
 }
@@ -151,9 +157,13 @@
 
     NSArray *viewsArray = _scrollContainer.subviews;
     CGRect bounds = self.bounds;
+    if ( !CGRectEqualToRect(bounds, self.previousBounds)) {
+        self.needsUpdateScroll = YES;
+    }
+    
     if ( self.needsUpdateScroll && viewsArray.count > 0 ) {
 
-        NSArray * buttonsArray = self.associatedButtonMatrix.buttonsArray;
+        NSArray * buttonsArray = self.matrix.buttonsArray;
         CGRect minRect = ((UIView *)buttonsArray[0]).frame;
         CGRect maxRect = ((UIView *)buttonsArray[buttonsArray.count-1]).frame;
         
@@ -193,6 +203,7 @@
     
     self.needsAnimateSelection = NO;
     self.needsUpdateScroll = NO;
+    self.previousBounds = bounds;
 }
 
 @end

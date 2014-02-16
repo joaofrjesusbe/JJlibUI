@@ -9,21 +9,11 @@
 #import "UIButton+JButton.h"
 #import <objc/runtime.h>
 
+
 @implementation UIButton (JButton)
 
-static const NSString *KEY_ASSOC_BlockSelectionAction = @"JButton.blockSelectionAction";
+static const NSString *KEY_ASSOC_BlockSelectionAction = @"JButton.blockSelectionActions";
 static const NSString *KEY_ASSOC_SelectionIndex = @"JButton.selectionIndex";
-
-@dynamic blockSelectionAction;
--(JButtonSelectionBlock)blockSelectionAction {
-    JButtonSelectionBlock block = (JButtonSelectionBlock)objc_getAssociatedObject(self, &KEY_ASSOC_BlockSelectionAction);
-    return block;
-}
-
--(void)setBlockSelectionAction:(JButtonSelectionBlock)blockSelectionAction {
-    objc_setAssociatedObject(self, &KEY_ASSOC_BlockSelectionAction, blockSelectionAction, OBJC_ASSOCIATION_RETAIN);
-}
-
 
 @dynamic selectionIndex;
 - (NSInteger)selectionIndex {
@@ -39,6 +29,50 @@ static const NSString *KEY_ASSOC_SelectionIndex = @"JButton.selectionIndex";
     objc_setAssociatedObject(self, &KEY_ASSOC_SelectionIndex, indexNumber, OBJC_ASSOCIATION_RETAIN);
 }
 
+@dynamic blockSelectionActions;
+-(NSMutableArray *)blockSelectionActions {
+    NSArray* blocks = (NSArray *)objc_getAssociatedObject(self, &KEY_ASSOC_BlockSelectionAction);
+    if (blocks == nil) {
+        blocks = @[];
+    }
+    return [blocks mutableCopy];
+}
 
+-(void)setBlockSelectionActions:(NSMutableArray *)blockSelectionActions {
+    
+    if ( blockSelectionActions != nil || blockSelectionActions.count > 0 ) {
+        objc_setAssociatedObject(self, &KEY_ASSOC_BlockSelectionAction, [blockSelectionActions copy], OBJC_ASSOCIATION_RETAIN);
+    } else {
+        objc_setAssociatedObject(self, &KEY_ASSOC_BlockSelectionAction, nil, OBJC_ASSOCIATION_RETAIN);
+        [self removeObserver:self forKeyPath:@"selection"];
+    }
+}
+
+- (void)addBlockSelectionAction:(JButtonSelectionBlock)action {
+    if (action) {
+        NSMutableArray *blocks = self.blockSelectionActions;
+        [blocks addObject:action];
+        [self setBlockSelectionActions:blocks];
+    }
+}
+
+- (void)removeBlockSelectionAction:(JButtonSelectionBlock)action {
+    if (action) {
+        NSMutableArray *blocks = self.blockSelectionActions;
+        [blocks removeObject:action];
+        [self setBlockSelectionActions:blocks];
+    }
+}
+
+- (void)removeAllBlocks {
+    [self setBlockSelectionActions:nil];
+}
+
+- (void)performBlockSelectionForEvent:(JButtonEventType)type {
+    NSArray* blocks = [self blockSelectionActions];
+    for (JButtonSelectionBlock eventBlock in blocks) {
+        eventBlock(self, type);
+    }
+}
 
 @end

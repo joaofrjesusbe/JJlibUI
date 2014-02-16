@@ -36,4 +36,17 @@
  */
 @property(nonatomic,assign) NSInteger selectedIndex;
 
+@property(nonatomic,assign) id<JButtonMatrixDelegate> delegate;
+
 @end
+
+
+@protocol JButtonMatrixDelegate <NSObject>
+@optional
+
+- (BOOL)buttonMatrix:(JButtonMatrix *)buttonMatrix willSelectButton:(UIButton *)button forIndex:(NSInteger)index;
+
+- (void)buttonMatrix:(JButtonMatrix *)buttonMatrix didSelectButton:(UIButton *)button forIndex:(NSInteger)index;
+
+@end
+

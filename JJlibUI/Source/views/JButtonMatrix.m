@@ -71,7 +71,7 @@
     }
     
     if (selectedIndex < 0 || selectedIndex >= _buttonsArray.count) {
-        [NSException raise:@"Invalid selected index" format:@"Selection index %d is invalid", selectedIndex];
+        [NSException raise:@"Invalid selected index" format:@"Selection index %ld is invalid", (long)selectedIndex];
         return;
     }
     self.selectedButton = _buttonsArray[selectedIndex];
@@ -80,12 +80,19 @@
 #pragma mark - action
 
 - (void)pressedButton:(UIButton *)sender
-{    
+{   
+    BOOL allowSelection = YES;
+    if ( [self.delegate respondsToSelector:@selector(buttonMatrix:willSelectButton:forIndex:)] ) {
+        allowSelection = [self.delegate buttonMatrix:self willSelectButton:sender forIndex:sender.selectionIndex];
+    }
+    
+    if ( !allowSelection ) {
+        return;
+    }    
+    
     UIButton *previousSelected = self.selectedButton;
     if ( previousSelected == sender ) {
-        if ( sender.blockSelectionAction != NULL ) {
-            sender.blockSelectionAction(sender, JButtonEventReselect);
-        }
+        [sender performBlockSelectionForEvent:JButtonEventReselect];
         return;
     }
 
@@ -93,12 +100,11 @@
     _selectedButton = sender;
     _selectedButton.selected = YES;
     
-    if ( previousSelected  && previousSelected.blockSelectionAction ) {
-        previousSelected.blockSelectionAction(previousSelected, JButtonEventDeselect);
-    }
+    [previousSelected performBlockSelectionForEvent:JButtonEventDeselect];
+    [sender performBlockSelectionForEvent:JButtonEventSelect];
     
-    if ( sender  && sender.blockSelectionAction ) {
-        sender.blockSelectionAction(sender, JButtonEventSelect);
+    if ( [self.delegate respondsToSelector:@selector(buttonMatrix:didSelectButton:forIndex:)] ) {
+        [self.delegate buttonMatrix:self didSelectButton:_selectedButton forIndex:_selectedButton.selectionIndex];
     }
 }
 

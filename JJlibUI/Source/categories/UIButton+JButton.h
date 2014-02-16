@@ -50,6 +50,14 @@ typedef void (^JButtonSelectionBlock)(UIButton*, JButtonEventType);
  *  Block executed when an event of selection occurs.
  *  Default: nil
  */
-@property(nonatomic,assign) JButtonSelectionBlock blockSelectionAction;
+@property(nonatomic,copy,readonly) NSMutableArray *blockSelectionActions;
+
+- (void)addBlockSelectionAction:(JButtonSelectionBlock)action;
+
+- (void)removeBlockSelectionAction:(JButtonSelectionBlock)action;
+
+- (void)removeAllBlocks;
+
+- (void)performBlockSelectionForEvent:(JButtonEventType)type;
 
 @end

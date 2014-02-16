@@ -63,6 +63,6 @@
  */
 @property(nonatomic,assign) BOOL alwaysCenterTabBarOnSelect;
 
-@property(nonatomic,readonly) JButtonMatrix *associatedButtonMatrix;
+@property(nonatomic,readonly) JButtonMatrix *matrix;
 
 @end
