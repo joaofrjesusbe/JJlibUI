@@ -14,7 +14,6 @@
 @interface JTabBarView ()
 
 @property(nonatomic,readwrite) JButtonMatrix *matrix;
-@property(nonatomic,assign) BOOL needsUpdateScroll;
 @property(nonatomic,assign) BOOL needsAnimateSelection;
 @property(nonatomic,assign) CGRect previousBounds;
 
@@ -47,13 +46,11 @@
 - (void)setupJTabBarView {
     _matrix = [[JButtonMatrix alloc] init];
     self.needsAnimateSelection = NO;
-    self.needsUpdateScroll = NO;
     self.previousBounds = self.bounds;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.childViews = self.childViews;
 }
 
 #pragma mark - override super properties
@@ -75,11 +72,6 @@
     }
     
     self.matrix.buttonsArray = childsButtons;
-    
-    if (self.scrollEnabled) {
-        self.needsUpdateScroll = YES;
-    }
-    
     [super setChildViews:childViews];
 }
 
@@ -113,13 +105,26 @@
 - (void)setCenterTabBarOnSelect:(BOOL)centerTabBarOnSelect {
     
     if (_centerTabBarOnSelect != centerTabBarOnSelect) {
-        self.needsUpdateScroll = YES;
+         [self setNeedsLayout];
     }
     
     _centerTabBarOnSelect = centerTabBarOnSelect;
     
     if (centerTabBarOnSelect && !self.scrollEnabled ) {
         self.scrollEnabled = YES;
+    }
+}
+
+- (void)setAlwaysCenterTabBarOnSelect:(BOOL)alwaysCenterTabBarOnSelect {
+    
+    if (_alwaysCenterTabBarOnSelect != alwaysCenterTabBarOnSelect) {
+        [self setNeedsLayout];
+    }
+    
+    _alwaysCenterTabBarOnSelect = alwaysCenterTabBarOnSelect;
+    
+    if ( _alwaysCenterTabBarOnSelect ) {
+        self.centerTabBarOnSelect = YES;
     }
 }
 
@@ -154,46 +159,40 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
-    NSArray *viewsArray = _scrollContainer.subviews;
-    CGRect bounds = self.bounds;
-    if ( !CGRectEqualToRect(bounds, self.previousBounds)) {
-        self.needsUpdateScroll = YES;
-    }
     
-    if ( self.needsUpdateScroll && viewsArray.count > 0 ) {
-
-        NSArray * buttonsArray = self.matrix.buttonsArray;
+    CGRect bounds = self.bounds;
+    NSArray *buttonsArray = self.matrix.buttonsArray;
+    NSArray *viewsArray = _scrollContainer.subviews;
+    
+    if ( self.alwaysCenterTabBarOnSelect && viewsArray.count > 0 ) {
+        
         CGRect minRect = ((UIView *)buttonsArray[0]).frame;
         CGRect maxRect = ((UIView *)buttonsArray[buttonsArray.count-1]).frame;
         
-        if ( self.alwaysCenterTabBarOnSelect ) {
-            
-            if ( self.alignment == JBarViewAlignmentHorizontal ) {
-                CGFloat minDelta = bounds.size.width/2.0f - minRect.size.width/2.0f;
-                CGFloat maxDelta = bounds.size.width/2.0f - maxRect.size.width/2.0f;
-                for (UIView *subView in viewsArray) {
-                    CGRect frame = subView.frame;
-                    frame.origin.x += minDelta;
-                    subView.frame = frame;
-                }
-                CGSize size = _scrollContainer.contentSize;
-                size.width += minDelta + maxDelta;
-                _scrollContainer.contentSize = size;
-
-            }else if ( self.alignment == JBarViewAlignmentVertical ) {
-                CGFloat minDelta = bounds.size.height/2.0f - minRect.size.height/2.0f;
-                CGFloat maxDelta = bounds.size.height/2.0f - maxRect.size.height/2.0f;
-                for (UIView *subView in viewsArray) {
-                    CGRect frame = subView.frame;
-                    frame.origin.y += minDelta;
-                    subView.frame = frame;
-                }
-                CGSize size = _scrollContainer.contentSize;
-                size.height += minDelta + maxDelta;
-                _scrollContainer.contentSize = size;
-                
+        if ( self.alignment == JBarViewAlignmentHorizontal ) {
+            CGFloat minDelta = bounds.size.width/2.0f - minRect.size.width/2.0f;
+            CGFloat maxDelta = bounds.size.width/2.0f - maxRect.size.width/2.0f;
+            for (UIView *subView in viewsArray) {
+                CGRect frame = subView.frame;
+                frame.origin.x += minDelta;
+                subView.frame = frame;
             }
+            CGSize size = _scrollContainer.contentSize;
+            size.width += minDelta + maxDelta;
+            _scrollContainer.contentSize = size;
+            
+        }else if ( self.alignment == JBarViewAlignmentVertical ) {
+            CGFloat minDelta = bounds.size.height/2.0f - minRect.size.height/2.0f;
+            CGFloat maxDelta = bounds.size.height/2.0f - maxRect.size.height/2.0f;
+            for (UIView *subView in viewsArray) {
+                CGRect frame = subView.frame;
+                frame.origin.y += minDelta;
+                subView.frame = frame;
+            }
+            CGSize size = _scrollContainer.contentSize;
+            size.height += minDelta + maxDelta;
+            _scrollContainer.contentSize = size;
+            
         }
     }
     
@@ -202,7 +201,6 @@
     }
     
     self.needsAnimateSelection = NO;
-    self.needsUpdateScroll = NO;
     self.previousBounds = bounds;
 }
 

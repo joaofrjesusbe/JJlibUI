@@ -54,16 +54,14 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self setupJBarView];
-    _childViews = self.subviews;
 }
 
 - (void)setupJBarView {
     _alignment = JBarViewAlignmentHorizontal;
     self.subViewsContainer = self;
     self.autoResizeChilds = YES;
-    _childViews = @[];
     self.separatorImageViews = nil;
+    _childViews = @[];
 }
 
 
@@ -222,7 +220,7 @@
     }
 }
 
-- (CGRect)frameForSubBarViews {
+- (CGRect)childFrameSlotWithScrollEnabled:(BOOL)scrollEnabled {
     
     CGRect frame = CGRectZero;
     CGRect bounds = self.bounds;
@@ -233,11 +231,11 @@
     }
     
     // CGRectZero no change in size
-    if ( (self.isScrollEnabled && self.scrollViewsCounter == 0 && self.scrollBoxFixSize == 0) ) {
+    if ( (scrollEnabled && self.scrollViewsCounter == 0 && self.scrollBoxFixSize == 0) ) {
         return CGRectZero;
     }
     
-    if ( self.isScrollEnabled  && self.scrollBoxFixSize != 0 ) {
+    if ( scrollEnabled  && self.scrollBoxFixSize != 0 ) {
         
         switch (self.alignment) {
             case JBarViewAlignmentHorizontal:
@@ -260,7 +258,7 @@
         CGSize separatorSize = _imageSeparator.size;
         CGFloat totalSpace = 0;
         
-        if ( _scrollEnabled && self.scrollViewsCounter != 0 ) {
+        if ( scrollEnabled && self.scrollViewsCounter != 0 ) {
             boxCount = self.scrollViewsCounter;
             separatorCount = boxCount - 1;
             
@@ -289,34 +287,17 @@
         
     }
     
+    frame = UIEdgeInsetsInsetRect(frame, self.childEdges);
     return frame;
 }
 
-
-#pragma mark - UIView methods
-
--(void)layoutSubviews {
-    [super layoutSubviews];
+- (UIView *)positionChildsWithFrameSlot:(CGRect)frameSlot allowChildChangeSize:(BOOL)allowChildChangeSize {
     
     CGRect bounds = self.bounds;
-
-    [self verifyChangesOfContainer];
-    
-    CGRect subViewFrame = [self frameForSubBarViews];
-    if (CGRectIsNull(subViewFrame)) {
-        return;
-    }
-    
-    BOOL isFixedSize = NO;
-    if ( !CGRectIsEmpty(subViewFrame) ) {
-        isFixedSize = YES;
-        subViewFrame = UIEdgeInsetsInsetRect(subViewFrame, self.childEdges);
-    }
-    
-    [self prepareImageSeparators];
-    
     UIView *childView = nil;
     UIView *previousChildView = nil;
+    //BOOL hasFrameSlot = CGRectEqualToRect(frameSlot, CGRectZero);
+    
     for ( NSInteger i = 0; i < _childViews.count; i++ ) {
         previousChildView = childView;
         childView = _childViews[i];
@@ -328,8 +309,8 @@
             imageViewFrame.size = imageSeparatorView.frame.size;
         }
         
-        CGRect frame = subViewFrame;
-        if ( !isFixedSize ) {
+        CGRect frame = frameSlot;
+        if ( !allowChildChangeSize ) {
             frame = childView.frame;
             frame.origin = CGPointZero;
         }
@@ -338,34 +319,45 @@
             case JBarViewAlignmentHorizontal:
             {
                 CGFloat shift = 0;
-                if (isFixedSize) {
-                    shift = ( previousChildView == nil ? 0 : self.childEdges.right + imageViewFrame.size.width );
+                 /*
+                if ( hasFrameSlot ) {
+                    shift = ( previousChildView == nil ? 0 : imageViewFrame.size.width );
+                } else {
+                    shift = ( previousChildView == nil ? self.childEdges.left : self.childEdges.left + self.childEdges.right + imageViewFrame.size.width );
+                }
+                 */
+                
+                if (allowChildChangeSize) {
+                    shift = ( previousChildView == nil ? 0 : imageViewFrame.size.width );
                 }else {
                     shift = ( previousChildView == nil ? self.childEdges.left : self.childEdges.left + self.childEdges.right + imageViewFrame.size.width );
+                    shift += (frameSlot.size.width - frame.size.width) / 2.0f;
                 }
                 frame.origin.x += CGRectGetMaxX(previousFrame) + shift;
                 frame.origin.y = CGRectGetMidY(bounds) - frame.size.height/2.0f;
                 
                 if (imageSeparatorView) {
-                    imageViewFrame.origin = CGPointMake( CGRectGetMaxX(frame) + self.childEdges.right , CGRectGetMidY(bounds) - imageViewFrame.size.height/2.0f);
+                    imageViewFrame.origin = CGPointMake( CGRectGetMaxX(frameSlot), CGRectGetMidY(bounds) - imageViewFrame.size.height/2.0f);
                     imageSeparatorView.frame = imageViewFrame;
                 }
             }
-            break;
+                break;
                 
             case JBarViewAlignmentVertical:
             {
                 CGFloat shift = 0;
-                if (isFixedSize) {
-                    shift = ( previousChildView == nil ? 0 : self.childEdges.bottom + imageViewFrame.size.height );
+                if (allowChildChangeSize) {
+                    shift = ( previousChildView == nil ? 0 : imageViewFrame.size.height );
                 }else {
                     shift = ( previousChildView == nil ? self.childEdges.top : self.childEdges.top + self.childEdges.bottom + imageViewFrame.size.height );
+                    shift += (frameSlot.size.height - frame.size.height) / 2.0f;
                 }
+                
                 frame.origin.x = CGRectGetMidX(bounds) - frame.size.width/2.0f;
                 frame.origin.y += CGRectGetMaxY(previousFrame) + shift;
                 
                 if (imageSeparatorView) {
-                    imageViewFrame.origin = CGPointMake( CGRectGetMidX(bounds) - imageViewFrame.size.width/2.0f, CGRectGetMaxY(frame) + self.childEdges.bottom);
+                    imageViewFrame.origin = CGPointMake( CGRectGetMidX(bounds) - imageViewFrame.size.width/2.0f, CGRectGetMaxY(frameSlot));
                     imageSeparatorView.frame = imageViewFrame;
                 }
             }
@@ -380,14 +372,50 @@
             childView.frame = frame;
         }
     }
+    return childView;
+}
+
+#pragma mark - UIView methods
+
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGRect bounds = self.bounds;
+    [self verifyChangesOfContainer];
+    
+    CGRect childFrameSlot = [self childFrameSlotWithScrollEnabled:self.scrollEnabled];
+    if (CGRectIsNull(childFrameSlot)) {
+        return;
+    }
+    
+    BOOL allowChildChangeSize = YES;
+    if ( CGRectIsEmpty(childFrameSlot) ) {
+        allowChildChangeSize = NO;
+    }
+    
+    [self prepareImageSeparators];
+    
+    UIView *lastChild = [self positionChildsWithFrameSlot:childFrameSlot allowChildChangeSize:allowChildChangeSize];
+    
     _backgroundView.frame = bounds;
     
     if ( _scrollEnabled && _childViews.count > 0 ) {
         
-        if ( _alignment == JBarViewAlignmentHorizontal )
-            _scrollContainer.contentSize = CGSizeMake( CGRectGetMaxX(childView.frame) + self.childEdges.right, CGRectGetMaxY(bounds));
-        if ( _alignment == JBarViewAlignmentVertical )
-            _scrollContainer.contentSize = CGSizeMake( CGRectGetMaxX(bounds),  CGRectGetMaxY(childView.frame) + self.childEdges.bottom);
+        if ( _alignment == JBarViewAlignmentHorizontal ) {
+            CGSize size = CGSizeMake( CGRectGetMaxX(lastChild.frame) + self.childEdges.right, CGRectGetMaxY(bounds));
+            
+            if (self.scrollEnabled && size.width < bounds.size.width) {
+                // too much space available
+                // recalculate buttons frame to center
+                CGRect subViewFrame = [self childFrameSlotWithScrollEnabled:NO];
+                lastChild = [self positionChildsWithFrameSlot:subViewFrame allowChildChangeSize:NO];
+                size = CGSizeMake( CGRectGetMaxX(lastChild.frame) + self.childEdges.right, CGRectGetMaxY(bounds));
+            }
+            
+            _scrollContainer.contentSize = size;
+        } else if ( _alignment == JBarViewAlignmentVertical ) {
+            _scrollContainer.contentSize = CGSizeMake( CGRectGetMaxX(bounds),  CGRectGetMaxY(lastChild.frame) + self.childEdges.bottom);
+        }
     }
 }
 
