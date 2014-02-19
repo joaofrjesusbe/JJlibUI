@@ -11,6 +11,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="rty-7d-lCS">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="d3a-el-Sbr" kind="relationship" relationship="rootViewController" id="F85-SO-Xn4"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IHi-Co-EdN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -21,11 +24,11 @@
             <objects>
                 <viewController id="d3a-el-Sbr" customClass="JTabBarController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6If-ye-NW3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="AMs-fA-Vzb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>

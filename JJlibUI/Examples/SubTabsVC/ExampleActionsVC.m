@@ -9,7 +9,7 @@
 #import "ExampleActionsVC.h"
 #import "JUILib.h"
 #import "ExampleTabBarVC.h"
-#import "ExampleConfigVC.h"
+#import "ExampleAnimConfigVC.h"
 #import "ExampleSettings.h"
 
 
@@ -56,7 +56,7 @@
         
         ExampleTabBarVC *tabBar = [[ExampleTabBarVC alloc] initWithNibName:nil bundle:nil];
         
-        ExampleConfigVC *config = [[ExampleConfigVC alloc] initWithNibName:nil bundle:nil];
+        ExampleAnimConfigVC *config = [[ExampleAnimConfigVC alloc] initWithNibName:nil bundle:nil];
         
         // remove our custom button so a default delegate is created
         self.backupButton = self.jTabBarButton;
