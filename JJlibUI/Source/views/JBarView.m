@@ -168,6 +168,7 @@
     NSAssert( numberOfChildsVisible > 0, @"numberOfChildsVisible must be great than 0" );
     
     self.scrollEnabled = YES;
+    self.autoResizeChilds = YES;
     self.scrollViewsCounter = (int)numberOfChildsVisible;
     self.partialViewPercentage = fmodf(numberOfChildsVisible, 1.0);
     self.scrollBoxFixSize = ValueNotDefine;
@@ -176,6 +177,7 @@
 
 - (void)setScrollEnabledWithChildSize:(CGFloat)childsSize {
     self.scrollEnabled = YES;
+    self.autoResizeChilds = YES;
     self.scrollViewsCounter = ValueNotDefine;
     self.scrollBoxFixSize = childsSize;
     [self setNeedsLayout];

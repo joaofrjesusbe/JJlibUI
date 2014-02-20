@@ -8,8 +8,9 @@
             <connections>
                 <outlet property="containerCheckBoxValue1" destination="HX0-IF-lm5" id="hAQ-VW-utH"/>
                 <outlet property="containerCheckBoxValue2" destination="ncr-o6-Pr0" id="gsF-Bq-1BM"/>
-                <outlet property="containerCheckBoxValue3" destination="V3a-DM-ZBX" id="sji-Ur-sV8"/>
+                <outlet property="containerCheckBoxValue3" destination="V3a-DM-ZBX" id="gD7-Dm-8NA"/>
                 <outlet property="containerCheckBoxValue4" destination="Sed-Mw-slD" id="1mJ-lq-jak"/>
+                <outlet property="containerCheckBoxValue5" destination="glq-sQ-anu" id="nhx-yo-izJ"/>
                 <outlet property="segOrientation" destination="Klk-l2-n9y" id="GFK-0j-9QQ"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -21,7 +22,7 @@
             <subviews>
                 <view contentMode="scaleToFill" id="Lcr-7g-vTG">
                     <rect key="frame" x="0.0" y="44" width="320" height="524"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="gXn-Sr-4Wq">
                             <rect key="frame" x="10" y="10" width="300" height="60"/>
@@ -51,32 +52,43 @@
                             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                         </view>
                         <view contentMode="scaleToFill" id="Idb-NZ-q2X">
-                            <rect key="frame" x="10" y="88" width="300" height="290"/>
+                            <rect key="frame" x="10" y="88" width="300" height="320"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TabBar Scroll Policy:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lDO-Pe-euf">
-                                    <rect key="frame" x="10" y="10" width="280" height="16"/>
+                                    <rect key="frame" x="10" y="11" width="280" height="16"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TabBar Selection Policy:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M3H-70-nhY">
+                                    <rect key="frame" x="20" y="231" width="280" height="16"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" id="HX0-IF-lm5">
-                                    <rect key="frame" x="0.0" y="40" width="300" height="50"/>
+                                    <rect key="frame" x="0.0" y="35" width="300" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="ncr-o6-Pr0">
-                                    <rect key="frame" x="0.0" y="100" width="300" height="50"/>
+                                    <rect key="frame" x="0.0" y="80" width="300" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="V3a-DM-ZBX">
-                                    <rect key="frame" x="0.0" y="160" width="300" height="50"/>
+                                    <rect key="frame" x="0.0" y="125" width="300" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="Sed-Mw-slD">
-                                    <rect key="frame" x="0.0" y="220" width="300" height="50"/>
+                                    <rect key="frame" x="0.0" y="170" width="300" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view contentMode="scaleToFill" id="glq-sQ-anu">
+                                    <rect key="frame" x="0.0" y="250" width="300" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>

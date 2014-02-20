@@ -38,6 +38,9 @@
 
 @property(nonatomic,assign) id<JButtonMatrixDelegate> delegate;
 
+@property(nonatomic,assign) BOOL allowNoSelection;
+
+
 @end
 
 

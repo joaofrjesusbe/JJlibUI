@@ -81,6 +81,18 @@
 
 - (void)pressedButton:(UIButton *)sender
 {   
+    UIButton *previousSelected = self.selectedButton;
+    if ( previousSelected == sender ) {
+        if ( self.allowNoSelection ) {
+            _selectedButton.selected = NO;
+            _selectedButton = nil;
+            [sender performBlockSelectionForEvent:JButtonEventDeselect];
+        } else {
+            [sender performBlockSelectionForEvent:JButtonEventReselect];
+        }
+        return;
+    }
+    
     BOOL allowSelection = YES;
     if ( [self.delegate respondsToSelector:@selector(buttonMatrix:willSelectButton:forIndex:)] ) {
         allowSelection = [self.delegate buttonMatrix:self willSelectButton:sender forIndex:sender.selectionIndex];
@@ -88,14 +100,8 @@
     
     if ( !allowSelection ) {
         return;
-    }    
-    
-    UIButton *previousSelected = self.selectedButton;
-    if ( previousSelected == sender ) {
-        [sender performBlockSelectionForEvent:JButtonEventReselect];
-        return;
     }
-
+    
     _selectedButton.selected = NO;
     _selectedButton = sender;
     _selectedButton.selected = YES;

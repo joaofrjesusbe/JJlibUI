@@ -14,6 +14,10 @@
  */
 typedef NS_ENUM(short, JButtonEventType) {
     /**
+     *  Event as same as UIControlEventTouchUpInside. This will execute automatically when add a block selection action with this event.
+     */
+    JButtonEventTouchUpInside,
+    /**
      *  Event when the button pass from selection to normal.
      */
     JButtonEventDeselect,
@@ -33,7 +37,7 @@ typedef NS_ENUM(short, JButtonEventType) {
  *  @param UIButton*        button that receives the event
  *  @param JButtonEventType type of the event
  */
-typedef void (^JButtonSelectionBlock)(UIButton*, JButtonEventType);
+typedef void (^JButtonSelectionBlock)(UIButton* button, JButtonEventType type);
 
 /**
  *  Category that add's extra functionality on button with this framework.
@@ -46,15 +50,11 @@ typedef void (^JButtonSelectionBlock)(UIButton*, JButtonEventType);
  */
 @property(nonatomic,assign) NSInteger selectionIndex;
 
-/**
- *  Block executed when an event of selection occurs.
- *  Default: nil
- */
-@property(nonatomic,copy,readonly) NSMutableArray *blockSelectionActions;
 
-- (void)addBlockSelectionAction:(JButtonSelectionBlock)action;
 
-- (void)removeBlockSelectionAction:(JButtonSelectionBlock)action;
+- (void)addBlockSelectionAction:(JButtonSelectionBlock)action forEvent:(JButtonEventType)event;
+
+- (void)removeBlockSelectionAction:(JButtonSelectionBlock)action forEvent:(JButtonEventType)event;
 
 - (void)removeAllBlocks;
 

@@ -21,4 +21,6 @@
 @property(nonatomic, assign) JTabBarAnimation defaultVCTransition;
 @property(nonatomic, assign) JTabBarAnimation nonDefaultVCTransition;
 
+@property(nonatomic, assign) NSInteger scrollPolicyIndex;
+
 @end

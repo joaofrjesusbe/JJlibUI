@@ -64,9 +64,6 @@
     
     ExampleSettings *settings = [ExampleSettings sharedSettings];
     [settings initializeDefaultsWithTabBarController:_tabBarController];
-    
-    //self.tabBarController.tabBar.centerTabBarOnSelect = YES;
-    //self.tabBarController.tabBar.alwaysCenterTabBarOnSelect = YES;
 }
 
 #pragma mark - JTabBarControllerDelegate

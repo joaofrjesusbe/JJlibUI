@@ -12,8 +12,71 @@
 
 @implementation UIButton (JButton)
 
-static const NSString *KEY_ASSOC_BlockSelectionAction = @"JButton.blockSelectionActions";
+static const NSString *KEY_ASSOC_JButtonEventDeselect = @"JButton.JButtonEventDeselect";
+static const NSString *KEY_ASSOC_JButtonEventSelect = @"JButton.JButtonEventSelect";
+static const NSString *KEY_ASSOC_JButtonEventReselect = @"JButton.JButtonEventReselect";
+static const NSString *KEY_ASSOC_JButtonEventTouchUpInside = @"JButton.JButtonEventTouchUpInside";
 static const NSString *KEY_ASSOC_SelectionIndex = @"JButton.selectionIndex";
+
+#pragma mark - private
+
+-(NSMutableArray *)blockSelectionActionsForEvent:(JButtonEventType)event {
+    
+    NSMutableArray* blocks = nil;
+    switch (event) {
+        case JButtonEventTouchUpInside:
+            blocks = (NSMutableArray *)objc_getAssociatedObject(self, &KEY_ASSOC_JButtonEventTouchUpInside);
+            break;
+        case JButtonEventSelect:
+            blocks = (NSMutableArray *)objc_getAssociatedObject(self, &KEY_ASSOC_JButtonEventSelect);
+            break;
+        case JButtonEventReselect:
+            blocks = (NSMutableArray *)objc_getAssociatedObject(self, &KEY_ASSOC_JButtonEventReselect);
+            break;
+        case JButtonEventDeselect:
+            blocks = (NSMutableArray *)objc_getAssociatedObject(self, &KEY_ASSOC_JButtonEventDeselect);
+            break;
+            
+        default:
+            break;
+    }
+    
+    if (blocks == nil) {
+        blocks = [NSMutableArray array];
+    }
+    return blocks;
+}
+
+-(void)setBlockSelectionActions:(NSMutableArray *)blockSelectionActions forEvent:(JButtonEventType)event {
+    
+    if ( blockSelectionActions.count == 0 ) {
+        blockSelectionActions = nil;
+    }
+    
+    switch (event) {
+        case JButtonEventTouchUpInside:
+            objc_setAssociatedObject(self, &KEY_ASSOC_JButtonEventTouchUpInside, blockSelectionActions, OBJC_ASSOCIATION_RETAIN);
+            if (blockSelectionActions) {
+                [self addTarget:self action:@selector(onTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+            } else {
+                [self addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+            }
+            break;
+        case JButtonEventSelect:
+            objc_setAssociatedObject(self, &KEY_ASSOC_JButtonEventSelect, blockSelectionActions, OBJC_ASSOCIATION_RETAIN);
+            break;
+        case JButtonEventReselect:
+            objc_setAssociatedObject(self, &KEY_ASSOC_JButtonEventReselect, blockSelectionActions, OBJC_ASSOCIATION_RETAIN);
+            break;
+        case JButtonEventDeselect:
+            objc_setAssociatedObject(self, &KEY_ASSOC_JButtonEventDeselect, blockSelectionActions, OBJC_ASSOCIATION_RETAIN);
+            break;
+            
+        default:
+            break;
+    }
+}
+
 
 @dynamic selectionIndex;
 - (NSInteger)selectionIndex {
@@ -29,50 +92,37 @@ static const NSString *KEY_ASSOC_SelectionIndex = @"JButton.selectionIndex";
     objc_setAssociatedObject(self, &KEY_ASSOC_SelectionIndex, indexNumber, OBJC_ASSOCIATION_RETAIN);
 }
 
-@dynamic blockSelectionActions;
--(NSMutableArray *)blockSelectionActions {
-    NSArray* blocks = (NSArray *)objc_getAssociatedObject(self, &KEY_ASSOC_BlockSelectionAction);
-    if (blocks == nil) {
-        blocks = @[];
-    }
-    return [blocks mutableCopy];
-}
-
--(void)setBlockSelectionActions:(NSMutableArray *)blockSelectionActions {
-    
-    if ( blockSelectionActions != nil || blockSelectionActions.count > 0 ) {
-        objc_setAssociatedObject(self, &KEY_ASSOC_BlockSelectionAction, [blockSelectionActions copy], OBJC_ASSOCIATION_RETAIN);
-    } else {
-        objc_setAssociatedObject(self, &KEY_ASSOC_BlockSelectionAction, nil, OBJC_ASSOCIATION_RETAIN);
-        [self removeObserver:self forKeyPath:@"selection"];
-    }
-}
-
-- (void)addBlockSelectionAction:(JButtonSelectionBlock)action {
+- (void)addBlockSelectionAction:(JButtonSelectionBlock)action forEvent:(JButtonEventType)event {
     if (action) {
-        NSMutableArray *blocks = self.blockSelectionActions;
+        NSMutableArray *blocks = [self blockSelectionActionsForEvent:event];
         [blocks addObject:action];
-        [self setBlockSelectionActions:blocks];
+        [self setBlockSelectionActions:blocks forEvent:event];
     }
 }
 
-- (void)removeBlockSelectionAction:(JButtonSelectionBlock)action {
+- (void)removeBlockSelectionAction:(JButtonSelectionBlock)action forEvent:(JButtonEventType)event {
     if (action) {
-        NSMutableArray *blocks = self.blockSelectionActions;
-        [blocks removeObject:action];
-        [self setBlockSelectionActions:blocks];
+        NSMutableArray *blocks = [self blockSelectionActionsForEvent:event];
+        [blocks addObject:action];
+        [self setBlockSelectionActions:blocks forEvent:event];
     }
 }
 
 - (void)removeAllBlocks {
-    [self setBlockSelectionActions:nil];
+    [self setBlockSelectionActions:nil forEvent:JButtonEventDeselect];
+    [self setBlockSelectionActions:nil forEvent:JButtonEventSelect];
+    [self setBlockSelectionActions:nil forEvent:JButtonEventReselect];
 }
 
-- (void)performBlockSelectionForEvent:(JButtonEventType)type {
-    NSArray* blocks = [self blockSelectionActions];
+- (void)performBlockSelectionForEvent:(JButtonEventType)event {
+    NSMutableArray *blocks = [self blockSelectionActionsForEvent:event];
     for (JButtonSelectionBlock eventBlock in blocks) {
-        eventBlock(self, type);
+        eventBlock(self, event);
     }
+}
+
+- (void)onTouchUpInside:(UIButton *)sender {
+    [self performBlockSelectionForEvent:JButtonEventTouchUpInside];
 }
 
 @end

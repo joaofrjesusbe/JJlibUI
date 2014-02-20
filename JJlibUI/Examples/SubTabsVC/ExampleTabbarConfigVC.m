@@ -9,6 +9,7 @@
 #import "ExampleTabbarConfigVC.h"
 #import "JUILib.h"
 #import "CheckBoxValue.h"
+#import "ExampleSettings.h"
 
 @interface ExampleTabbarConfigVC ()
 
@@ -18,8 +19,10 @@
 @property (weak, nonatomic) IBOutlet UIView *containerCheckBoxValue2;
 @property (weak, nonatomic) IBOutlet UIView *containerCheckBoxValue3;
 @property (weak, nonatomic) IBOutlet UIView *containerCheckBoxValue4;
+@property (strong, nonatomic) JButtonMatrix *buttonMatrixScrollPolicy;
 
-@property (strong, nonatomic) JButtonMatrix *buttonMatrix;
+@property (weak, nonatomic) IBOutlet CheckBoxValue *containerCheckBoxValue5;
+@property (strong, nonatomic) JButtonMatrix *buttonMatrixSelectPolicy;
 
 @end
 
@@ -82,20 +85,18 @@
     [array addObject:checkBox.checkButton];
     [self.containerCheckBoxValue1 addSubview:checkBox];
     [checkBox.checkButton addBlockSelectionAction:^(UIButton *button, JButtonEventType type) {
-        if (type == JButtonEventSelect) {
-            self.jTabBarController.tabBar.scrollEnabled = NO;
-        }
-    }];
-
+        [ExampleSettings sharedSettings].scrollPolicyIndex = self.buttonMatrixScrollPolicy.selectedIndex;
+        self.jTabBarController.tabBar.scrollEnabled = NO;
+    } forEvent:JButtonEventSelect];
+    
     checkBox = [CheckBoxValue checkBoxValue];
     [checkBox setupCheckBoxWithHiddenValueAndText:@"Simple Scroll"];
     [array addObject:checkBox.checkButton];
     [self.containerCheckBoxValue2 addSubview:checkBox];
     [checkBox.checkButton addBlockSelectionAction:^(UIButton *button, JButtonEventType type) {
-        if (type == JButtonEventSelect) {
-            self.jTabBarController.tabBar.scrollEnabled = YES;
-        }
-    }];
+        [ExampleSettings sharedSettings].scrollPolicyIndex = self.buttonMatrixScrollPolicy.selectedIndex;
+        self.jTabBarController.tabBar.scrollEnabled = YES;
+    } forEvent:JButtonEventSelect];
 
     CGFloat childSize = 120.0f;
     checkBox = [CheckBoxValue checkBoxValue];
@@ -103,10 +104,9 @@
     [array addObject:checkBox.checkButton];
     [self.containerCheckBoxValue3 addSubview:checkBox];
     [checkBox.checkButton addBlockSelectionAction:^(UIButton *button, JButtonEventType type) {
-        if (type == JButtonEventSelect) {
-            [self.jTabBarController.tabBar setScrollEnabledWithChildSize:childSize];
-        }
-    }];
+        [ExampleSettings sharedSettings].scrollPolicyIndex = self.buttonMatrixScrollPolicy.selectedIndex;
+        [self.jTabBarController.tabBar setScrollEnabledWithChildSize:childSize];
+    } forEvent:JButtonEventSelect];
 
     CGFloat childItems = 3.5;
     checkBox = [CheckBoxValue checkBoxValue];
@@ -114,18 +114,33 @@
     [array addObject:checkBox.checkButton];
     [self.containerCheckBoxValue4 addSubview:checkBox];
     [checkBox.checkButton addBlockSelectionAction:^(UIButton *button, JButtonEventType type) {
-        if (type == JButtonEventSelect) {
-            [self.jTabBarController.tabBar setScrollEnabledWithChildSize:childItems];
-        }
-    }];
+        [ExampleSettings sharedSettings].scrollPolicyIndex = self.buttonMatrixScrollPolicy.selectedIndex;
+        [self.jTabBarController.tabBar setScrollEnabledWithNumberOfChildsVisible:childItems];
+    } forEvent:JButtonEventSelect];
 
-    self.buttonMatrix = [[JButtonMatrix alloc] init];
-    self.buttonMatrix.buttonsArray = array;
+    self.buttonMatrixScrollPolicy = [[JButtonMatrix alloc] init];
+    self.buttonMatrixScrollPolicy.buttonsArray = array;
+    
+    checkBox = [CheckBoxValue checkBoxValue];
+    [checkBox setupCheckBoxWithHiddenValueAndText:@"Selected Item always center"];
+    [array addObject:checkBox.checkButton];
+    [self.containerCheckBoxValue5 addSubview:checkBox];
+    [checkBox.checkButton addBlockSelectionAction:^(UIButton *button, JButtonEventType type) {
+        [self.jTabBarController.tabBar setAlwaysCenterTabBarOnSelect:YES];
+    } forEvent:JButtonEventSelect];
+    [checkBox.checkButton addBlockSelectionAction:^(UIButton *button, JButtonEventType type) {
+        [self.jTabBarController.tabBar setAlwaysCenterTabBarOnSelect:NO];
+    } forEvent:JButtonEventDeselect];
+    
+    self.buttonMatrixSelectPolicy = [[JButtonMatrix alloc] init];
+    self.buttonMatrixSelectPolicy.allowNoSelection = YES;
+    self.buttonMatrixSelectPolicy.buttonsArray = @[checkBox.checkButton];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.segOrientation.selectedSegmentIndex = [self indexForDocking:self.jTabBarController.tabBarDock];
-    
+    self.buttonMatrixScrollPolicy.selectedIndex = [ExampleSettings sharedSettings].scrollPolicyIndex;
 }
 
 - (IBAction)changeOrientation:(id)sender {
