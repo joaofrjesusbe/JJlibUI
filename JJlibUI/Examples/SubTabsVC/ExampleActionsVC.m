@@ -47,7 +47,7 @@
 
 - (IBAction)changeTabByCode:(id)sender {
     
-    [self.jTabBarController setSelectedIndex:0 animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
+    [self.jTabBarController setSelectedTabBarIndex:0 animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
 }
 
 - (IBAction)changeVCsByCode:(id)sender {
@@ -67,14 +67,14 @@
         
         NSArray * childViewControllers = @[ tabBar, self, config];
         
-        [self.jTabBarController setChildViewControllers:childViewControllers animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
+        [self.jTabBarController setTabBarChilds:childViewControllers animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
         
     } else {
 
         self.jTabBarButton = self.backupButton;
         self.usingOriginalVCs = YES;
         
-        [self.jTabBarController setChildViewControllers:self.backupVCs animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
+        [self.jTabBarController setTabBarChilds:self.backupVCs animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
 
     }
 }

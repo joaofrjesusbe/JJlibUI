@@ -128,7 +128,6 @@
     }
 }
 
-
 #pragma mark - public actions
 
 - (void)setSelectedTabBar:(UIButton *)selectedTabBar animated:(BOOL)animated {

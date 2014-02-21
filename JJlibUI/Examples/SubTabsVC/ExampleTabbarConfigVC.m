@@ -22,6 +22,7 @@
 @property (strong, nonatomic) JButtonMatrix *buttonMatrixScrollPolicy;
 
 @property (weak, nonatomic) IBOutlet CheckBoxValue *containerCheckBoxValue5;
+@property (weak, nonatomic) IBOutlet UIView *containerCheckBoxValue6;
 @property (strong, nonatomic) JButtonMatrix *buttonMatrixSelectPolicy;
 
 @end
@@ -78,6 +79,7 @@
     // Do any additional setup after loading the view from its nib.
     
     CheckBoxValue *checkBox;
+    self.buttonMatrixScrollPolicy = [[JButtonMatrix alloc] init];
     NSMutableArray *array = [NSMutableArray array];
     
     checkBox = [CheckBoxValue checkBoxValue];
@@ -118,8 +120,12 @@
         [self.jTabBarController.tabBar setScrollEnabledWithNumberOfChildsVisible:childItems];
     } forEvent:JButtonEventSelect];
 
-    self.buttonMatrixScrollPolicy = [[JButtonMatrix alloc] init];
     self.buttonMatrixScrollPolicy.buttonsArray = array;
+    
+    
+    self.buttonMatrixSelectPolicy = [[JButtonMatrix alloc] init];
+    self.buttonMatrixSelectPolicy.allowMultipleSelection = YES;
+    array = [NSMutableArray array];
     
     checkBox = [CheckBoxValue checkBoxValue];
     [checkBox setupCheckBoxWithHiddenValueAndText:@"Selected Item always center"];
@@ -131,10 +137,19 @@
     [checkBox.checkButton addBlockSelectionAction:^(UIButton *button, JButtonEventType type) {
         [self.jTabBarController.tabBar setAlwaysCenterTabBarOnSelect:NO];
     } forEvent:JButtonEventDeselect];
+
+    checkBox = [CheckBoxValue checkBoxValue];
+    [checkBox setupCheckBoxWithHiddenValueAndText:@"Selected Item centered"];
+    [array addObject:checkBox.checkButton];
+    [self.containerCheckBoxValue6 addSubview:checkBox];
+    [checkBox.checkButton addBlockSelectionAction:^(UIButton *button, JButtonEventType type) {
+        [self.jTabBarController.tabBar setCenterTabBarOnSelect:YES];
+    } forEvent:JButtonEventSelect];
+    [checkBox.checkButton addBlockSelectionAction:^(UIButton *button, JButtonEventType type) {
+        [self.jTabBarController.tabBar setCenterTabBarOnSelect:NO];
+    } forEvent:JButtonEventDeselect];
     
-    self.buttonMatrixSelectPolicy = [[JButtonMatrix alloc] init];
-    self.buttonMatrixSelectPolicy.allowNoSelection = YES;
-    self.buttonMatrixSelectPolicy.buttonsArray = @[checkBox.checkButton];
+    self.buttonMatrixSelectPolicy.buttonsArray = array;
 
 }
 

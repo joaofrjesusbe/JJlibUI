@@ -54,6 +54,7 @@
 		CF5B823E18B5033800E35C36 /* ExampleTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B823C18B5033800E35C36 /* ExampleTabBarVC.m */; };
 		CF5B823F18B5033800E35C36 /* ExampleTabBarVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B823D18B5033800E35C36 /* ExampleTabBarVC.xib */; };
 		CF5B824218B5034A00E35C36 /* ExampleMainTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B824118B5034A00E35C36 /* ExampleMainTabBarVC.m */; };
+		CF894B4718B7908A00537AAC /* JTabBarSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CF894B4618B7908A00537AAC /* JTabBarSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,8 @@
 		CF5B823D18B5033800E35C36 /* ExampleTabBarVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleTabBarVC.xib; sourceTree = "<group>"; };
 		CF5B824018B5034A00E35C36 /* ExampleMainTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleMainTabBarVC.h; sourceTree = "<group>"; };
 		CF5B824118B5034A00E35C36 /* ExampleMainTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleMainTabBarVC.m; sourceTree = "<group>"; };
+		CF894B4518B7908A00537AAC /* JTabBarSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTabBarSegue.h; sourceTree = "<group>"; };
+		CF894B4618B7908A00537AAC /* JTabBarSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTabBarSegue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +201,8 @@
 			children = (
 				0777010B183AC43A00203BE9 /* JTabBarController.h */,
 				0777010C183AC43A00203BE9 /* JTabBarController.m */,
+				CF894B4518B7908A00537AAC /* JTabBarSegue.h */,
+				CF894B4618B7908A00537AAC /* JTabBarSegue.m */,
 			);
 			path = containers;
 			sourceTree = "<group>";
@@ -478,6 +483,7 @@
 				CF5B823E18B5033800E35C36 /* ExampleTabBarVC.m in Sources */,
 				CF5B822518B4EF3100E35C36 /* CheckBoxValue.m in Sources */,
 				61366AA318AA5E7100BF5AAA /* ExampleSettings.m in Sources */,
+				CF894B4718B7908A00537AAC /* JTabBarSegue.m in Sources */,
 				07E4B3601813E1FB00B861CD /* JJAppDelegate.m in Sources */,
 				CF5B824218B5034A00E35C36 /* ExampleMainTabBarVC.m in Sources */,
 				CF5B822F18B4F95E00E35C36 /* ExampleActionsVC.m in Sources */,

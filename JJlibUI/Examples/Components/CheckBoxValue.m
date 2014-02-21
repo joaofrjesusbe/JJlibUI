@@ -24,6 +24,9 @@
 
 - (void)setupCheckBoxWithHiddenValueAndText:(NSString *)text {
     self.containerValue.hidden = YES;
+    CGRect frame = self.checkLabel.frame;
+    frame.size.width += 80;
+    self.checkLabel.frame = frame;
     self.checkLabel.text = text;
 }
 

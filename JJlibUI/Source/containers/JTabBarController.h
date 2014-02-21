@@ -34,9 +34,6 @@ typedef NS_ENUM(short, JTabBarAnimation) {
 #define JTabBarDockIsVertical(x) ( (x) == JTabBarDockLeft || (x) == JTabBarDockRight )
 
 
-const static NSString *JTabBarControllerSegue = @"JTabBarControllerSegue";
-
-
 @protocol JTabBarControllerDelegate;
 @interface JTabBarController : UIViewController
 
@@ -72,11 +69,11 @@ const static NSString *JTabBarControllerSegue = @"JTabBarControllerSegue";
 /**
  *  Child's UIViewController's. Will create a tabbar for each UIViewController.
  */
-@property(nonatomic,copy) IBOutletCollection(UIViewController) NSArray *childViewControllers;
+@property(nonatomic,copy) IBOutletCollection(UIViewController) NSArray *tabBarChilds;
 
-@property(nonatomic,strong) UIViewController *selectedChildViewController;
+@property(nonatomic,strong) UIViewController *selectedTabBarChild;
 
-@property(nonatomic,assign) NSInteger selectedIndex;
+@property(nonatomic,assign) NSInteger selectedTabBarIndex;
 
 @property(nonatomic,assign) id<JTabBarControllerDelegate> delegate;
 
@@ -94,11 +91,11 @@ const static NSString *JTabBarControllerSegue = @"JTabBarControllerSegue";
 
 @property(nonatomic,assign) JTabBarAnimation defaultSelectedControllerAnimation;
 
-- (void)setSelectedIndex:(NSInteger)selectedIndex animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
+- (void)setSelectedTabBarIndex:(NSInteger)selectedIndex animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
 
-- (void)setSelectedChildViewController:(UIViewController *)selectedChildViewController animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
+- (void)setSelectedTabBarChild:(UIViewController *)selectedChildViewController animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
 
-- (void)setChildViewControllers:(NSArray *)childViewControllers animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
+- (void)setTabBarChilds:(NSArray *)childViewControllers animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
 
 - (void)setHiddenTabBar:(BOOL)hiddenTabBar animation:(JTabBarAnimation)animation completion:(void (^)(void))completion;
 
@@ -108,11 +105,11 @@ const static NSString *JTabBarControllerSegue = @"JTabBarControllerSegue";
 @protocol JTabBarControllerDelegate <NSObject>
 @optional
 
-- (UIButton *)tabBarController:(JTabBarController *)tabBarController tabBarButtonForChildViewController:(UIViewController *)childViewController forIndex:(NSInteger)index;
+- (UIButton *)tabBarController:(JTabBarController *)tabBarController tabBarButtonForTabBarChild:(UIViewController *)childViewController forIndex:(NSInteger)index;
 
-- (BOOL)tabBarController:(JTabBarController *)tabBarController willSelectChildViewController:(UIViewController *)childViewController forIndex:(NSInteger)index;
+- (BOOL)tabBarController:(JTabBarController *)tabBarController willSelectTabBarChild:(UIViewController *)childViewController forIndex:(NSInteger)index;
 
-- (void)tabBarController:(JTabBarController *)tabBarController didSelectChildViewController:(UIViewController *)childViewController forIndex:(NSInteger)index;
+- (void)tabBarController:(JTabBarController *)tabBarController didSelectTabBarChild:(UIViewController *)childViewController forIndex:(NSInteger)index;
 
 @end
 

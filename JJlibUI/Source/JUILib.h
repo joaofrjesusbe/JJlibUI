@@ -25,3 +25,4 @@
 #import "JButtonMatrix.h"
 #import "JTabBarView.h"
 #import "JTabBarController.h"
+#import "JTabBarSegue.h"

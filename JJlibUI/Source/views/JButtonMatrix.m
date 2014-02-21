@@ -13,17 +13,43 @@
 @end
 
 @implementation JButtonMatrix
+{
+    NSMutableArray *_selectedButtons;
+}
+
+@synthesize selectedButtons = _selectedButtons;
 
 - (id)init {
     self = [super init];
     if (self) {
         _buttonsArray = @[];
-        _selectedButton = nil;
+        _selectedButtons = [NSMutableArray array];
     }
     return self;
 }
 
 #pragma mark  - public methods
+
+@dynamic selectedButton;
+- (UIButton *)selectedButton {
+    if ( _selectedButtons.count == 0 ) {
+        return nil;
+    } else {
+        return _selectedButtons[0];
+    }
+}
+
+- (void)setSelectedButton:(UIButton *)selectedButton {
+    if ( selectedButton == nil ) {
+        if ( self.allowMultipleSelection == NO ) {
+            self.selectedButton.selected = NO;
+            [self.selectedButton performBlockSelectionForEvent:JButtonEventDeselect];
+        }
+        [_selectedButtons removeAllObjects];
+    } else {
+        [self pressedButton:selectedButton];
+    }
+}
 
 - (void)setButtonsArray:(NSArray *)buttonsArray
 {
@@ -33,7 +59,7 @@
     
     if (buttonsArray == nil) {
         _buttonsArray = @[];
-        _selectedButton = nil;
+        self.selectedButton = nil;
     } else {
         _buttonsArray = [buttonsArray copy];
         NSInteger i = 0;
@@ -46,11 +72,6 @@
     for (UIButton *button in _buttonsArray) {
         [button addTarget:self action:@selector(pressedButton:) forControlEvents:UIControlEventTouchUpInside];
     }
-}
-
-- (void)setSelectedButton:(UIButton *)selectedButton
-{
-    [self pressedButton:selectedButton];
 }
 
 @dynamic selectedIndex;
@@ -80,38 +101,71 @@
 #pragma mark - action
 
 - (void)pressedButton:(UIButton *)sender
-{   
-    UIButton *previousSelected = self.selectedButton;
-    if ( previousSelected == sender ) {
-        if ( self.allowNoSelection ) {
-            _selectedButton.selected = NO;
-            _selectedButton = nil;
-            [sender performBlockSelectionForEvent:JButtonEventDeselect];
-        } else {
-            [sender performBlockSelectionForEvent:JButtonEventReselect];
+{
+    if ( self.allowMultipleSelection ) {
+        
+        BOOL isSelecting = ( sender && sender.selected == NO );
+        BOOL allowSelection = YES;
+        if ( isSelecting && [self.delegate respondsToSelector:@selector(buttonMatrix:willSelectButton:forIndex:)] ) {
+            allowSelection = [self.delegate buttonMatrix:self willSelectButton:sender forIndex:sender.selectionIndex];
         }
-        return;
+        
+        if ( !allowSelection ) {
+            return;
+        }
+
+        sender.selected = isSelecting;
+        if ( isSelecting ) {
+            [_selectedButtons addObject:sender];
+            [sender performBlockSelectionForEvent:JButtonEventSelect];
+            
+            if ( [self.delegate respondsToSelector:@selector(buttonMatrix:didSelectButton:forIndex:)] ) {
+                [self.delegate buttonMatrix:self didSelectButton:sender forIndex:sender.selectionIndex];
+            }
+            
+        } else {
+            [_selectedButtons removeObject:sender];
+            [sender performBlockSelectionForEvent:JButtonEventDeselect];
+        }
+        
+    } else {
+
+        UIButton *previousSelected = self.selectedButton;
+        if ( previousSelected == sender ) {
+            if ( self.allowNoSelection || sender == nil) {
+                self.selectedButton = nil;
+            } else {
+                [sender performBlockSelectionForEvent:JButtonEventReselect];
+            }
+            return;
+        }
+        
+        BOOL allowSelection = YES;
+        if ( [self.delegate respondsToSelector:@selector(buttonMatrix:willSelectButton:forIndex:)] ) {
+            allowSelection = [self.delegate buttonMatrix:self willSelectButton:sender forIndex:sender.selectionIndex];
+        }
+        
+        if ( !allowSelection ) {
+            return;
+        }
+        
+        previousSelected.selected = NO;
+        if (previousSelected) {
+            [_selectedButtons replaceObjectAtIndex:0 withObject:sender];
+        } else {
+            [_selectedButtons addObject:sender];
+        }
+        sender.selected = YES;
+        
+        [previousSelected performBlockSelectionForEvent:JButtonEventDeselect];
+        [sender performBlockSelectionForEvent:JButtonEventSelect];
+        
+        if ( [self.delegate respondsToSelector:@selector(buttonMatrix:didSelectButton:forIndex:)] ) {
+            [self.delegate buttonMatrix:self didSelectButton:sender forIndex:sender.selectionIndex];
+        }
+
     }
     
-    BOOL allowSelection = YES;
-    if ( [self.delegate respondsToSelector:@selector(buttonMatrix:willSelectButton:forIndex:)] ) {
-        allowSelection = [self.delegate buttonMatrix:self willSelectButton:sender forIndex:sender.selectionIndex];
-    }
-    
-    if ( !allowSelection ) {
-        return;
-    }
-    
-    _selectedButton.selected = NO;
-    _selectedButton = sender;
-    _selectedButton.selected = YES;
-    
-    [previousSelected performBlockSelectionForEvent:JButtonEventDeselect];
-    [sender performBlockSelectionForEvent:JButtonEventSelect];
-    
-    if ( [self.delegate respondsToSelector:@selector(buttonMatrix:didSelectButton:forIndex:)] ) {
-        [self.delegate buttonMatrix:self didSelectButton:_selectedButton forIndex:_selectedButton.selectionIndex];
-    }
 }
 
 @end
