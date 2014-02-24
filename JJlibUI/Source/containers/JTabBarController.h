@@ -69,7 +69,7 @@ typedef NS_ENUM(short, JTabBarAnimation) {
 /**
  *  Child's UIViewController's. Will create a tabbar for each UIViewController.
  */
-@property(nonatomic,copy) IBOutletCollection(UIViewController) NSArray *tabBarChilds;
+@property(nonatomic,copy) NSArray *tabBarChilds;
 
 @property(nonatomic,strong) UIViewController *selectedTabBarChild;
 

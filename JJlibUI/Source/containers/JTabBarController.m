@@ -132,19 +132,27 @@
         [self createViewContainer];
     }
     
-    [self createButtonsForViewControllers];
+    if ( _tabBarChilds == nil && _tabBar.matrix.buttonsArray.count > 0 ) {
+        // initialize from storyboard
+        [self prepareTabBarChildsArray];
+        [self performSegueWithIdentifier:@"" sender:_tabBar.matrix.buttonsArray[0]];
+        
+    } else {
+        
+        [self createButtonsForViewControllers];
     
-    if ( _tabBarChilds.count > 0 ) {
-        
-        NSUInteger index = 0;
-        if (_selectedTabBarChild) {
-            index = [_tabBarChilds indexOfObject:_selectedTabBarChild];
+        if ( _tabBarChilds.count > 0 ) {
+            
+            NSUInteger index = 0;
+            if (_selectedTabBarChild) {
+                index = [_tabBarChilds indexOfObject:_selectedTabBarChild];
+            }
+            
+            _tabBar.selectedIndex = index;
+            
+            UIViewController *controller = _tabBarChilds[index];
+            [self changeToViewController:controller withAnimation:JTabBarAnimationNone completion:nil];
         }
-        
-        _tabBar.selectedIndex = index;
-
-        UIViewController *controller = _tabBarChilds[index];
-        [self changeToViewController:controller withAnimation:JTabBarAnimationNone completion:nil];
     }
 }
 
@@ -174,6 +182,7 @@
 #pragma mark - animation functions
 
 - (void)setSelectedTabBarIndex:(NSInteger)selectedIndex animation:(JTabBarAnimation)animation completion:(void (^)(void))completion {
+
     if (selectedIndex >= 0 && selectedIndex < _tabBarChilds.count) {
         UIViewController *viewController = [_tabBarChilds objectAtIndex:selectedIndex];
         
@@ -192,7 +201,7 @@
 }
 
 - (void)setTabBarChilds:(NSArray *)childViewControllers animation:(JTabBarAnimation)animation completion:(void (^)(void))completion {
-    
+
     for (UIViewController *child in _tabBarChilds) {
         child.jTabBarController = nil;
     }
@@ -267,7 +276,7 @@
 }
 
 - (void)setSelectedTabBarChild:(UIViewController *)selectedChildViewController animation:(JTabBarAnimation)animation completion:(void (^)(void))completion {
-    
+
     NSInteger index = [_tabBarChilds indexOfObject:selectedChildViewController];
     if (index == NSNotFound) {
         return;
@@ -288,14 +297,16 @@
 
 #pragma mark - Perform Segue
 
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    if ( [sender isKindOfClass:[JTabBarSegue class]] ) {
-         NSLog(@"should perform segue");
-        return YES;
-    }
-    return YES;
-}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ( [segue isKindOfClass:[JTabBarSegue class]] && [sender isKindOfClass:[UIButton class]] ) {
 
+        UIButton *button = (UIButton *)sender;
+        UIViewController *vc = segue.destinationViewController;
+        vc.jTabBarController = self;
+        vc.jTabBarButton = button;
+        [((NSMutableArray *)_tabBarChilds) replaceObjectAtIndex:button.selectionIndex withObject:segue.destinationViewController];
+    }
+}
 
 #pragma mark - JButtonMatrixDelegate
 
@@ -319,6 +330,14 @@
 }
 
 #pragma mark - private functions
+
+- (void)prepareTabBarChildsArray {
+    NSMutableArray *array = [NSMutableArray array];
+    for (UIButton *button in self.tabBar.matrix.buttonsArray) {
+        [array addObject:[NSNull null]];
+    }
+    _tabBarChilds = array;
+}
 
 - (void)createTabBar {
     JTabBarView *tabbar = [[JTabBarView alloc] initWithFrame:CGRectZero];
@@ -411,7 +430,7 @@
 }
 
 - (void)createButtonsForViewControllers {
-    
+
     NSMutableArray *tabBarButtons = [NSMutableArray arrayWithCapacity:_tabBarChilds.count];
     NSInteger i = 0;
     BOOL needToAssociateNewButtons = NO;

@@ -3,14 +3,15 @@
 To help build new UI easy and customizable.
 Support for iOS 5.0 and superior.
 
-Current build: v0.4
+Current build: v0.5
 
 ####Functionality :
  - Personalize your TabBar.
- - Easy transitions.
+ - Built-in transitions.
  - Choose the TabBar orientation.
-
-See example for advance how to do advance features.
+ - Define if you want a static or a scroll TabBar.
+ - Storyboard integrantion
+ - Easilly add new actions for the TabBar with blocks
 
 ####How to create
 
@@ -29,6 +30,8 @@ See example for advance how to do advance features.
     [self.view addSubview:_tabBarController.view];
     [_tabBarController didMoveToParentViewController:self];
 
+Download the project and see the example on how to do more advance features.
+
 ####Screenshots
 ![Screenshots](Screenshots/Screenshot1.png "Screenshot1")
 
@@ -36,7 +39,9 @@ See example for advance how to do advance features.
 
 ![Screenshots](Screenshots/Screenshot3.png "Screenshot3")
 
-![Screenshots](Screenshots/Screenshot4.png "Screenshot3")
+![Screenshots](Screenshots/Screenshot4.png "Screenshot4")
+
+![Screenshots](Screenshots/Screenshot5.png "Screenshot5")
 
 
 ####More:

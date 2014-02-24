@@ -44,7 +44,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="BKu-Le-SK4" kind="custom" identifier="" customClass="JTabBarSegue" id="A0I-52-XM1"/>
+                                            <segue destination="BKu-Le-SK4" kind="custom" customClass="JTabBarSegue" id="1P2-Xp-A6W"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iU1-nf-aCE">
