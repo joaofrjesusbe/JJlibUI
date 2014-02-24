@@ -62,7 +62,7 @@
         self.backupButton = self.jTabBarButton;
         self.jTabBarButton = nil;
         
-        self.backupVCs = self.jTabBarController.childViewControllers;
+        self.backupVCs = self.jTabBarController.tabBarChilds;
         self.usingOriginalVCs = NO;
         
         NSArray * childViewControllers = @[ tabBar, self, config];

@@ -44,7 +44,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="BKu-Le-SK4" kind="custom" customClass="JTabBarSegue" id="1P2-Xp-A6W"/>
+                                            <segue destination="BKu-Le-SK4" kind="custom" customClass="JTabBarSegue" id="YBI-VX-Yd8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iU1-nf-aCE">
@@ -57,7 +57,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="EXY-rR-PGW" kind="custom" identifier="" customClass="JTabBarSegue" id="2dH-nN-pD9"/>
+                                            <segue destination="EXY-rR-PGW" kind="custom" customClass="JTabBarSegue" id="b9b-HX-pD9"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Kci-qd-s8j">
@@ -70,7 +70,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="6zl-ob-hWC" kind="custom" identifier="" customClass="JTabBarSegue" id="ibB-9J-Zm2"/>
+                                            <segue destination="6zl-ob-hWC" kind="custom" customClass="JTabBarSegue" id="1Xp-kR-JYQ"/>
                                         </connections>
                                     </button>
                                 </subviews>

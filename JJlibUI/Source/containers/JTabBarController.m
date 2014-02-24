@@ -135,7 +135,12 @@
     if ( _tabBarChilds == nil && _tabBar.matrix.buttonsArray.count > 0 ) {
         // initialize from storyboard
         [self prepareTabBarChildsArray];
-        [self performSegueWithIdentifier:@"" sender:_tabBar.matrix.buttonsArray[0]];
+        UIButton *selectedButton = _tabBar.matrix.selectedButton;
+        if ( selectedButton == nil ) {
+            _tabBar.matrix.selectedIndex = 0;
+            selectedButton = _tabBar.matrix.selectedButton;
+        }
+        [self performSegueWithIdentifier:@"" sender:selectedButton];
         
     } else {
         
@@ -296,6 +301,14 @@
 }
 
 #pragma mark - Perform Segue
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ( [sender isKindOfClass:[UIButton class]] ) {
+        return YES;
+    }
+    
+    return [super shouldPerformSegueWithIdentifier:identifier sender:sender];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue isKindOfClass:[JTabBarSegue class]] && [sender isKindOfClass:[UIButton class]] ) {

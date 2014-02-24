@@ -9,9 +9,8 @@ Current build: v0.5
  - Personalize your TabBar.
  - Built-in transitions.
  - Choose the TabBar orientation.
- - Define if you want a static or a scroll TabBar.
- - Storyboard integrantion
- - Easilly add new actions for the TabBar with blocks
+ - Storyboard integration.
+ - Easily add new actions for the TabBar with blocks.
 
 ####How to create
 
