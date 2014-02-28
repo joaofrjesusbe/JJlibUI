@@ -33,6 +33,8 @@ typedef NS_ENUM(short, JTabBarAnimation) {
 #define JTabBarDockIsHorizontal(x) ( (x) == JTabBarDockBottom || (x) == JTabBarDockTop )
 #define JTabBarDockIsVertical(x) ( (x) == JTabBarDockLeft || (x) == JTabBarDockRight )
 
+static const NSString *JTabBarSegueIndex = @"index";
+
 
 @protocol JTabBarControllerDelegate;
 @interface JTabBarController : UIViewController

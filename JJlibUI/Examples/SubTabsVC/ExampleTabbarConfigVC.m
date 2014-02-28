@@ -13,6 +13,10 @@
 
 @interface ExampleTabbarConfigVC ()
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *scrollContentView;
+
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segOrientation;
 
 @property (weak, nonatomic) IBOutlet UIView *containerCheckBoxValue1;
@@ -21,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIView *containerCheckBoxValue4;
 @property (strong, nonatomic) JButtonMatrix *buttonMatrixScrollPolicy;
 
-@property (weak, nonatomic) IBOutlet CheckBoxValue *containerCheckBoxValue5;
+@property (weak, nonatomic) IBOutlet UIView *containerCheckBoxValue5;
 @property (weak, nonatomic) IBOutlet UIView *containerCheckBoxValue6;
 @property (strong, nonatomic) JButtonMatrix *buttonMatrixSelectPolicy;
 
@@ -150,6 +154,8 @@
     } forEvent:JButtonEventDeselect];
     
     self.buttonMatrixSelectPolicy.buttonsArray = array;
+    
+    self.scrollView.contentSize = self.scrollContentView.frame.size;
 
 }
 

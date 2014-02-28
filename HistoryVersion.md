@@ -3,7 +3,7 @@ Suggestions and Contributions email: joaofrjesusbe at gmail.com
 
 Release Notes (v0.5):
 	- Storyboard integration
-	- Add several blocks to buttons for events
+	- Add option to add several blocks to buttons for events
 	- Small fixes
 	- Improved examples	 
 

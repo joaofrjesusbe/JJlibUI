@@ -71,7 +71,7 @@
         [childsButtons addObject:button];
     }
     
-    self.matrix.buttonsArray = childsButtons;
+    self.matrix.buttonsArray = childsButtons;    
     [super setChildViews:childViews];
 }
 

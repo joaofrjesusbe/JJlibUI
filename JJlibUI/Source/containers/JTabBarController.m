@@ -140,7 +140,8 @@
             _tabBar.matrix.selectedIndex = 0;
             selectedButton = _tabBar.matrix.selectedButton;
         }
-        [self performSegueWithIdentifier:@"" sender:selectedButton];
+        NSString *segueIdentifier = [NSString stringWithFormat:@"%@%ld", JTabBarSegueIndex, (long)selectedButton.selectionIndex];
+        [self performSegueWithIdentifier:segueIdentifier sender:selectedButton];
         
     } else {
         
@@ -190,6 +191,11 @@
 
     if (selectedIndex >= 0 && selectedIndex < _tabBarChilds.count) {
         UIViewController *viewController = [_tabBarChilds objectAtIndex:selectedIndex];
+        if ( viewController == nil ) {
+            UIButton *button = self.tabBar.matrix.buttonsArray[selectedIndex];
+            NSString *segueIdentifier = [NSString stringWithFormat:@"%@%ld", JTabBarSegueIndex, (long)button.selectionIndex];
+            [self performSegueWithIdentifier:segueIdentifier sender:button];
+        }
         
         if ( [self isViewLoaded] ) {
             
@@ -303,8 +309,10 @@
 #pragma mark - Perform Segue
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    if ( [sender isKindOfClass:[UIButton class]] ) {
-        return YES;
+    if ( [identifier hasPrefix:(NSString *)JTabBarSegueIndex] ) {
+        NSString *stringIndex = [identifier substringFromIndex:[identifier rangeOfString:(NSString *)JTabBarSegueIndex].length];
+        NSInteger parsedIndex = [stringIndex integerValue];
+        return (parsedIndex >= 0 && parsedIndex < _tabBar.childViews.count);
     }
     
     return [super shouldPerformSegueWithIdentifier:identifier sender:sender];

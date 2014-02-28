@@ -72,6 +72,8 @@
     for (UIButton *button in _buttonsArray) {
         [button addTarget:self action:@selector(pressedButton:) forControlEvents:UIControlEventTouchUpInside];
     }
+    
+    self.selectedButton = nil;
 }
 
 @dynamic selectedIndex;
