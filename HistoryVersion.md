@@ -1,6 +1,12 @@
 JJlibUI - simplify UI
 Suggestions and Contributions email: joaofrjesusbe at gmail.com
 
+Release Notes (v0.5):
+	- Storyboard integration
+	- Add option to add several blocks to buttons for events
+	- Small fixes
+	- Improved examples	 
+
 Release Notes (v0.4):
 	- Change examples
 	- Fix animations

@@ -20,7 +20,7 @@
  *  Array of buttons to be managed by this object.
  *  Default: @[]
  */
-@property(nonatomic,copy) NSArray *buttonsArray;
+@property(nonatomic,copy) IBOutletCollection(UIButton) NSArray *buttonsArray;
 
 /**
  *  The UIButton that is currently selected.
@@ -36,4 +36,24 @@
  */
 @property(nonatomic,assign) NSInteger selectedIndex;
 
+@property(nonatomic,assign) id<JButtonMatrixDelegate> delegate;
+
+@property(nonatomic,assign) BOOL allowNoSelection;
+
+@property(nonatomic,assign) BOOL allowMultipleSelection;
+
+@property(nonatomic,copy,readonly) NSArray *selectedButtons;
+
+
 @end
+
+
+@protocol JButtonMatrixDelegate <NSObject>
+@optional
+
+- (BOOL)buttonMatrix:(JButtonMatrix *)buttonMatrix willSelectButton:(UIButton *)button forIndex:(NSInteger)index;
+
+- (void)buttonMatrix:(JButtonMatrix *)buttonMatrix didSelectButton:(UIButton *)button forIndex:(NSInteger)index;
+
+@end
+

@@ -6,29 +6,26 @@
 //  Copyright (c) 2013 Joao Jesus. All rights reserved.
 //
 
-#import "ExampleConfigVC.h"
+#import "ExampleAnimConfigVC.h"
 #import "JUILib.h"
 #import "ExampleSettings.h"
 
-@interface ExampleConfigVC ()
+@interface ExampleAnimConfigVC ()
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segAnimHiddenTabbar;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segAnimDefaultTrans;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segAnimOtherTrans;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segOrientation;
-
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
-@implementation ExampleConfigVC
+@implementation ExampleAnimConfigVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"Config";
+        self.title = @"Anim";
     }
     return self;
 }
@@ -61,60 +58,18 @@
     }
 }
 
-#pragma mark - Converter Orientation
-
-- (JTabBarDock)dockingForIndex:(NSInteger)index {
-    switch (index) {
-        case 0:
-            return JTabBarDockTop;
-        case 1:
-            return JTabBarDockLeft;
-        case 2:
-            return JTabBarDockBottom;
-        case 3:
-            return JTabBarDockRight;
-            
-        default:
-            return JTabBarDockBottom;
-    }
-}
-
-- (NSInteger)indexForDocking:(NSInteger)index {
-    switch (index) {
-        case JTabBarDockTop:
-            return 0;
-        case JTabBarDockLeft:
-            return 1;
-        case JTabBarDockBottom:
-            return 2;
-        case JTabBarDockRight:
-            return 3;
-            
-        default:
-            return 3;
-    }
-}
-
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     self.segAnimDefaultTrans.selectedSegmentIndex = [self indexForAnimation:[ExampleSettings sharedSettings].defaultVCTransition];
     self.segAnimOtherTrans.selectedSegmentIndex = [self indexForAnimation:[ExampleSettings sharedSettings].nonDefaultVCTransition];
     self.segAnimHiddenTabbar.selectedSegmentIndex = [self indexForAnimation:[ExampleSettings sharedSettings].hiddenTabBar];
-    
-    self.segOrientation.selectedSegmentIndex = [self indexForDocking:self.jTabBarController.tabBarDock];
-    
-    [self.scrollView setContentSizeWithMarginSize:CGSizeMake(0, 0)];
-}
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    
-    [self.scrollView setContentSizeWithMarginSize:CGSizeMake(0, 0)];
 }
 
 #pragma mark - IBActions
@@ -129,10 +84,6 @@
 
 - (IBAction)changeAnimOtherTrans:(id)sender {
     [ExampleSettings sharedSettings].nonDefaultVCTransition = [self animationForIndex:self.segAnimOtherTrans.selectedSegmentIndex];
-}
-
-- (IBAction)changeOrientation:(id)sender {
-    self.jTabBarController.tabBarDock = [self dockingForIndex:self.segOrientation.selectedSegmentIndex];
 }
 
 @end

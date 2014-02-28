@@ -9,7 +9,7 @@
 /**
  *  @brief JJlibUI - simplify UI
  *
- *  @version 0.4
+ *  @version 0.5
  *  @author João Jesus
  *
  *  To help build new UI easy and customizable.
@@ -25,3 +25,4 @@
 #import "JButtonMatrix.h"
 #import "JTabBarView.h"
 #import "JTabBarController.h"
+#import "JTabBarSegue.h"

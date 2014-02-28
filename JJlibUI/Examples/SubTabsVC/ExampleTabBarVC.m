@@ -37,14 +37,8 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
-    JButtonSelectionBlock verticalBlockWhenSelect = ^(UIButton *button, JButtonEventType type ) {
-        if (type == JButtonEventSelect) {
-            NSInteger horizontalIndex = self.horizontalTabBar.selectedIndex;
-            self.indexLabel.text = [NSString stringWithFormat:@"%d - %d", horizontalIndex, button.selectionIndex];
-        }
-    };
     
-    JButtonSelectionBlock horizontalBlockWhenSelect = ^(UIButton *button, JButtonEventType type ) {
+    JButtonSelectionBlock horizontalBlock = ^(UIButton *button, JButtonEventType type ) {
         if (type == JButtonEventSelect) {
      
             NSMutableArray *verticalViewsArray = [NSMutableArray array];
@@ -52,7 +46,12 @@
                 
                 UIButton *tabButton = [[NSBundle mainBundle] loadNibNamed:@"ButtonTemplate" owner:self options:nil][0];
                 [tabButton setTitle:[NSString stringWithFormat:@"Btn %d", i] forState:UIControlStateNormal];
-                tabButton.blockSelectionAction = verticalBlockWhenSelect;
+                
+                [tabButton addBlockSelectionAction:^(UIButton *button, JButtonEventType type) {
+                    NSInteger horizontalIndex = self.horizontalTabBar.selectedIndex;
+                    self.indexLabel.text = [NSString stringWithFormat:@"%ld - %ld", (long)horizontalIndex, (long)button.selectionIndex];
+                } forEvent:JButtonEventSelect];
+                
                 [verticalViewsArray addObject:tabButton];
                 
                 
@@ -80,7 +79,8 @@
     for (int i=0; i<10; i++) {
          UIButton *tabButton = [[NSBundle mainBundle] loadNibNamed:@"ButtonTemplate" owner:self options:nil][0];
         [tabButton setTitle:[NSString stringWithFormat:@"Btn %d", i] forState:UIControlStateNormal];
-        tabButton.blockSelectionAction = horizontalBlockWhenSelect;
+        [tabButton addBlockSelectionAction:horizontalBlock forEvent:JButtonEventSelect];
+        [tabButton addBlockSelectionAction:horizontalBlock forEvent:JButtonEventReselect];
         [tabViewsArray addObject:tabButton];
     }
     

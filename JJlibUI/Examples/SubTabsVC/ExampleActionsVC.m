@@ -9,7 +9,7 @@
 #import "ExampleActionsVC.h"
 #import "JUILib.h"
 #import "ExampleTabBarVC.h"
-#import "ExampleConfigVC.h"
+#import "ExampleAnimConfigVC.h"
 #import "ExampleSettings.h"
 
 
@@ -47,7 +47,7 @@
 
 - (IBAction)changeTabByCode:(id)sender {
     
-    [self.jTabBarController setSelectedIndex:0 animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
+    [self.jTabBarController setSelectedTabBarIndex:0 animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
 }
 
 - (IBAction)changeVCsByCode:(id)sender {
@@ -56,25 +56,25 @@
         
         ExampleTabBarVC *tabBar = [[ExampleTabBarVC alloc] initWithNibName:nil bundle:nil];
         
-        ExampleConfigVC *config = [[ExampleConfigVC alloc] initWithNibName:nil bundle:nil];
+        ExampleAnimConfigVC *config = [[ExampleAnimConfigVC alloc] initWithNibName:nil bundle:nil];
         
         // remove our custom button so a default delegate is created
         self.backupButton = self.jTabBarButton;
         self.jTabBarButton = nil;
         
-        self.backupVCs = self.jTabBarController.childViewControllers;
+        self.backupVCs = self.jTabBarController.tabBarChilds;
         self.usingOriginalVCs = NO;
         
         NSArray * childViewControllers = @[ tabBar, self, config];
         
-        [self.jTabBarController setChildViewControllers:childViewControllers animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
+        [self.jTabBarController setTabBarChilds:childViewControllers animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
         
     } else {
 
         self.jTabBarButton = self.backupButton;
         self.usingOriginalVCs = YES;
         
-        [self.jTabBarController setChildViewControllers:self.backupVCs animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
+        [self.jTabBarController setTabBarChilds:self.backupVCs animation:[ExampleSettings sharedSettings].nonDefaultVCTransition completion:nil];
 
     }
 }

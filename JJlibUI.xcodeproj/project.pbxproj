@@ -12,9 +12,6 @@
 		072238CB1823D7E100824A9D /* JBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 072238C21823D7E100824A9D /* JBarView.m */; };
 		072238CC1823D7E100824A9D /* JButtonMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 072238C41823D7E100824A9D /* JButtonMatrix.m */; };
 		072238CD1823D7E100824A9D /* JTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 072238C61823D7E100824A9D /* JTabBarView.m */; };
-		0759DA77181BDBBE006BA244 /* ExampleTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0759DA75181BDBBE006BA244 /* ExampleTabBarVC.m */; };
-		0759DA78181BDBBE006BA244 /* ExampleTabBarVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0759DA76181BDBBE006BA244 /* ExampleTabBarVC.xib */; };
-		077676DF184A0E8D00D08B1C /* ExampleMainTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 077676DE184A0E8D00D08B1C /* ExampleMainTabBarVC.m */; };
 		0777010D183AC43A00203BE9 /* JTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0777010C183AC43A00203BE9 /* JTabBarController.m */; };
 		07B43DEA185DEB2700F8926C /* ButtonTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DE9185DEB2700F8926C /* ButtonTemplate.xib */; };
 		07B43DF4185DEB3700F8926C /* blackHorizontalBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DEC185DEB3700F8926C /* blackHorizontalBar.png */; };
@@ -27,10 +24,6 @@
 		07B43DFB185DEB3700F8926C /* blueVerticalSeparator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DF3185DEB3700F8926C /* blueVerticalSeparator@2x.png */; };
 		07B43DFD185DEB5E00F8926C /* MainButtonTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DFC185DEB5E00F8926C /* MainButtonTemplate.xib */; };
 		07B43DFF185DEC6300F8926C /* AltMainButtonTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B43DFE185DEC6300F8926C /* AltMainButtonTemplate.xib */; };
-		07C760F0185673D30020FDF4 /* ExampleConfigVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C760EE185673D30020FDF4 /* ExampleConfigVC.m */; };
-		07C760F1185673D30020FDF4 /* ExampleConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C760EF185673D30020FDF4 /* ExampleConfigVC.xib */; };
-		07C760F51856747C0020FDF4 /* ExampleActionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C760F31856747C0020FDF4 /* ExampleActionsVC.m */; };
-		07C760F61856747C0020FDF4 /* ExampleActionsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C760F41856747C0020FDF4 /* ExampleActionsVC.xib */; };
 		07E4B3501813E1FB00B861CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E4B34F1813E1FB00B861CD /* Foundation.framework */; };
 		07E4B3521813E1FB00B861CD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E4B3511813E1FB00B861CD /* CoreGraphics.framework */; };
 		07E4B3541813E1FB00B861CD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E4B3531813E1FB00B861CD /* UIKit.framework */; };
@@ -46,6 +39,22 @@
 		61366AA318AA5E7100BF5AAA /* ExampleSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 61366AA218AA5E7100BF5AAA /* ExampleSettings.m */; };
 		61838FA318AA8218003B4665 /* MoreStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61838FA218AA8218003B4665 /* MoreStoryboard.storyboard */; };
 		61CB127318A90DB200B37440 /* under-construction.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 61CB127218A90DB200B37440 /* under-construction.jpg */; };
+		CF5B821C18B4ECA800E35C36 /* checkbox-checked.png in Resources */ = {isa = PBXBuildFile; fileRef = CF5B821818B4ECA800E35C36 /* checkbox-checked.png */; };
+		CF5B821D18B4ECA800E35C36 /* checkbox-checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF5B821918B4ECA800E35C36 /* checkbox-checked@2x.png */; };
+		CF5B821E18B4ECA800E35C36 /* checkbox-unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = CF5B821A18B4ECA800E35C36 /* checkbox-unchecked.png */; };
+		CF5B821F18B4ECA800E35C36 /* checkbox-unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF5B821B18B4ECA800E35C36 /* checkbox-unchecked@2x.png */; };
+		CF5B822218B4EEFB00E35C36 /* CheckBoxValue.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B822118B4EEFB00E35C36 /* CheckBoxValue.xib */; };
+		CF5B822518B4EF3100E35C36 /* CheckBoxValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B822418B4EF3100E35C36 /* CheckBoxValue.m */; };
+		CF5B822F18B4F95E00E35C36 /* ExampleActionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B822818B4F95E00E35C36 /* ExampleActionsVC.m */; };
+		CF5B823018B4F95E00E35C36 /* ExampleActionsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B822918B4F95E00E35C36 /* ExampleActionsVC.xib */; };
+		CF5B823118B4F95E00E35C36 /* ExampleAnimConfigVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B822B18B4F95E00E35C36 /* ExampleAnimConfigVC.m */; };
+		CF5B823718B4F98A00E35C36 /* ExampleTabbarConfigVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B823518B4F98A00E35C36 /* ExampleTabbarConfigVC.m */; };
+		CF5B823818B4F98A00E35C36 /* ExampleTabbarConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B823618B4F98A00E35C36 /* ExampleTabbarConfigVC.xib */; };
+		CF5B823A18B4FCD400E35C36 /* ExampleAnimConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B823918B4FCD400E35C36 /* ExampleAnimConfigVC.xib */; };
+		CF5B823E18B5033800E35C36 /* ExampleTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B823C18B5033800E35C36 /* ExampleTabBarVC.m */; };
+		CF5B823F18B5033800E35C36 /* ExampleTabBarVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5B823D18B5033800E35C36 /* ExampleTabBarVC.xib */; };
+		CF5B824218B5034A00E35C36 /* ExampleMainTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5B824118B5034A00E35C36 /* ExampleMainTabBarVC.m */; };
+		CF894B4718B7908A00537AAC /* JTabBarSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CF894B4618B7908A00537AAC /* JTabBarSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,11 +79,6 @@
 		072238C41823D7E100824A9D /* JButtonMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JButtonMatrix.m; sourceTree = "<group>"; };
 		072238C51823D7E100824A9D /* JTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTabBarView.h; sourceTree = "<group>"; };
 		072238C61823D7E100824A9D /* JTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTabBarView.m; sourceTree = "<group>"; };
-		0759DA74181BDBBE006BA244 /* ExampleTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTabBarVC.h; sourceTree = "<group>"; };
-		0759DA75181BDBBE006BA244 /* ExampleTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleTabBarVC.m; sourceTree = "<group>"; };
-		0759DA76181BDBBE006BA244 /* ExampleTabBarVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleTabBarVC.xib; sourceTree = "<group>"; };
-		077676DD184A0E8D00D08B1C /* ExampleMainTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleMainTabBarVC.h; sourceTree = "<group>"; };
-		077676DE184A0E8D00D08B1C /* ExampleMainTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleMainTabBarVC.m; sourceTree = "<group>"; };
 		0777010B183AC43A00203BE9 /* JTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTabBarController.h; sourceTree = "<group>"; };
 		0777010C183AC43A00203BE9 /* JTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTabBarController.m; sourceTree = "<group>"; };
 		07B43DE9185DEB2700F8926C /* ButtonTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTemplate.xib; sourceTree = "<group>"; };
@@ -88,12 +92,6 @@
 		07B43DF3185DEB3700F8926C /* blueVerticalSeparator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueVerticalSeparator@2x.png"; sourceTree = "<group>"; };
 		07B43DFC185DEB5E00F8926C /* MainButtonTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainButtonTemplate.xib; sourceTree = "<group>"; };
 		07B43DFE185DEC6300F8926C /* AltMainButtonTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AltMainButtonTemplate.xib; sourceTree = "<group>"; };
-		07C760ED185673D30020FDF4 /* ExampleConfigVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleConfigVC.h; sourceTree = "<group>"; };
-		07C760EE185673D30020FDF4 /* ExampleConfigVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleConfigVC.m; sourceTree = "<group>"; };
-		07C760EF185673D30020FDF4 /* ExampleConfigVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleConfigVC.xib; sourceTree = "<group>"; };
-		07C760F21856747C0020FDF4 /* ExampleActionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleActionsVC.h; sourceTree = "<group>"; };
-		07C760F31856747C0020FDF4 /* ExampleActionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleActionsVC.m; sourceTree = "<group>"; };
-		07C760F41856747C0020FDF4 /* ExampleActionsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleActionsVC.xib; sourceTree = "<group>"; };
 		07E4B34C1813E1FB00B861CD /* JJlibUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JJlibUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07E4B34F1813E1FB00B861CD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		07E4B3511813E1FB00B861CD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -114,6 +112,29 @@
 		61366AA218AA5E7100BF5AAA /* ExampleSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleSettings.m; sourceTree = "<group>"; };
 		61838FA218AA8218003B4665 /* MoreStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MoreStoryboard.storyboard; sourceTree = "<group>"; };
 		61CB127218A90DB200B37440 /* under-construction.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "under-construction.jpg"; sourceTree = "<group>"; };
+		CF5B821818B4ECA800E35C36 /* checkbox-checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox-checked.png"; sourceTree = "<group>"; };
+		CF5B821918B4ECA800E35C36 /* checkbox-checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox-checked@2x.png"; sourceTree = "<group>"; };
+		CF5B821A18B4ECA800E35C36 /* checkbox-unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox-unchecked.png"; sourceTree = "<group>"; };
+		CF5B821B18B4ECA800E35C36 /* checkbox-unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox-unchecked@2x.png"; sourceTree = "<group>"; };
+		CF5B822118B4EEFB00E35C36 /* CheckBoxValue.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckBoxValue.xib; sourceTree = "<group>"; };
+		CF5B822318B4EF3100E35C36 /* CheckBoxValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxValue.h; sourceTree = "<group>"; };
+		CF5B822418B4EF3100E35C36 /* CheckBoxValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxValue.m; sourceTree = "<group>"; };
+		CF5B822718B4F95E00E35C36 /* ExampleActionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleActionsVC.h; sourceTree = "<group>"; };
+		CF5B822818B4F95E00E35C36 /* ExampleActionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleActionsVC.m; sourceTree = "<group>"; };
+		CF5B822918B4F95E00E35C36 /* ExampleActionsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleActionsVC.xib; sourceTree = "<group>"; };
+		CF5B822A18B4F95E00E35C36 /* ExampleAnimConfigVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleAnimConfigVC.h; sourceTree = "<group>"; };
+		CF5B822B18B4F95E00E35C36 /* ExampleAnimConfigVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleAnimConfigVC.m; sourceTree = "<group>"; };
+		CF5B823418B4F98A00E35C36 /* ExampleTabbarConfigVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTabbarConfigVC.h; sourceTree = "<group>"; };
+		CF5B823518B4F98A00E35C36 /* ExampleTabbarConfigVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleTabbarConfigVC.m; sourceTree = "<group>"; };
+		CF5B823618B4F98A00E35C36 /* ExampleTabbarConfigVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleTabbarConfigVC.xib; sourceTree = "<group>"; };
+		CF5B823918B4FCD400E35C36 /* ExampleAnimConfigVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleAnimConfigVC.xib; sourceTree = "<group>"; };
+		CF5B823B18B5033800E35C36 /* ExampleTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTabBarVC.h; sourceTree = "<group>"; };
+		CF5B823C18B5033800E35C36 /* ExampleTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleTabBarVC.m; sourceTree = "<group>"; };
+		CF5B823D18B5033800E35C36 /* ExampleTabBarVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleTabBarVC.xib; sourceTree = "<group>"; };
+		CF5B824018B5034A00E35C36 /* ExampleMainTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleMainTabBarVC.h; sourceTree = "<group>"; };
+		CF5B824118B5034A00E35C36 /* ExampleMainTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleMainTabBarVC.m; sourceTree = "<group>"; };
+		CF894B4518B7908A00537AAC /* JTabBarSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTabBarSegue.h; sourceTree = "<group>"; };
+		CF894B4618B7908A00537AAC /* JTabBarSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTabBarSegue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +201,8 @@
 			children = (
 				0777010B183AC43A00203BE9 /* JTabBarController.h */,
 				0777010C183AC43A00203BE9 /* JTabBarController.m */,
+				CF894B4518B7908A00537AAC /* JTabBarSegue.h */,
+				CF894B4618B7908A00537AAC /* JTabBarSegue.m */,
 			);
 			path = containers;
 			sourceTree = "<group>";
@@ -197,6 +220,10 @@
 		07B43DEB185DEB3700F8926C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CF5B821818B4ECA800E35C36 /* checkbox-checked.png */,
+				CF5B821918B4ECA800E35C36 /* checkbox-checked@2x.png */,
+				CF5B821A18B4ECA800E35C36 /* checkbox-unchecked.png */,
+				CF5B821B18B4ECA800E35C36 /* checkbox-unchecked@2x.png */,
 				61CB127218A90DB200B37440 /* under-construction.jpg */,
 				07B43DEC185DEB3700F8926C /* blackHorizontalBar.png */,
 				07B43DED185DEB3700F8926C /* blackHorizontalBar@2x.png */,
@@ -213,22 +240,15 @@
 		07B777421813F33D004B76A1 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				CF5B822618B4F95E00E35C36 /* SubTabsVC */,
+				CF5B822018B4EE3900E35C36 /* Components */,
 				07B43DEB185DEB3700F8926C /* Images */,
 				07B43DE8185DEB2700F8926C /* Xibs */,
-				077676DD184A0E8D00D08B1C /* ExampleMainTabBarVC.h */,
-				077676DE184A0E8D00D08B1C /* ExampleMainTabBarVC.m */,
-				0759DA74181BDBBE006BA244 /* ExampleTabBarVC.h */,
-				0759DA75181BDBBE006BA244 /* ExampleTabBarVC.m */,
-				0759DA76181BDBBE006BA244 /* ExampleTabBarVC.xib */,
-				07C760ED185673D30020FDF4 /* ExampleConfigVC.h */,
-				07C760EE185673D30020FDF4 /* ExampleConfigVC.m */,
-				07C760EF185673D30020FDF4 /* ExampleConfigVC.xib */,
-				07C760F21856747C0020FDF4 /* ExampleActionsVC.h */,
-				07C760F31856747C0020FDF4 /* ExampleActionsVC.m */,
-				07C760F41856747C0020FDF4 /* ExampleActionsVC.xib */,
 				61366AA118AA5E7100BF5AAA /* ExampleSettings.h */,
 				61366AA218AA5E7100BF5AAA /* ExampleSettings.m */,
 				61838FA218AA8218003B4665 /* MoreStoryboard.storyboard */,
+				CF5B824018B5034A00E35C36 /* ExampleMainTabBarVC.h */,
+				CF5B824118B5034A00E35C36 /* ExampleMainTabBarVC.m */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -303,6 +323,35 @@
 				07E4B3711813E1FB00B861CD /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CF5B822018B4EE3900E35C36 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				CF5B822318B4EF3100E35C36 /* CheckBoxValue.h */,
+				CF5B822418B4EF3100E35C36 /* CheckBoxValue.m */,
+				CF5B822118B4EEFB00E35C36 /* CheckBoxValue.xib */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		CF5B822618B4F95E00E35C36 /* SubTabsVC */ = {
+			isa = PBXGroup;
+			children = (
+				CF5B823B18B5033800E35C36 /* ExampleTabBarVC.h */,
+				CF5B823C18B5033800E35C36 /* ExampleTabBarVC.m */,
+				CF5B823D18B5033800E35C36 /* ExampleTabBarVC.xib */,
+				CF5B823418B4F98A00E35C36 /* ExampleTabbarConfigVC.h */,
+				CF5B823518B4F98A00E35C36 /* ExampleTabbarConfigVC.m */,
+				CF5B823618B4F98A00E35C36 /* ExampleTabbarConfigVC.xib */,
+				CF5B822718B4F95E00E35C36 /* ExampleActionsVC.h */,
+				CF5B822818B4F95E00E35C36 /* ExampleActionsVC.m */,
+				CF5B822918B4F95E00E35C36 /* ExampleActionsVC.xib */,
+				CF5B822A18B4F95E00E35C36 /* ExampleAnimConfigVC.h */,
+				CF5B822B18B4F95E00E35C36 /* ExampleAnimConfigVC.m */,
+				CF5B823918B4FCD400E35C36 /* ExampleAnimConfigVC.xib */,
+			);
+			path = SubTabsVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,18 +436,24 @@
 				07B43DFD185DEB5E00F8926C /* MainButtonTemplate.xib in Resources */,
 				07B43DF8185DEB3700F8926C /* blueHorizontalSeparator.png in Resources */,
 				07B43DFA185DEB3700F8926C /* blueVerticalSeparator.png in Resources */,
-				07C760F61856747C0020FDF4 /* ExampleActionsVC.xib in Resources */,
 				07B43DF4185DEB3700F8926C /* blackHorizontalBar.png in Resources */,
 				07B43DFB185DEB3700F8926C /* blueVerticalSeparator@2x.png in Resources */,
+				CF5B823F18B5033800E35C36 /* ExampleTabBarVC.xib in Resources */,
 				07B43DF5185DEB3700F8926C /* blackHorizontalBar@2x.png in Resources */,
+				CF5B823818B4F98A00E35C36 /* ExampleTabbarConfigVC.xib in Resources */,
+				CF5B821D18B4ECA800E35C36 /* checkbox-checked@2x.png in Resources */,
+				CF5B823018B4F95E00E35C36 /* ExampleActionsVC.xib in Resources */,
 				07B43DEA185DEB2700F8926C /* ButtonTemplate.xib in Resources */,
 				07B43DFF185DEC6300F8926C /* AltMainButtonTemplate.xib in Resources */,
+				CF5B821F18B4ECA800E35C36 /* checkbox-unchecked@2x.png in Resources */,
 				61CB127318A90DB200B37440 /* under-construction.jpg in Resources */,
-				07C760F1185673D30020FDF4 /* ExampleConfigVC.xib in Resources */,
 				07B43DF9185DEB3700F8926C /* blueHorizontalSeparator@2x.png in Resources */,
+				CF5B822218B4EEFB00E35C36 /* CheckBoxValue.xib in Resources */,
 				07B43DF6185DEB3700F8926C /* blueHorizontalBar.png in Resources */,
-				0759DA78181BDBBE006BA244 /* ExampleTabBarVC.xib in Resources */,
+				CF5B823A18B4FCD400E35C36 /* ExampleAnimConfigVC.xib in Resources */,
 				07E4B35A1813E1FB00B861CD /* InfoPlist.strings in Resources */,
+				CF5B821E18B4ECA800E35C36 /* checkbox-unchecked.png in Resources */,
+				CF5B821C18B4ECA800E35C36 /* checkbox-checked.png in Resources */,
 				07B43DF7185DEB3700F8926C /* blueHorizontalBar@2x.png in Resources */,
 				61838FA318AA8218003B4665 /* MoreStoryboard.storyboard in Resources */,
 				07E4B3621813E1FB00B861CD /* Images.xcassets in Resources */,
@@ -421,18 +476,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				0777010D183AC43A00203BE9 /* JTabBarController.m in Sources */,
+				CF5B823118B4F95E00E35C36 /* ExampleAnimConfigVC.m in Sources */,
 				072238C71823D7E100824A9D /* UIButton+JButton.m in Sources */,
 				072238CC1823D7E100824A9D /* JButtonMatrix.m in Sources */,
-				0759DA77181BDBBE006BA244 /* ExampleTabBarVC.m in Sources */,
+				CF5B823718B4F98A00E35C36 /* ExampleTabbarConfigVC.m in Sources */,
+				CF5B823E18B5033800E35C36 /* ExampleTabBarVC.m in Sources */,
+				CF5B822518B4EF3100E35C36 /* CheckBoxValue.m in Sources */,
 				61366AA318AA5E7100BF5AAA /* ExampleSettings.m in Sources */,
+				CF894B4718B7908A00537AAC /* JTabBarSegue.m in Sources */,
 				07E4B3601813E1FB00B861CD /* JJAppDelegate.m in Sources */,
+				CF5B824218B5034A00E35C36 /* ExampleMainTabBarVC.m in Sources */,
+				CF5B822F18B4F95E00E35C36 /* ExampleActionsVC.m in Sources */,
 				072238C81823D7E100824A9D /* UIScrollView+JCenterScroll.m in Sources */,
 				07E4B35C1813E1FB00B861CD /* main.m in Sources */,
 				072238CB1823D7E100824A9D /* JBarView.m in Sources */,
-				07C760F0185673D30020FDF4 /* ExampleConfigVC.m in Sources */,
 				072238CD1823D7E100824A9D /* JTabBarView.m in Sources */,
-				07C760F51856747C0020FDF4 /* ExampleActionsVC.m in Sources */,
-				077676DF184A0E8D00D08B1C /* ExampleMainTabBarVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

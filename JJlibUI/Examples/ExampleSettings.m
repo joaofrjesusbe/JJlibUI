@@ -34,6 +34,8 @@
     self.hiddenTabBar = JTabBarAnimationSlide;
     self.defaultVCTransition = JTabBarAnimationCrossDissolve;
     self.nonDefaultVCTransition = JTabBarAnimationNone;
+    
+    self.scrollPolicyIndex = 0;
 }
 
 @dynamic defaultVCTransition;

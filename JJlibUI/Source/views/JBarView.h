@@ -48,7 +48,7 @@ typedef NS_ENUM(short, JBarViewAlignment) {
  *  Array of UIView's that are going to rearrange it's position and size.
  *  Default: @[]
  */
-@property(nonatomic,copy) NSArray *childViews;
+@property(nonatomic,copy) IBOutletCollection(UIView) NSArray *childViews;
 
 /**
  *  Type of position of the child's views relative to the bar. 
