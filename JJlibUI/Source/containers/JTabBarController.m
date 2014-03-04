@@ -487,7 +487,7 @@
             [button setTitle:childViewController.tabBarItem.title forState:UIControlStateNormal];
             [button setImage:childViewController.tabBarItem.image forState:UIControlStateNormal];
             if ([childViewController.tabBarItem respondsToSelector:@selector(selectedImage)]) {
-                [button setImage:childViewController.tabBarItem.selectedImage forState:UIControlStateNormal];
+                [button setImage:childViewController.tabBarItem.selectedImage forState:UIControlStateSelected];
             }
         }
         

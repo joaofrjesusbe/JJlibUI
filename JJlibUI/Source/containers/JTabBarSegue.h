@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  A specific UIStoryboardSegue used to link the childs UIViewController's to the JTabBarController.
+ */
 @interface JTabBarSegue : UIStoryboardSegue
 
 @end

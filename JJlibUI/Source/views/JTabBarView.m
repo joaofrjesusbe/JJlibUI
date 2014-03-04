@@ -49,10 +49,6 @@
     self.previousBounds = self.bounds;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
-
 #pragma mark - override super properties
 
 - (void)setChildViews:(NSArray *)childViews {

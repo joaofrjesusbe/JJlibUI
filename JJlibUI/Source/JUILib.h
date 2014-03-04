@@ -9,7 +9,7 @@
 /**
  *  @brief JJlibUI - simplify UI
  *
- *  @version 0.5
+ *  @version 0.5.1
  *  @author João Jesus
  *
  *  To help build new UI easy and customizable.

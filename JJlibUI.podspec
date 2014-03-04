@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "JJlibUI"
-  s.version      = "0.1.3"
+  s.version      = "0.5.1"
   s.summary      = "JJlibUI - simplify UI"
   s.description  = <<-DESC
                    A library to help create simple and customize UI.

@@ -15,7 +15,7 @@
 @property(nonatomic,strong) NSMutableArray *separatorImageViews;
 @property(nonatomic,strong) UIImageView *backgroundView;
 @property(nonatomic,strong) UIScrollView *scrollContainer;
-@property(nonatomic,assign) UIView *subViewsContainer;
+@property(nonatomic,weak) UIView *subViewsContainer;
 @property(nonatomic,assign) CGFloat scrollBoxFixSize;
 @property(nonatomic,assign) NSInteger scrollViewsCounter;
 @property(nonatomic,assign) float partialViewPercentage;

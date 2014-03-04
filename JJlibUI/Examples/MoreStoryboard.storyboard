@@ -7,7 +7,9 @@
         <!--Navigation Controller - More-->
         <scene sceneID="lrF-oJ-m6y">
             <objects>
-                <navigationController title="More" definesPresentationContext="YES" id="9Cs-N1-TKh" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="9Cs-N1-TKh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="More" id="1UJ-Em-zdC"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="rty-7d-lCS">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -44,7 +46,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="BKu-Le-SK4" kind="custom" identifier="index0" customClass="JTabBarSegue" id="YBI-VX-Yd8"/>
+                                            <segue destination="BKu-Le-SK4" kind="custom" identifier="JIndex0" customClass="JTabBarSegue" id="YBI-VX-Yd8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iU1-nf-aCE">
@@ -57,7 +59,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="EXY-rR-PGW" kind="custom" identifier="index1" customClass="JTabBarSegue" id="b9b-HX-pD9"/>
+                                            <segue destination="EXY-rR-PGW" kind="custom" identifier="JIndex1" customClass="JTabBarSegue" id="b9b-HX-pD9"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Kci-qd-s8j">
@@ -70,7 +72,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="6zl-ob-hWC" kind="custom" identifier="index2" customClass="JTabBarSegue" id="1Xp-kR-JYQ"/>
+                                            <segue destination="6zl-ob-hWC" kind="custom" identifier="JIndex2" customClass="JTabBarSegue" id="1Xp-kR-JYQ"/>
                                         </connections>
                                     </button>
                                 </subviews>

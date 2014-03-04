@@ -103,12 +103,15 @@ static const NSString *KEY_ASSOC_SelectionIndex = @"JButton.selectionIndex";
 - (void)removeBlockSelectionAction:(JButtonSelectionBlock)action forEvent:(JButtonEventType)event {
     if (action) {
         NSMutableArray *blocks = [self blockSelectionActionsForEvent:event];
-        [blocks addObject:action];
+        [blocks removeObject:action];
         [self setBlockSelectionActions:blocks forEvent:event];
+    } else {
+        [self setBlockSelectionActions:nil forEvent:event];
     }
 }
 
 - (void)removeAllBlocks {
+    [self setBlockSelectionActions:nil forEvent:JButtonEventTouchUpInside];
     [self setBlockSelectionActions:nil forEvent:JButtonEventDeselect];
     [self setBlockSelectionActions:nil forEvent:JButtonEventSelect];
     [self setBlockSelectionActions:nil forEvent:JButtonEventReselect];

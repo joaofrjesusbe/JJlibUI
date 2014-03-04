@@ -134,7 +134,7 @@
 
         UIButton *previousSelected = self.selectedButton;
         if ( previousSelected == sender ) {
-            if ( self.allowNoSelection || sender == nil) {
+            if ( self.allowEmptySelection || sender == nil) {
                 self.selectedButton = nil;
             } else {
                 [sender performBlockSelectionForEvent:JButtonEventReselect];
