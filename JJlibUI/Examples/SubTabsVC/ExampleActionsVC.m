@@ -30,7 +30,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"Actions";
+        self.tabBarItem.title = @"Actions";
     }
     return self;
 }

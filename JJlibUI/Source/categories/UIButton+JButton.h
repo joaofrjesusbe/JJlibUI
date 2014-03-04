@@ -18,21 +18,21 @@ typedef NS_ENUM(short, JButtonEventType) {
      */
     JButtonEventTouchUpInside,
     /**
-     *  Event when the button pass from selection to normal.
+     *  Event when the button pass from selection to normal (Only if is inside a JButtonMatrix).
      */
     JButtonEventDeselect,
     /**
-     *  Event when the button pass from normal to selection.
+     *  Event when the button pass from normal to selection (Only if is inside a JButtonMatrix).
      */
     JButtonEventSelect,
     /**
-     *  Event when the button is selected and is press again.
+     *  Event when the button is selected and is press again (Only if is inside a JButtonMatrix).
      */
     JButtonEventReselect
 };
 
 /**
- *  Block executed when an event of selection occurs.
+ *  Block executed when an event JButtonEventType occurs.
  *
  *  @param UIButton*        button that receives the event
  *  @param JButtonEventType type of the event
@@ -50,14 +50,26 @@ typedef void (^JButtonSelectionBlock)(UIButton* button, JButtonEventType type);
  */
 @property(nonatomic,assign) NSInteger selectionIndex;
 
-
-
+/**
+ *  Adds a execution block for a JButtonEventType
+ */
 - (void)addBlockSelectionAction:(JButtonSelectionBlock)action forEvent:(JButtonEventType)event;
 
+/**
+ *  Removes a block from an event.
+ *  Setting the parameter action to nil will remove all blocks for that event.
+ *
+ */
 - (void)removeBlockSelectionAction:(JButtonSelectionBlock)action forEvent:(JButtonEventType)event;
 
+/**
+ *  Removes all blocks from all events.
+ */
 - (void)removeAllBlocks;
 
+/**
+ *  Executes all blocks for a specific event.
+ */
 - (void)performBlockSelectionForEvent:(JButtonEventType)type;
 
 @end

@@ -14,7 +14,7 @@
 @interface UIScrollView (JCenterScroll)
 
 /**
- *  Set the new contentOffset so the rect is in the center
+ *  Set the new contentOffset so the rect is in the center.
  *
  *  @param rect     frame to be centered
  *  @param animated is movement animated

@@ -38,7 +38,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"Config";
+        self.tabBarItem.title = @"Config";
     }
     return self;
 }

@@ -3,7 +3,7 @@
 To help build new UI easy and customizable.
 Support for iOS 5.0 and superior.
 
-Current build: v0.5
+Current build: v0.5.1
 
 ####Functionality :
  - Personalize your TabBar.

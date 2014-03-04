@@ -50,8 +50,6 @@
 - (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated;
 
 /**
- *  @warning different behaviour from v0.1
- *
  *  If YES the tabbar will become scrollable and when a tabbar item is selected will be centered, except on the borders.
  *  Default: NO
  */
@@ -63,6 +61,9 @@
  */
 @property(nonatomic,assign) BOOL alwaysCenterTabBarOnSelect;
 
+/**
+ *  Access to the underline JButtonMatrix used by the tabbar.
+ */
 @property(nonatomic,readonly) JButtonMatrix *matrix;
 
 @end
